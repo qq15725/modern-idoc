@@ -1,3 +1,4 @@
+export * from './IBackground'
 export * from './IDoc'
 export * from './IElement'
 export * from './IElementStyle'

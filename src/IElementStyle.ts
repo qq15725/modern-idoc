@@ -1,15 +1,30 @@
+export type Overflow = 'hidden' | 'visible'
+export type Visibility = 'hidden' | 'visible'
+
 export interface IElementStyle {
-  visibility: 'hidden'
-  shadow: string
-  backgroundColor: string
+  overflow: Overflow
+  visibility: Visibility
+  filter: string
   // position
   left: number
   top: number
   width: number
   height: number
   rotate: number
+  opacity: number
+  // transform
   scaleX: number
   scaleY: number
+  transform: string
+  transformOrigin: string
+  // background
+  backgroundImage: string
+  backgroundColor: string
+  // shadow
+  shadowColor: string
+  shadowOffsetX: number
+  shadowOffsetY: number
+  shadowBlur: number
   // margin
   marginLeft: number
   marginTop: number
@@ -21,6 +36,7 @@ export interface IElementStyle {
   paddingRight: number
   paddingBottom: number
   // border
+  borderRadius: number
   borderColor: string
   borderWidth: number
 }
