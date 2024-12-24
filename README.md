@@ -1,35 +1,67 @@
-<h1 align="center">starter-ts</h1>
+<h1 align="center">modern-idoc</h1>
 
 <p align="center">
-  <a href="https://unpkg.com/starter-ts">
-    <img src="https://img.shields.io/bundlephobia/minzip/starter-ts" alt="Minzip">
+  <a href="https://unpkg.com/modern-idoc">
+    <img src="https://img.shields.io/bundlephobia/minzip/modern-idoc" alt="Minzip">
   </a>
-  <a href="https://www.npmjs.com/package/starter-ts">
-    <img src="https://img.shields.io/npm/v/starter-ts.svg" alt="Version">
+  <a href="https://www.npmjs.com/package/modern-idoc">
+    <img src="https://img.shields.io/npm/v/modern-idoc.svg" alt="Version">
   </a>
-  <a href="https://www.npmjs.com/package/starter-ts">
-    <img src="https://img.shields.io/npm/dm/starter-ts" alt="Downloads">
+  <a href="https://www.npmjs.com/package/modern-idoc">
+    <img src="https://img.shields.io/npm/dm/modern-idoc" alt="Downloads">
   </a>
-  <a href="https://github.com/qq15725/starter-ts/issues">
-    <img src="https://img.shields.io/github/issues/qq15725/starter-ts" alt="Issues">
+  <a href="https://github.com/qq15725/modern-idoc/issues">
+    <img src="https://img.shields.io/github/issues/qq15725/modern-idoc" alt="Issues">
   </a>
-  <a href="https://github.com/qq15725/starter-ts/blob/main/LICENSE">
-    <img src="https://img.shields.io/npm/l/starter-ts.svg" alt="License">
+  <a href="https://github.com/qq15725/modern-idoc/blob/main/LICENSE">
+    <img src="https://img.shields.io/npm/l/modern-idoc.svg" alt="License">
   </a>
 </p>
 
-## Try it now!
+## Usage
 
-### GitHub Template
+```ts
+import type { IDoc } from 'modern-idoc'
 
-[Create a repo from this template on GitHub](https://github.com/qq15725/starter-ts/generate).
-
-### Clone to local
-
-If you prefer to do it manually with the cleaner git history
-
-```bash
-npx degit qq15725/starter-ts my-ts-lib
-cd my-ts-lib
-pnpm i # If you don't have pnpm installed, run: npm install -g pnpm
+const doc: IDoc = {
+  name: 'example.pptx',
+  children: [
+    {
+      name: 'ppt/slides/slide1.xml',
+      style: {
+        width: 960,
+        height: 540,
+      },
+      meta: {
+        layout: 'ppt/slideLayous/slideLayout1.xml',
+      },
+      children: [
+        {
+          type: 'image',
+          style: {
+            left: 100,
+            top: 100,
+            width: 300,
+            height: 400,
+          },
+          src: '/example.png',
+        },
+        {
+          type: 'text',
+          style: {
+            left: 100,
+            top: 100,
+          },
+          content: 'TEXT',
+        },
+        {
+          type: 'shape',
+          paths: [
+            { fill: '#000', data: 'M 0 0 L 100 100' },
+          ],
+        },
+      ]
+    },
+  ],
+}
 ```

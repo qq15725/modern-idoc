@@ -1,1 +1,11 @@
-export const one = 1
+export * from './IDoc'
+export * from './IElement'
+export * from './IElementStyle'
+export * from './IGroup'
+export * from './IImage'
+export * from './IPath'
+export * from './IPathCommand'
+export * from './IPathStyle'
+export * from './IShape'
+export * from './IText'
+export * from './ITextStyle'
