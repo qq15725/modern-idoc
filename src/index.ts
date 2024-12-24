@@ -8,3 +8,5 @@ export * from './IPath'
 export * from './IShape'
 export * from './IText'
 export * from './ITextStyle'
+
+export default {}
