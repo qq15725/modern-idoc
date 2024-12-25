@@ -1,3 +1,18 @@
+## [0.0.2](https://github.com/qq15725/modern-idoc/compare/v0.0.1...v0.0.2) (2024-12-25)
+
+
+### Bug Fixes
+
+* iDoc ([4ef6bcc](https://github.com/qq15725/modern-idoc/commit/4ef6bcce6ce27b7451cac0bd1bc2c677acced1eb))
+
+
+### Features
+
+* add `getDefaultTextStyle` and `getDefaultElementStyle` util methods ([cb50348](https://github.com/qq15725/modern-idoc/commit/cb50348bd10ae3b64dfd278e1c5a067288f45ebf))
+* add `IElementType` enum ([2e3064c](https://github.com/qq15725/modern-idoc/commit/2e3064c81b5487fa5f08d0deff54442a0d358d6d))
+
+
+
 ## 0.0.1 (2024-12-24)
 
 
