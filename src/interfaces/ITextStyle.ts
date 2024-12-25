@@ -1,4 +1,4 @@
-import type { IBaseElementStyle } from './IBaseElementStyle'
+import type { IElementStyle } from './IElementStyle'
 
 export type FontWeight = 'normal' | 'bold' | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900
 export type FontStyle = 'normal' | 'italic' | 'oblique' | `oblique ${string}`
@@ -10,7 +10,6 @@ export type TextOrientation = 'mixed' | 'upright' | 'sideways-right' | 'sideways
 export type TextDecorationLine = 'none' | 'underline' | 'line-through' | 'overline'
 export type VerticalAlign = 'baseline' | 'top' | 'middle' | 'bottom' | 'sub' | 'super' | 'text-top' | 'text-bottom'
 export type WritingMode = 'horizontal-tb' | 'vertical-lr' | 'vertical-rl'
-
 export type Sizeable = `${number}%` | `${number}rem` | number
 
 // listStyle
@@ -25,6 +24,14 @@ export interface ListStyle {
   colormap: ListStyleColormap
   size: ListStyleSize
   position: ListStylePosition
+}
+export interface TextListStyle {
+  listStyle?: Partial<ListStyle>
+  listStyleType: ListStyleType
+  listStyleImage: ListStyleImage
+  listStyleColormap: ListStyleColormap
+  listStyleSize: ListStyleSize
+  listStylePosition: ListStylePosition
 }
 
 // highlight
@@ -42,16 +49,6 @@ export interface Highlight {
   size: HighlightSize
   thickness: HighlightThickness
 }
-
-export interface TextListStyle {
-  listStyle?: Partial<ListStyle>
-  listStyleType: ListStyleType
-  listStyleImage: ListStyleImage
-  listStyleColormap: ListStyleColormap
-  listStyleSize: ListStyleSize
-  listStylePosition: ListStylePosition
-}
-
 export interface TextHighlightStyle {
   highlight?: Partial<Highlight>
   highlightImage: HighlightImage
@@ -74,6 +71,7 @@ export interface ITextInlineStyle extends TextHighlightStyle {
   color: string
   verticalAlign: VerticalAlign
   letterSpacing: number
+  wordSpacing: number
   fontSize: number
   fontWeight: FontWeight
   fontFamily: string
@@ -101,6 +99,6 @@ export interface ITextStyle extends
   ITextLineStyle,
   ITextInlineStyle,
   ITextDrawStyle,
-  IBaseElementStyle {
+  IElementStyle {
   //
 }

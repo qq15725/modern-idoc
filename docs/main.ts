@@ -1,6 +1,6 @@
-import type { IDoc } from '../src'
+import type { IDOC } from '../src'
 
-const doc: IDoc = {
+const doc: IDOC = {
   children: [
     {
       type: 'image',

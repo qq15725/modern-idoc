@@ -1,6 +1,6 @@
-import type { IBaseElementStyle } from '../interfaces'
+import type { IElementStyle } from '../interfaces'
 
-export function getDefaultElementStyle(): IBaseElementStyle {
+export function getDefaultElementStyle(): IElementStyle {
   return {
     overflow: 'visible',
     visibility: 'visible',

@@ -1,7 +1,6 @@
-import type { IElementType } from '../constants'
-import type { IBaseElement } from './IBaseElement'
+import type { IElement } from './IElement'
 
-export interface IVideo extends IBaseElement {
-  type: IElementType.video
+export interface IVideo extends IElement {
+  type: 'video'
   src: string
 }

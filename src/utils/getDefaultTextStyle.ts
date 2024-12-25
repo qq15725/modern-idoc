@@ -8,6 +8,7 @@ export function getDefaultTextStyle(): ITextStyle {
     verticalAlign: 'baseline',
     lineHeight: 1.2,
     letterSpacing: 0,
+    wordSpacing: 0,
     // font
     fontSize: 14,
     fontWeight: 'normal',

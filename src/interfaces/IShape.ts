@@ -1,8 +1,7 @@
-import type { IElementType } from '../constants'
-import type { IBaseElement } from './IBaseElement'
+import type { IElement } from './IElement'
 import type { IPath } from './IPath'
 
-export interface IShape extends IBaseElement {
-  type: IElementType.shape
+export interface IShape extends IElement {
+  type: 'shape'
   paths: IPath[]
 }

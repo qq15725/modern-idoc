@@ -1,7 +1,6 @@
-import type { IElementType } from '../constants'
-import type { IBaseElement } from './IBaseElement'
+import type { IElement } from './IElement'
 
-export interface IImage extends IBaseElement {
-  type: IElementType.image
+export interface IImage extends IElement {
+  type: 'image'
   src: string
 }

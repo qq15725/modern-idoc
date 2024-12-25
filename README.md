@@ -21,14 +21,13 @@
 ## Usage
 
 ```ts
-import type { IDoc } from 'modern-idoc'
+import type { IDOC } from 'modern-idoc'
 
-const doc: IDoc = {
+const doc: IDOC = {
   name: 'example.pptx',
   children: [
     {
       name: 'ppt/slides/slide1.xml',
-      type: 'group',
       style: {
         width: 960,
         height: 540,
