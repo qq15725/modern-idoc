@@ -44,7 +44,7 @@ export interface Highlight {
 }
 
 export interface TextListStyle {
-  listStyle: Partial<ListStyle>
+  listStyle?: Partial<ListStyle>
   listStyleType: ListStyleType
   listStyleImage: ListStyleImage
   listStyleColormap: ListStyleColormap
@@ -53,7 +53,7 @@ export interface TextListStyle {
 }
 
 export interface TextHighlightStyle {
-  highlight: Partial<Highlight>
+  highlight?: Partial<Highlight>
   highlightImage: HighlightImage
   highlightReferImage: HighlightReferImage
   highlightColormap: HighlightColormap
@@ -62,7 +62,7 @@ export interface TextHighlightStyle {
   highlightThickness: HighlightThickness
 }
 
-export interface TextLineStyle extends TextListStyle {
+export interface ITextLineStyle extends TextListStyle {
   writingMode: WritingMode
   textWrap: TextWrap
   textAlign: TextAlign
@@ -70,7 +70,7 @@ export interface TextLineStyle extends TextListStyle {
   lineHeight: number
 }
 
-export interface TextInlineStyle extends TextHighlightStyle {
+export interface ITextInlineStyle extends TextHighlightStyle {
   color: string
   verticalAlign: VerticalAlign
   letterSpacing: number
@@ -84,7 +84,7 @@ export interface TextInlineStyle extends TextHighlightStyle {
   textDecoration: TextDecorationLine
 }
 
-export interface TextDrawStyle {
+export interface ITextDrawStyle {
   textStrokeWidth: number
   textStrokeColor: string
   shadowColor: string
@@ -97,6 +97,10 @@ export interface TextDrawStyle {
   skewY: number
 }
 
-export interface ITextStyle extends TextLineStyle, TextInlineStyle, TextDrawStyle, IElementStyle {
+export interface ITextStyle extends
+  ITextLineStyle,
+  ITextInlineStyle,
+  ITextDrawStyle,
+  IElementStyle {
   //
 }

@@ -12,19 +12,6 @@ export interface IElementStyle {
   height: number
   rotate: number
   opacity: number
-  // transform
-  scaleX: number
-  scaleY: number
-  transform: string
-  transformOrigin: string
-  // background
-  backgroundImage: string
-  backgroundColor: string
-  // shadow
-  shadowColor: string
-  shadowOffsetX: number
-  shadowOffsetY: number
-  shadowBlur: number
   // margin
   marginLeft: number
   marginTop: number
@@ -35,6 +22,23 @@ export interface IElementStyle {
   paddingTop: number
   paddingRight: number
   paddingBottom: number
+  // transform
+  scaleX: number
+  scaleY: number
+  skewX: number
+  skewY: number
+  translateX: number
+  translateY: number
+  transform: string
+  transformOrigin: string
+  // background
+  backgroundImage: string
+  backgroundColor: string
+  // shadow
+  shadowColor: string
+  shadowOffsetX: number
+  shadowOffsetY: number
+  shadowBlur: number
   // border
   borderRadius: number
   borderColor: string
