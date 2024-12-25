@@ -1,5 +1,6 @@
-import type { IGroup } from './IGroup'
+import type { IBaseElement } from './IBaseElement'
+import type { IElement } from './IElement'
 
-export interface IDoc extends IGroup {
-  //
+export interface IDoc extends IBaseElement {
+  children: IElement[]
 }
