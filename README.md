@@ -28,6 +28,7 @@ const doc: IDoc = {
   children: [
     {
       name: 'ppt/slides/slide1.xml',
+      type: 'group',
       style: {
         width: 960,
         height: 540,

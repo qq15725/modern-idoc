@@ -1,7 +1,7 @@
 export type Overflow = 'hidden' | 'visible'
 export type Visibility = 'hidden' | 'visible'
 
-export interface IElementStyle {
+export interface IBaseElementStyle {
   overflow: Overflow
   visibility: Visibility
   filter: string

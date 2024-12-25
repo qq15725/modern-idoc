@@ -1,9 +1,12 @@
-import type { IBackground } from './IBackground'
-import type { IElementStyle } from './IElementStyle'
+import type { IGroup } from './IGroup'
+import type { IImage } from './IImage'
+import type { IShape } from './IShape'
+import type { IText } from './IText'
+import type { IVideo } from './IVideo'
 
-export interface IElement<T extends IElementStyle = IElementStyle> {
-  name?: string
-  style?: Partial<T>
-  background?: IBackground
-  meta?: Record<string, any>
-}
+export type IElement =
+  | IImage
+  | IText
+  | IShape
+  | IVideo
+  | IGroup

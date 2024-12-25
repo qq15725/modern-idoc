@@ -1,4 +1,5 @@
-import type { IElement } from './IElement'
+import type { IElementType } from '../constants'
+import type { IBaseElement } from './IBaseElement'
 import type { ITextStyle } from './ITextStyle'
 
 export interface IFragmentContent extends Partial<ITextStyle> {
@@ -15,7 +16,7 @@ export type ITextContent =
   | IParagraphContent
   | (string | IFragmentContent | IParagraphContent | (string | IFragmentContent)[])[]
 
-export interface IText extends IElement<ITextStyle> {
-  type: 'text'
+export interface IText extends IBaseElement<ITextStyle> {
+  type: IElementType.text
   content: ITextContent
 }

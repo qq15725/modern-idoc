@@ -1,4 +1,4 @@
-import type { IElementStyle } from './IElementStyle'
+import type { IBaseElementStyle } from './IBaseElementStyle'
 
 export type FontWeight = 'normal' | 'bold' | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900
 export type FontStyle = 'normal' | 'italic' | 'oblique' | `oblique ${string}`
@@ -101,6 +101,6 @@ export interface ITextStyle extends
   ITextLineStyle,
   ITextInlineStyle,
   ITextDrawStyle,
-  IElementStyle {
+  IBaseElementStyle {
   //
 }
