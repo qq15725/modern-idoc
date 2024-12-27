@@ -1,6 +1,6 @@
-import type { IDOCElementStyle } from '../interfaces'
+import type { IDOCElementStyleDeclaration } from '../interfaces'
 
-export function getDefaultElementStyle(): IDOCElementStyle {
+export function getDefaultElementStyle(): IDOCElementStyleDeclaration {
   return {
     overflow: 'visible',
     visibility: 'visible',

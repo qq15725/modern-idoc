@@ -1,6 +1,6 @@
-import type { IDOCNormalizedImageProp } from './IDOCNormalizedImageProp'
+import type { IDOCImageDeclaration } from './IDOCImageDeclaration'
 
 export type IDOCImageProp =
   | 'none'
   | string
-  | IDOCNormalizedImageProp
+  | IDOCImageDeclaration

@@ -1,6 +1,6 @@
-import type { IDOCFillProp, IDOCNormalizedFillProp } from '../interfaces'
+import type { IDOCFillDeclaration, IDOCFillProp } from '../interfaces'
 
-export function normalizeFill(fill?: IDOCFillProp): IDOCNormalizedFillProp | undefined {
+export function normalizeFill(fill?: IDOCFillProp): IDOCFillDeclaration | undefined {
   if (!fill || fill === 'none') {
     return undefined
   }

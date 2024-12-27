@@ -1,6 +1,6 @@
-import type { IDOCNormalizedVideoProp } from './IDOCNormalizedVideoProp'
+import type { IDOCVideoDeclaration } from './IDOCVideoDeclaration'
 
 export type IDOCVideoProp =
   | 'none'
   | string
-  | IDOCNormalizedVideoProp
+  | IDOCVideoDeclaration

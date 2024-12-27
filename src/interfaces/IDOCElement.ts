@@ -8,7 +8,7 @@ import type { IDOCTextProp } from './IDOCTextProp'
 import type { IDOCVideoProp } from './IDOCVideoProp'
 
 export interface IDOCElement extends IDOCNode {
-  style?: Partial<IDOCStyleProp>
+  style?: IDOCStyleProp
   image?: IDOCImageProp
   video?: IDOCVideoProp
   text?: IDOCTextProp

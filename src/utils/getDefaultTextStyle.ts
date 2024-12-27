@@ -1,6 +1,6 @@
-import type { IDOCTextStyle } from '../interfaces'
+import type { IDOCTextStyleDeclaration } from '../interfaces'
 
-export function getDefaultTextStyle(): IDOCTextStyle {
+export function getDefaultTextStyle(): IDOCTextStyleDeclaration {
   return {
     writingMode: 'horizontal-tb',
     verticalAlign: 'baseline',

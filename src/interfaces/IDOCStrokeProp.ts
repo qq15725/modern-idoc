@@ -1,6 +1,6 @@
-import type { IDOCNormalizedStrokeProp } from './IDOCNormalizedStrokeProp'
+import type { IDOCStrokeDeclaration } from './IDOCStrokeDeclaration'
 
 export type IDOCStrokeProp =
   | 'none'
   | string
-  | IDOCNormalizedStrokeProp
+  | IDOCStrokeDeclaration

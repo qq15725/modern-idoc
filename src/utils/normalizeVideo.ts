@@ -1,6 +1,6 @@
-import type { IDOCNormalizedVideoProp, IDOCVideoProp } from '../interfaces'
+import type { IDOCVideoDeclaration, IDOCVideoProp } from '../interfaces'
 
-export function normalizeVideo(video?: IDOCVideoProp): IDOCNormalizedVideoProp | undefined {
+export function normalizeVideo(video?: IDOCVideoProp): IDOCVideoDeclaration | undefined {
   if (!video || video === 'none') {
     return undefined
   }
