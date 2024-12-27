@@ -21,46 +21,68 @@
 ## Usage
 
 ```ts
-import type { IDOC } from 'modern-idoc'
+import type { IDOCDocument } from 'modern-idoc'
 
-const doc: IDOC = {
-  name: 'example.pptx',
+const pdf: IDOCDocument = {
   children: [
     {
-      name: 'ppt/slides/slide1.xml',
       style: {
-        width: 960,
-        height: 540,
-      },
-      meta: {
-        layout: 'ppt/slideLayous/slideLayout1.xml',
+        width: 300,
+        height: 600,
       },
       children: [
         {
-          type: 'image',
           style: {
-            left: 100,
-            top: 100,
-            width: 300,
-            height: 400,
+            rotate: 60,
+            width: 50,
+            height: 50,
           },
-          src: '/example.png',
+          image: '/example.png',
         },
         {
-          type: 'text',
           style: {
+            rotate: 40,
             left: 100,
             top: 100,
+            fontSize: 20,
+            color: '#FF00FF',
           },
-          content: 'TEXT',
+          text: 'test',
         },
         {
-          type: 'shape',
-          paths: [
-            { fill: '#000', data: 'M 0 0 L 100 100' },
+          style: {
+            left: 200,
+            top: 100,
+            width: 100,
+            height: 200,
+            fontSize: 22,
+          },
+          text: [
+            {
+              letterSpacing: 3,
+              fragments: [
+                {
+                  content: 'He',
+                  color: '#00FF00',
+                  fontSize: 12,
+                },
+                {
+                  content: 'llo',
+                  color: '#000000',
+                },
+              ],
+            },
+            {
+              content: ', ',
+              color: '#FF0000',
+            },
+            {
+              content: 'World!',
+              color: '#0000FF',
+            },
           ],
         },
-      ]
+      ],
     },
   ],
 }

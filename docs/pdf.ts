@@ -14,7 +14,7 @@ export const pdf: IDOCDocument = {
             width: 50,
             height: 50,
           },
-          image: '/static/example.png',
+          image: '/example.png',
         },
         {
           style: {
