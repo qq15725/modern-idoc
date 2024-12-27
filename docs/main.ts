@@ -1,22 +1,4 @@
-import type { IDOC } from '../src'
+import { pdf } from './pdf'
+import { pptx } from './pptx'
 
-const doc: IDOC = {
-  children: [
-    {
-      type: 'image',
-      src: '/example.png',
-    },
-    {
-      type: 'text',
-      content: 'TEXT',
-    },
-    {
-      type: 'shape',
-      paths: [
-        { fill: '#000', data: 'M 0 0 L 100 100' },
-      ],
-    },
-  ],
-}
-
-console.warn(doc)
+console.warn(pdf, pptx)

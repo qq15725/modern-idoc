@@ -1,9 +1,7 @@
-import type { ITextStyle } from '../interfaces'
-import { getDefaultElementStyle } from './getDefaultElementStyle'
+import type { IDOCTextStyle } from '../interfaces'
 
-export function getDefaultTextStyle(): ITextStyle {
+export function getDefaultTextStyle(): IDOCTextStyle {
   return {
-    ...getDefaultElementStyle(),
     writingMode: 'horizontal-tb',
     verticalAlign: 'baseline',
     lineHeight: 1.2,
@@ -33,13 +31,26 @@ export function getDefaultTextStyle(): ITextStyle {
     listStyleColormap: 'none',
     listStyleSize: 'cover',
     listStylePosition: 'outside',
-
-    // listStyle
+    // highlight
     highlightImage: 'none',
     highlightReferImage: 'none',
     highlightColormap: 'none',
     highlightLine: 'none',
     highlightSize: 'cover',
     highlightThickness: '100%',
+    // transform
+    scaleX: 1,
+    scaleY: 1,
+    skewX: 0,
+    skewY: 0,
+    translateX: 0,
+    translateY: 0,
+    transform: 'none',
+    transformOrigin: '50% 50%',
+    // shadow
+    shadowColor: 'transparent',
+    shadowOffsetX: 0,
+    shadowOffsetY: 0,
+    shadowBlur: 0,
   }
 }

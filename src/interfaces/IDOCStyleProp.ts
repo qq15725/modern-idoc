@@ -1,5 +1,5 @@
-import type { IElementStyle } from './IElementStyle'
-
+export type Overflow = 'hidden' | 'visible'
+export type Visibility = 'hidden' | 'visible'
 export type FontWeight = 'normal' | 'bold' | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900
 export type FontStyle = 'normal' | 'italic' | 'oblique' | `oblique ${string}`
 export type FontKerning = 'none' | 'auto' | 'normal'
@@ -18,15 +18,15 @@ export type ListStyleImage = 'none' | string
 export type ListStyleColormap = 'none' | Record<string, string>
 export type ListStyleSize = 'cover' | Sizeable
 export type ListStylePosition = 'inside' | 'outside'
-export interface ListStyle {
+export interface IDOCListStyleObject {
   type: ListStyleType
   image: ListStyleImage
   colormap: ListStyleColormap
   size: ListStyleSize
   position: ListStylePosition
 }
-export interface TextListStyle {
-  listStyle?: Partial<ListStyle>
+export interface IDOCListStyleStyle {
+  listStyle?: Partial<IDOCListStyleObject>
   listStyleType: ListStyleType
   listStyleImage: ListStyleImage
   listStyleColormap: ListStyleColormap
@@ -41,7 +41,7 @@ export type HighlightReferImage = 'none' | string
 export type HighlightColormap = 'none' | Record<string, string>
 export type HighlightSize = 'cover' | Sizeable
 export type HighlightThickness = Sizeable
-export interface Highlight {
+export interface IDOCHighlightObject {
   image: HighlightImage
   referImage: HighlightReferImage
   colormap: HighlightColormap
@@ -49,8 +49,8 @@ export interface Highlight {
   size: HighlightSize
   thickness: HighlightThickness
 }
-export interface TextHighlightStyle {
-  highlight?: Partial<Highlight>
+export interface IDOCHighlightStyle {
+  highlight?: Partial<IDOCHighlightObject>
   highlightImage: HighlightImage
   highlightReferImage: HighlightReferImage
   highlightColormap: HighlightColormap
@@ -59,7 +59,34 @@ export interface TextHighlightStyle {
   highlightThickness: HighlightThickness
 }
 
-export interface ITextLineStyle extends TextListStyle {
+// shadow
+export interface IDCOShadowObject {
+  color: string
+  offsetX: number
+  offsetY: number
+  blur: number
+}
+export interface IDOCShadowStyle {
+  shadow?: Partial<IDCOShadowObject>
+  shadowColor: string
+  shadowOffsetX: number
+  shadowOffsetY: number
+  shadowBlur: number
+}
+
+// transform
+export interface IDOCTransformStyle {
+  scaleX: number
+  scaleY: number
+  skewX: number
+  skewY: number
+  translateX: number
+  translateY: number
+  transform: string
+  transformOrigin: string
+}
+
+export interface IDOCTextLineStyle extends IDOCListStyleStyle {
   writingMode: WritingMode
   textWrap: TextWrap
   textAlign: TextAlign
@@ -67,7 +94,7 @@ export interface ITextLineStyle extends TextListStyle {
   lineHeight: number
 }
 
-export interface ITextInlineStyle extends TextHighlightStyle {
+export interface IDOCTextInlineStyle extends IDOCHighlightStyle {
   color: string
   verticalAlign: VerticalAlign
   letterSpacing: number
@@ -82,23 +109,45 @@ export interface ITextInlineStyle extends TextHighlightStyle {
   textDecoration: TextDecorationLine
 }
 
-export interface ITextDrawStyle {
+export interface IDOCTextDrawStyle extends IDOCShadowStyle, IDOCTransformStyle {
   textStrokeWidth: number
   textStrokeColor: string
-  shadowColor: string
-  shadowOffsetX: number
-  shadowOffsetY: number
-  shadowBlur: number
-  translateX: number
-  translateY: number
-  skewX: number
-  skewY: number
 }
 
-export interface ITextStyle extends
-  ITextLineStyle,
-  ITextInlineStyle,
-  ITextDrawStyle,
-  IElementStyle {
+export interface IDOCTextStyle extends IDOCTextLineStyle, IDOCTextInlineStyle, IDOCTextDrawStyle {
+  //
+}
+
+export interface IDOCElementStyle extends IDOCShadowStyle, IDOCTransformStyle {
+  overflow: Overflow
+  visibility: Visibility
+  filter: string
+  // position
+  left: number
+  top: number
+  width: number
+  height: number
+  rotate: number
+  opacity: number
+  // margin
+  marginLeft: number
+  marginTop: number
+  marginRight: number
+  marginBottom: number
+  // padding
+  paddingLeft: number
+  paddingTop: number
+  paddingRight: number
+  paddingBottom: number
+  // background
+  backgroundImage: string
+  backgroundColor: string
+  // border
+  borderRadius: number
+  borderColor: string
+  borderWidth: number
+}
+
+export interface IDOCStyleProp extends IDOCTextStyle, IDOCElementStyle {
   //
 }

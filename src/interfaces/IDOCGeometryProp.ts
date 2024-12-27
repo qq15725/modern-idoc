@@ -1,21 +1,23 @@
+export type SVGPathData = string
 export type FillRule = 'nonzero' | 'evenodd'
 export type StrokeLinecap = 'butt' | 'round' | 'square'
 export type StrokeLinejoin = 'arcs' | 'bevel' | 'miter' | 'miter-clip' | 'round'
 
-export interface IPathDrawStyle {
-  fill: string
-  stroke: string
+export interface IDOCPath2DStyle {
+  [key: string]: any
+  opacity: number
+  visibility: string
+  // shadow
   shadowColor: string
   shadowOffsetX: number
   shadowOffsetY: number
   shadowBlur: number
-}
-
-export interface IPathStyle extends IPathDrawStyle {
-  [key: string]: any
+  // fill
+  fill: string
   fillOpacity: number
   fillRule: FillRule
-  opacity: number
+  // stroke
+  stroke: string
   strokeOpacity: number
   strokeWidth: number
   strokeLinecap: StrokeLinecap
@@ -23,9 +25,18 @@ export interface IPathStyle extends IPathDrawStyle {
   strokeMiterlimit: number
   strokeDasharray: number[]
   strokeDashoffset: number
-  visibility: string
 }
 
-export interface IPath extends Partial<IPathStyle> {
-  data: string
+export interface IDOCPath2D extends Partial<IDOCPath2DStyle> {
+  data: SVGPathData
 }
+
+export interface IDOCGeometryPropObject {
+  data: (IDOCPath2D | SVGPathData)[]
+}
+
+export type IDOCGeometryProp =
+  | 'none'
+  | SVGPathData
+  | SVGPathData[]
+  | IDOCGeometryPropObject
