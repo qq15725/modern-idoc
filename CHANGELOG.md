@@ -1,3 +1,13 @@
+# [0.1.0](https://github.com/qq15725/modern-idoc/compare/v0.0.3...v0.1.0) (2024-12-27)
+
+
+### Features
+
+* update IDOC ([99f582d](https://github.com/qq15725/modern-idoc/commit/99f582d9a9a566ec70a916abb11b2fc03ba1bf68))
+* update IDOC ([a661194](https://github.com/qq15725/modern-idoc/commit/a661194063937c4aeb48effeb7145811713799cf))
+
+
+
 ## [0.0.3](https://github.com/qq15725/modern-idoc/compare/v0.0.2...v0.0.3) (2024-12-25)
 
 
