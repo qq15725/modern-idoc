@@ -6,7 +6,7 @@ export function normalizeImage(image?: IDOCImageProp): IDOCImageDeclaration | un
   }
   else if (typeof image === 'string') {
     return {
-      src: image,
+      url: image,
     }
   }
   else {

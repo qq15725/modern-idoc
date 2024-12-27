@@ -1,4 +1,4 @@
 export interface IDOCVideoDeclaration {
-  src: string
+  url: string
   opacity?: number
 }

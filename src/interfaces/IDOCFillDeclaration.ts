@@ -1,5 +1,5 @@
 export interface IDOCFillDeclaration {
+  url?: string
   color?: string
-  image?: string
   opacity?: number
 }

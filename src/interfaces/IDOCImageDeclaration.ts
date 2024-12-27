@@ -1,4 +1,4 @@
 export interface IDOCImageDeclaration {
-  src: string
+  url: string
   opacity?: number
 }

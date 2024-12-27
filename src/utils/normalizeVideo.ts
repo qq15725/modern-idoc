@@ -6,7 +6,7 @@ export function normalizeVideo(video?: IDOCVideoProp): IDOCVideoDeclaration | un
   }
   else if (typeof video === 'string') {
     return {
-      src: video,
+      url: video,
     }
   }
   else {

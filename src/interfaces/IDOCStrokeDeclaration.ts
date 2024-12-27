@@ -1,5 +1,5 @@
 export interface IDOCStrokeDeclaration {
+  url?: string
   color?: string
-  image?: string
   opacity?: number
 }
