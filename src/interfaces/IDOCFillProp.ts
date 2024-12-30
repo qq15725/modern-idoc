@@ -1,6 +1,7 @@
 import type { IDOCFillDeclaration } from './IDOCFillDeclaration'
+import type { Noneable } from './shared'
 
 export type IDOCFillProp =
-  | 'none'
+  | Noneable
   | string
   | IDOCFillDeclaration

@@ -1,7 +1,8 @@
 import type { IDOCGeometryDeclaration, SVGPathData } from './IDOCGeometryDeclaration'
+import type { Noneable } from './shared'
 
 export type IDOCGeometryProp =
-  | 'none'
+  | Noneable
   | SVGPathData
   | SVGPathData[]
   | IDOCGeometryDeclaration

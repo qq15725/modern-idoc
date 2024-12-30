@@ -1,6 +1,7 @@
 import type { IDOCVideoDeclaration } from './IDOCVideoDeclaration'
+import type { Noneable } from './shared'
 
 export type IDOCVideoProp =
-  | 'none'
+  | Noneable
   | string
   | IDOCVideoDeclaration

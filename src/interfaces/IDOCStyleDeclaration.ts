@@ -1,22 +1,23 @@
+import type { Noneable, Sizeable } from './shared'
+
 export type Overflow = 'hidden' | 'visible'
 export type Visibility = 'hidden' | 'visible'
 export type FontWeight = 'normal' | 'bold' | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900
 export type FontStyle = 'normal' | 'italic' | 'oblique' | `oblique ${string}`
-export type FontKerning = 'none' | 'auto' | 'normal'
+export type FontKerning = Noneable | 'auto' | 'normal'
 export type TextWrap = 'wrap' | 'nowrap'
 export type TextAlign = 'center' | 'end' | 'left' | 'right' | 'start'
-export type TextTransform = 'none' | 'uppercase' | 'lowercase'
+export type TextTransform = Noneable | 'uppercase' | 'lowercase'
 export type TextOrientation = 'mixed' | 'upright' | 'sideways-right' | 'sideways' /* | 'use-glyph-orientation' */
-export type TextDecorationLine = 'none' | 'underline' | 'line-through' | 'overline'
+export type TextDecorationLine = Noneable | 'underline' | 'line-through' | 'overline'
 export type VerticalAlign = 'baseline' | 'top' | 'middle' | 'bottom' | 'sub' | 'super' | 'text-top' | 'text-bottom'
 export type WritingMode = 'horizontal-tb' | 'vertical-lr' | 'vertical-rl'
-export type Sizeable = `${number}%` | `${number}rem` | number
 
 // listStyle
-export type ListStyleType = 'none' | 'disc' /* 'decimal' | 'circle' | 'square' | 'georgian'  | 'trad-chinese-informal' | 'kannada' */
-export type ListStyleImage = 'none' | string
-export type ListStyleColormap = 'none' | Record<string, string>
-export type ListStyleSize = 'cover' | Sizeable
+export type ListStyleType = Noneable | 'disc' /* 'decimal' | 'circle' | 'square' | 'georgian'  | 'trad-chinese-informal' | 'kannada' */
+export type ListStyleImage = Noneable | string
+export type ListStyleColormap = Noneable | Record<string, string>
+export type ListStyleSize = Sizeable | 'cover'
 export type ListStylePosition = 'inside' | 'outside'
 export interface IDOCListStyleDeclaration {
   type: ListStyleType
@@ -36,10 +37,10 @@ export interface IDOCListStyleStyleDeclaration {
 
 // highlight
 export type HighlightLine = TextDecorationLine | 'outline'
-export type HighlightImage = 'none' | string
-export type HighlightReferImage = 'none' | string
-export type HighlightColormap = 'none' | Record<string, string>
-export type HighlightSize = 'cover' | Sizeable
+export type HighlightImage = Noneable | string
+export type HighlightReferImage = Noneable | string
+export type HighlightColormap = Noneable | Record<string, string>
+export type HighlightSize = Sizeable | 'cover'
 export type HighlightThickness = Sizeable
 export interface IDOCHighlightDeclaration {
   image: HighlightImage
