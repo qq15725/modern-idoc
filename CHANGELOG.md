@@ -1,3 +1,12 @@
+## [0.1.4](https://github.com/qq15725/modern-idoc/compare/v0.1.3...v0.1.4) (2025-01-02)
+
+
+### Bug Fixes
+
+* TextDecoration ([920a56c](https://github.com/qq15725/modern-idoc/commit/920a56c551683656995c6935ec2dd9718c1fa472))
+
+
+
 ## [0.1.3](https://github.com/qq15725/modern-idoc/compare/v0.1.2...v0.1.3) (2024-12-30)
 
 
