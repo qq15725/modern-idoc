@@ -14,16 +14,6 @@ export function normalizeGeometry(geometry?: IDOCGeometryProp): IDOCGeometryDecl
   else if (Array.isArray(geometry)) {
     return {
       data: geometry.map((data) => {
-        return {
-          data,
-        }
-      }),
-    }
-  }
-  else {
-    return {
-      ...geometry,
-      data: geometry.data.map((data) => {
         if (typeof data === 'string') {
           return {
             data,
@@ -32,5 +22,8 @@ export function normalizeGeometry(geometry?: IDOCGeometryProp): IDOCGeometryDecl
         return data
       }),
     }
+  }
+  else {
+    return geometry
   }
 }

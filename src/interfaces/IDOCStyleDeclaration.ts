@@ -9,7 +9,7 @@ export type TextWrap = 'wrap' | 'nowrap'
 export type TextAlign = 'center' | 'end' | 'left' | 'right' | 'start'
 export type TextTransform = Noneable | 'uppercase' | 'lowercase'
 export type TextOrientation = 'mixed' | 'upright' | 'sideways-right' | 'sideways' /* | 'use-glyph-orientation' */
-export type TextDecorationLine = Noneable | 'underline' | 'line-through' | 'overline'
+export type TextDecoration = Noneable | 'underline' | 'line-through' | 'overline'
 export type VerticalAlign = 'baseline' | 'top' | 'middle' | 'bottom' | 'sub' | 'super' | 'text-top' | 'text-bottom'
 export type WritingMode = 'horizontal-tb' | 'vertical-lr' | 'vertical-rl'
 
@@ -36,7 +36,7 @@ export interface IDOCListStyleStyleDeclaration {
 }
 
 // highlight
-export type HighlightLine = TextDecorationLine | 'outline'
+export type HighlightLine = TextDecoration | 'outline'
 export type HighlightImage = Noneable | string
 export type HighlightReferImage = Noneable | string
 export type HighlightColormap = Noneable | Record<string, string>
@@ -107,7 +107,7 @@ export interface IDOCTextInlineStyleDeclaration extends IDOCHighlightStyleDeclar
   fontKerning: FontKerning
   textTransform: TextTransform
   textOrientation: TextOrientation
-  textDecoration: TextDecorationLine
+  textDecoration: TextDecoration
 }
 
 export interface IDOCTextDrawStyleDeclaration extends

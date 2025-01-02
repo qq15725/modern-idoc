@@ -32,5 +32,5 @@ export interface IDOCPath2D extends Partial<IDOCPath2DStyle> {
 }
 
 export interface IDOCGeometryDeclaration {
-  data: (IDOCPath2D | SVGPathData)[]
+  data: IDOCPath2D[]
 }
