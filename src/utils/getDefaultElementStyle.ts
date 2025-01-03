@@ -1,4 +1,6 @@
 import type { IDOCElementStyleDeclaration } from '../interfaces'
+import { getDefaultShadowStyle } from './getDefaultShadowStyle'
+import { getDefaultTransformStyle } from './getDefaultTransformStyle'
 
 export function getDefaultElementStyle(): IDOCElementStyleDeclaration {
   return {
@@ -23,22 +25,12 @@ export function getDefaultElementStyle(): IDOCElementStyleDeclaration {
     paddingRight: 0,
     paddingBottom: 0,
     // transform
-    scaleX: 1,
-    scaleY: 1,
-    skewX: 0,
-    skewY: 0,
-    translateX: 0,
-    translateY: 0,
-    transform: 'none',
-    transformOrigin: '50% 50%',
+    ...getDefaultTransformStyle(),
     // background
     backgroundImage: 'none',
     backgroundColor: 'transparent',
     // shadow
-    shadowColor: 'transparent',
-    shadowOffsetX: 0,
-    shadowOffsetY: 0,
-    shadowBlur: 0,
+    ...getDefaultShadowStyle(),
     // border
     borderRadius: 0,
     borderColor: 'transparent',

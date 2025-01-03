@@ -38,19 +38,5 @@ export function getDefaultTextStyle(): IDOCTextStyleDeclaration {
     highlightLine: 'none',
     highlightSize: 'cover',
     highlightThickness: '100%',
-    // transform
-    scaleX: 1,
-    scaleY: 1,
-    skewX: 0,
-    skewY: 0,
-    translateX: 0,
-    translateY: 0,
-    transform: 'none',
-    transformOrigin: '50% 50%',
-    // shadow
-    shadowColor: 'transparent',
-    shadowOffsetX: 0,
-    shadowOffsetY: 0,
-    shadowBlur: 0,
   }
 }

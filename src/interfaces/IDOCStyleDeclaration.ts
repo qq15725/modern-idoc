@@ -110,9 +110,7 @@ export interface IDOCTextInlineStyleDeclaration extends IDOCHighlightStyleDeclar
   textDecoration: TextDecoration
 }
 
-export interface IDOCTextDrawStyleDeclaration extends
-  IDOCShadowStyleDeclaration,
-  IDOCTransformStyleDeclaration {
+export interface IDOCTextDrawStyleDeclaration {
   textStrokeWidth: number
   textStrokeColor: string
 }
@@ -156,6 +154,8 @@ export interface IDOCElementStyleDeclaration extends
   borderWidth: number
 }
 
-export interface IDOCStyleDeclaration extends IDOCTextStyleDeclaration, IDOCElementStyleDeclaration {
+export interface IDOCStyleDeclaration extends
+  IDOCTextStyleDeclaration,
+  IDOCElementStyleDeclaration {
   //
 }
