@@ -7,12 +7,6 @@ export function getDefaultElementStyle(): IDOCElementStyleDeclaration {
     overflow: 'visible',
     visibility: 'visible',
     filter: 'none',
-    // position
-    left: 0,
-    top: 0,
-    width: 0,
-    height: 0,
-    rotate: 0,
     opacity: 1,
     // margin
     marginLeft: 0,

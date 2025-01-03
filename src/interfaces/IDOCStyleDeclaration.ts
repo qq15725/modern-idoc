@@ -77,6 +77,11 @@ export interface IDOCShadowStyleDeclaration {
 
 // transform
 export interface IDOCTransformStyleDeclaration {
+  left: number
+  top: number
+  width: number
+  height: number
+  rotate: number
   scaleX: number
   scaleY: number
   skewX: number
@@ -128,12 +133,6 @@ export interface IDOCElementStyleDeclaration extends
   overflow: Overflow
   visibility: Visibility
   filter: string
-  // position
-  left: number
-  top: number
-  width: number
-  height: number
-  rotate: number
   opacity: number
   // margin
   marginLeft: number
