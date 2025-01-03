@@ -1,3 +1,13 @@
+## [0.1.5](https://github.com/qq15725/modern-idoc/compare/v0.1.4...v0.1.5) (2025-01-03)
+
+
+### Bug Fixes
+
+* getDefaultTransformStyle ([89b0b22](https://github.com/qq15725/modern-idoc/commit/89b0b22750d711e0983a48b72f0a0404225b21af))
+* split text style ([d219a56](https://github.com/qq15725/modern-idoc/commit/d219a566c8ab1a10f668605203403fe33d42b81b))
+
+
+
 ## [0.1.4](https://github.com/qq15725/modern-idoc/compare/v0.1.3...v0.1.4) (2025-01-02)
 
 
