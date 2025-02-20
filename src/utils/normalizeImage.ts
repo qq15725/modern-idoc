@@ -1,6 +1,6 @@
-import type { IDOCImageDeclaration, IDOCImageProp } from '../interfaces'
+import type { ImageDeclaration, ImageProp } from '../interfaces'
 
-export function normalizeImage(image?: IDOCImageProp): IDOCImageDeclaration | undefined {
+export function normalizeImage(image?: ImageProp): ImageDeclaration | undefined {
   if (!image || image === 'none') {
     return undefined
   }

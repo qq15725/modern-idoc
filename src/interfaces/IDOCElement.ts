@@ -1,19 +1,19 @@
-import type { IDOCFillProp } from './IDOCFillProp'
-import type { IDOCGeometryProp } from './IDOCGeometryProp'
-import type { IDOCImageProp } from './IDOCImageProp'
+import type { FillProp } from './FillProp'
+import type { GeometryProp } from './GeometryProp'
 import type { IDOCNode } from './IDOCNode'
-import type { IDOCStrokeProp } from './IDOCStrokeProp'
-import type { IDOCStyleProp } from './IDOCStyleProp'
-import type { IDOCTextProp } from './IDOCTextProp'
-import type { IDOCVideoProp } from './IDOCVideoProp'
+import type { ImageProp } from './ImageProp'
+import type { StrokeProp } from './StrokeProp'
+import type { StyleProp } from './StyleProp'
+import type { TextProp } from './TextProp'
+import type { VideoProp } from './VideoProp'
 
 export interface IDOCElement extends IDOCNode {
-  style?: IDOCStyleProp
-  image?: IDOCImageProp
-  video?: IDOCVideoProp
-  text?: IDOCTextProp
-  geometry?: IDOCGeometryProp
-  fill?: IDOCFillProp
-  stroke?: IDOCStrokeProp
+  style?: StyleProp
+  image?: ImageProp
+  video?: VideoProp
+  text?: TextProp
+  geometry?: GeometryProp
+  fill?: FillProp
+  stroke?: StrokeProp
   children?: IDOCElement[]
 }

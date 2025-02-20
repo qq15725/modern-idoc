@@ -3,7 +3,7 @@ export type FillRule = 'nonzero' | 'evenodd'
 export type StrokeLinecap = 'butt' | 'round' | 'square'
 export type StrokeLinejoin = 'arcs' | 'bevel' | 'miter' | 'miter-clip' | 'round'
 
-export interface IDOCPath2DStyle {
+export interface Path2DStyle {
   [key: string]: any
   opacity: number
   visibility: string
@@ -27,10 +27,10 @@ export interface IDOCPath2DStyle {
   strokeDashoffset: number
 }
 
-export interface IDOCPath2D extends Partial<IDOCPath2DStyle> {
+export interface Path2DDeclaration extends Partial<Path2DStyle> {
   data: SVGPathData
 }
 
-export interface IDOCGeometryDeclaration {
-  data: IDOCPath2D[]
+export interface GeometryDeclaration {
+  data: Path2DDeclaration[]
 }

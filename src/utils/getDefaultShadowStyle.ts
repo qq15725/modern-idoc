@@ -1,10 +1,11 @@
-import type { IDOCShadowStyleDeclaration } from '../interfaces'
+import type { ShadowStyleDeclaration } from '../interfaces'
 
-export function getDefaultShadowStyle(): IDOCShadowStyleDeclaration {
+export function getDefaultShadowStyle(): ShadowStyleDeclaration {
   return {
     shadowColor: 'transparent',
     shadowOffsetX: 0,
     shadowOffsetY: 0,
     shadowBlur: 0,
+    boxShadow: 'none',
   }
 }

@@ -1,6 +1,6 @@
-import type { IDOCStrokeDeclaration, IDOCStrokeProp } from '../interfaces'
+import type { StrokeDeclaration, StrokeProp } from '../interfaces'
 
-export function normalizeStroke(stroke?: IDOCStrokeProp): IDOCStrokeDeclaration | undefined {
+export function normalizeStroke(stroke?: StrokeProp): StrokeDeclaration | undefined {
   if (!stroke || stroke === 'none') {
     return undefined
   }

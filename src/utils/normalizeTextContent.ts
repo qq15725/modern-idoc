@@ -1,11 +1,11 @@
 import type {
-  IDOCTextContent,
-  IDOCTextContentDeclaration,
-  IDOCTextContentFlat,
+  TextContent,
+  TextContentDeclaration,
+  TextContentFlat,
 } from '../interfaces'
 
-export function normalizeTextContent(content: IDOCTextContent = ''): IDOCTextContentDeclaration {
-  const list: IDOCTextContentFlat[] = Array.isArray(content) ? content : [content]
+export function normalizeTextContent(content: TextContent = ''): TextContentDeclaration {
+  const list: TextContentFlat[] = Array.isArray(content) ? content : [content]
   return list.map((p) => {
     if (typeof p === 'string') {
       return {

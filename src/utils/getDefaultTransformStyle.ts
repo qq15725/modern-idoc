@@ -1,11 +1,7 @@
-import type { IDOCTransformStyleDeclaration } from '../interfaces'
+import type { TransformStyleDeclaration } from '../interfaces'
 
-export function getDefaultTransformStyle(): IDOCTransformStyleDeclaration {
+export function getDefaultTransformStyle(): TransformStyleDeclaration {
   return {
-    left: 0,
-    top: 0,
-    width: 0,
-    height: 0,
     rotate: 0,
     scaleX: 1,
     scaleY: 1,

@@ -1,7 +1,7 @@
-import type { IDOCTextDeclaration, IDOCTextProp } from '../interfaces'
+import type { TextDeclaration, TextProp } from '../interfaces'
 import { normalizeTextContent } from './normalizeTextContent'
 
-export function normalizeText(text?: IDOCTextProp): IDOCTextDeclaration | undefined {
+export function normalizeText(text?: TextProp): TextDeclaration | undefined {
   if (!text || text === 'none') {
     return undefined
   }

@@ -1,6 +1,6 @@
-import type { IDOCGeometryDeclaration, IDOCGeometryProp } from '../interfaces'
+import type { GeometryDeclaration, GeometryProp } from '../interfaces'
 
-export function normalizeGeometry(geometry?: IDOCGeometryProp): IDOCGeometryDeclaration | undefined {
+export function normalizeGeometry(geometry?: GeometryProp): GeometryDeclaration | undefined {
   if (!geometry || geometry === 'none') {
     return undefined
   }

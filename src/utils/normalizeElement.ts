@@ -1,4 +1,4 @@
-import type { IDOCElement, IDOCElementDeclaration } from '../interfaces'
+import type { ElementDeclaration, IDOCElement } from '../interfaces'
 import { normalizeFill } from './normalizeFill'
 import { normalizeGeometry } from './normalizeGeometry'
 import { normalizeImage } from './normalizeImage'
@@ -6,7 +6,7 @@ import { normalizeStroke } from './normalizeStroke'
 import { normalizeText } from './normalizeText'
 import { normalizeVideo } from './normalizeVideo'
 
-export function normalizeElement(element: IDOCElement): IDOCElementDeclaration {
+export function normalizeElement(element: IDOCElement): ElementDeclaration {
   return {
     ...element,
     image: normalizeImage(element.image),
