@@ -1,3 +1,13 @@
+# [0.2.0](https://github.com/qq15725/modern-idoc/compare/v0.1.5...v0.2.0) (2025-02-20)
+
+
+### Features
+
+* update types ([a6f7a10](https://github.com/qq15725/modern-idoc/commit/a6f7a10242ebd748b0c7f18fc59a7a50be888e80))
+* update types ([b049992](https://github.com/qq15725/modern-idoc/commit/b049992c367d5c81768f0dace0247bbf0df62117))
+
+
+
 ## [0.1.5](https://github.com/qq15725/modern-idoc/compare/v0.1.4...v0.1.5) (2025-01-03)
 
 
