@@ -1,11 +1,11 @@
-export interface FillRect {
+export interface ImageFillRect {
   left?: number
   top?: number
   bottom?: number
   right?: number
 }
 
-export interface FillTile {
+export interface ImageFillTile {
   alignment?: string
   scaleX?: number
   scaleY?: number
@@ -14,17 +14,23 @@ export interface FillTile {
   flip?: string
 }
 
-export interface FillDeclaration {
+export interface CommonFillDeclaration {
   opacity?: number
+}
 
-  // blip
+export interface ImageFillDeclaration extends CommonFillDeclaration {
   image?: string
   dpi?: number
   rotateWithShape?: boolean
-  srcRect?: FillRect
-  fillRect?: FillRect
-  tile?: FillTile
+  srcRect?: ImageFillRect
+  fillRect?: ImageFillRect
+  tile?: ImageFillTile
+}
 
-  // solid / gradient
+export interface ColorFillDeclaration extends CommonFillDeclaration {
   color?: string
+}
+
+export interface FillDeclaration extends ImageFillDeclaration, ColorFillDeclaration {
+  //
 }
