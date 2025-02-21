@@ -1,3 +1,17 @@
+## [0.2.3](https://github.com/qq15725/modern-idoc/compare/v0.2.2...v0.2.3) (2025-02-21)
+
+
+### Features
+
+* def ([24d11fc](https://github.com/qq15725/modern-idoc/commit/24d11fc2b43d846f521536b85bf1157c548c2b9b))
+* def ([318a17a](https://github.com/qq15725/modern-idoc/commit/318a17a85353753894ef3687c8ecdf3e3ad7d679))
+* def ([bbe6300](https://github.com/qq15725/modern-idoc/commit/bbe63009231b7fc1fb3e76ca88eadf61eb46ceef))
+* def ([61c3a2d](https://github.com/qq15725/modern-idoc/commit/61c3a2da8f4049b015c2a010bf0eae5d47870e9e))
+* def ([fe01d63](https://github.com/qq15725/modern-idoc/commit/fe01d6309e6af8ddaa1793466abfd982252cfe2e))
+* def ([729537c](https://github.com/qq15725/modern-idoc/commit/729537c194dcd4539c0d30889bcc1cb9f3d4f05a))
+
+
+
 ## [0.2.2](https://github.com/qq15725/modern-idoc/compare/v0.2.1...v0.2.2) (2025-02-21)
 
 
