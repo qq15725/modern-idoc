@@ -1,3 +1,12 @@
+## [0.2.5](https://github.com/qq15725/modern-idoc/compare/v0.2.4...v0.2.5) (2025-02-21)
+
+
+### Features
+
+* IDOCDocumentDeclaration ([433d231](https://github.com/qq15725/modern-idoc/commit/433d231d6446366c4ca49ff90f0a71740c75b2a4))
+
+
+
 ## [0.2.4](https://github.com/qq15725/modern-idoc/compare/v0.2.3...v0.2.4) (2025-02-21)
 
 
