@@ -1,3 +1,4 @@
+import type { AudioDeclaration, AudioProp } from './audio'
 import type { FillDeclaration, FillProp } from './fill'
 import type { GeometryDeclaration, GeometryProp } from './geometry'
 import type { IDOCNode } from './IDOCNode'
@@ -12,6 +13,7 @@ export interface IDOCElement extends IDOCNode {
   style?: StyleProp
   image?: ImageProp
   video?: VideoProp
+  audio?: AudioProp
   text?: TextProp
   geometry?: GeometryProp
   fill?: FillProp
@@ -23,6 +25,7 @@ export interface IDOCElement extends IDOCNode {
 export interface IDOCElementDeclaration extends IDOCElement {
   image?: ImageDeclaration
   video?: VideoDeclaration
+  audio?: AudioDeclaration
   text?: TextDeclaration
   geometry?: GeometryDeclaration
   fill?: FillDeclaration

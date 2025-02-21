@@ -1,3 +1,4 @@
+export * from './audio'
 export * from './fill'
 export * from './geometry'
 export * from './IDOCDocument'

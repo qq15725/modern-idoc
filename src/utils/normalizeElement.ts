@@ -1,5 +1,6 @@
 import type { IDOCElement, IDOCElementDeclaration } from '../interfaces'
 import { clearUndef } from './helper'
+import { normalizeAudio } from './normalizeAudio'
 import { normalizeFill } from './normalizeFill'
 import { normalizeGeometry } from './normalizeGeometry'
 import { normalizeImage } from './normalizeImage'
@@ -13,6 +14,7 @@ export function normalizeElement(element: IDOCElement): IDOCElementDeclaration {
     ...element,
     image: normalizeImage(element.image),
     video: normalizeVideo(element.video),
+    audio: normalizeAudio(element.audio),
     text: normalizeText(element.text),
     geometry: normalizeGeometry(element.geometry),
     fill: normalizeFill(element.fill),
