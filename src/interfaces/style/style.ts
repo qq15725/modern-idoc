@@ -6,3 +6,5 @@ export interface StyleDeclaration extends
   ElementStyleDeclaration {
   //
 }
+
+export type StyleProp = Partial<StyleDeclaration>

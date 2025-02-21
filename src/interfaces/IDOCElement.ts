@@ -1,11 +1,11 @@
-import type { FillDeclaration, FillProp } from './Fill'
-import type { GeometryDeclaration, GeometryProp } from './Geometry'
+import type { FillDeclaration, FillProp } from './fill'
+import type { GeometryDeclaration, GeometryProp } from './geometry'
 import type { IDOCNode } from './IDOCNode'
-import type { ImageDeclaration, ImageProp } from './Image'
-import type { StrokeDeclaration, StrokeProp } from './Stroke'
+import type { ImageDeclaration, ImageProp } from './image'
+import type { OutlineDeclaration, OutlineProp } from './outline'
 import type { StyleProp } from './style'
-import type { TextDeclaration, TextProp } from './Text'
-import type { VideoDeclaration, VideoProp } from './Video'
+import type { TextDeclaration, TextProp } from './text'
+import type { VideoDeclaration, VideoProp } from './video'
 
 export interface IDOCElement extends IDOCNode {
   style?: StyleProp
@@ -14,7 +14,7 @@ export interface IDOCElement extends IDOCNode {
   text?: TextProp
   geometry?: GeometryProp
   fill?: FillProp
-  stroke?: StrokeProp
+  outline?: OutlineProp
   children?: IDOCElement[]
 }
 
@@ -24,6 +24,6 @@ export interface IDOCElementDeclaration extends IDOCElement {
   text?: TextDeclaration
   geometry?: GeometryDeclaration
   fill?: FillDeclaration
-  stroke?: StrokeDeclaration
+  outline?: OutlineDeclaration
   children?: IDOCElementDeclaration[]
 }

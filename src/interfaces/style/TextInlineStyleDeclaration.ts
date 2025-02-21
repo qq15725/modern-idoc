@@ -1,4 +1,4 @@
-import type { HighlightStyleDeclaration } from './HighlightStyleDeclaration'
+import type { HighlightStyleDeclaration } from './highlight'
 import type {
   FontKerning,
   FontStyle,

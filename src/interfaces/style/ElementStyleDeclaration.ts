@@ -1,4 +1,4 @@
-import type { ShadowStyleDeclaration } from '../Shadow'
+import type { ShadowStyleDeclaration } from '../shadow'
 import type { LayoutStyleDeclaration } from './LayoutStyleDeclaration'
 import type { TransformStyleDeclaration } from './TransformStyleDeclaration'
 import type { Visibility } from './types'
