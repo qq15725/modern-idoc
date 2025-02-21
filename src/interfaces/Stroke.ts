@@ -1,3 +1,5 @@
+import type { Noneable } from './shared'
+
 export interface StrokeDeclaration {
   width?: number
   style?: 'dashed' | 'solid' | string
@@ -5,3 +7,8 @@ export interface StrokeDeclaration {
   color?: string
   opacity?: number
 }
+
+export type StrokeProp =
+  | Noneable
+  | string
+  | StrokeDeclaration

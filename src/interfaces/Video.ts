@@ -1,5 +1,9 @@
 import type { Noneable } from './shared'
-import type { VideoDeclaration } from './VideoDeclaration'
+
+export interface VideoDeclaration {
+  url: string
+  opacity?: number
+}
 
 export type VideoProp =
   | Noneable

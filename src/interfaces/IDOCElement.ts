@@ -1,11 +1,11 @@
-import type { FillProp } from './FillProp'
-import type { GeometryProp } from './GeometryProp'
+import type { FillProp } from './Fill'
+import type { GeometryProp } from './Geometry'
 import type { IDOCNode } from './IDOCNode'
-import type { ImageProp } from './ImageProp'
-import type { StrokeProp } from './StrokeProp'
+import type { ImageProp } from './Image'
+import type { StrokeProp } from './Stroke'
 import type { StyleProp } from './StyleProp'
-import type { TextProp } from './TextProp'
-import type { VideoProp } from './VideoProp'
+import type { TextProp } from './Text'
+import type { VideoProp } from './Video'
 
 export interface IDOCElement extends IDOCNode {
   style?: StyleProp

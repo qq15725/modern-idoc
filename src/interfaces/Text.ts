@@ -28,3 +28,9 @@ export interface TextDeclaration {
   measureDom?: any // HTMLElement
   fonts?: any // modern-font > Fonts
 }
+
+export type TextProp =
+  | string
+  | TextContent
+  | (TextDeclaration & { content: TextContent })
+  | TextDeclaration

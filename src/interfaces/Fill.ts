@@ -1,3 +1,5 @@
+import type { Noneable } from './shared'
+
 export interface ImageFillRect {
   left?: number
   top?: number
@@ -34,3 +36,8 @@ export interface ColorFillDeclaration extends CommonFillDeclaration {
 export interface FillDeclaration extends ImageFillDeclaration, ColorFillDeclaration {
   //
 }
+
+export type FillProp =
+  | Noneable
+  | string
+  | FillDeclaration

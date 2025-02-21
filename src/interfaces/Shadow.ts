@@ -1,7 +1,11 @@
-import type { ShadowDeclaration } from './ShadowDeclaration'
+export interface ShadowDeclaration {
+  color: string
+  offsetX: number
+  offsetY: number
+  blur: number
+}
 
 export interface ShadowStyleDeclaration {
-  shadow?: Partial<ShadowDeclaration>
   shadowColor: string
   shadowOffsetX: number
   shadowOffsetY: number

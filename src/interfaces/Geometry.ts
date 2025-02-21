@@ -1,3 +1,5 @@
+import type { Noneable } from './shared'
+
 export type SVGPathData = string
 export type FillRule = 'nonzero' | 'evenodd'
 export type StrokeLinecap = 'butt' | 'round' | 'square'
@@ -34,3 +36,10 @@ export interface Path2DDeclaration extends Partial<Path2DStyle> {
 export interface GeometryDeclaration {
   data: Path2DDeclaration[]
 }
+
+export type GeometryProp =
+  | Noneable
+  | SVGPathData
+  | SVGPathData[]
+  | Path2DDeclaration[]
+  | GeometryDeclaration

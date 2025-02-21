@@ -1,4 +1,4 @@
-import type { MetaProp } from './MetaProp'
+import type { MetaProp } from './Meta'
 
 export interface IDOCNode {
   name?: string
