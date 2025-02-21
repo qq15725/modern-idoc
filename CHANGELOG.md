@@ -1,3 +1,12 @@
+## [0.2.2](https://github.com/qq15725/modern-idoc/compare/v0.2.1...v0.2.2) (2025-02-21)
+
+
+### Features
+
+* update fill def ([a6c5d4e](https://github.com/qq15725/modern-idoc/commit/a6c5d4e00feba6f0989465688e7a3a52211bde6c))
+
+
+
 ## [0.2.1](https://github.com/qq15725/modern-idoc/compare/v0.2.0...v0.2.1) (2025-02-21)
 
 
