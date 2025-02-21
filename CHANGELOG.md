@@ -1,3 +1,12 @@
+## [0.2.4](https://github.com/qq15725/modern-idoc/compare/v0.2.3...v0.2.4) (2025-02-21)
+
+
+### Features
+
+* audio ([551d815](https://github.com/qq15725/modern-idoc/commit/551d815803aaf1ef5a5d5a6856c0ec62bf134b46))
+
+
+
 ## [0.2.3](https://github.com/qq15725/modern-idoc/compare/v0.2.2...v0.2.3) (2025-02-21)
 
 
