@@ -6,6 +6,7 @@ export function normalizeFill(fill?: FillProp): FillDeclaration | undefined {
   }
   else if (typeof fill === 'string') {
     return {
+      type: 'color',
       color: fill,
     }
   }

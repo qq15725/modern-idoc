@@ -21,7 +21,8 @@ export interface CommonFillDeclaration {
 }
 
 export interface ImageFillDeclaration extends CommonFillDeclaration {
-  image?: string
+  type: 'image'
+  image: string
   dpi?: number
   rotateWithShape?: boolean
   srcRect?: ImageFillRect
@@ -30,12 +31,13 @@ export interface ImageFillDeclaration extends CommonFillDeclaration {
 }
 
 export interface ColorFillDeclaration extends CommonFillDeclaration {
-  color?: string
+  type: 'color'
+  color: string
 }
 
-export interface FillDeclaration extends ImageFillDeclaration, ColorFillDeclaration {
-  //
-}
+export type FillDeclaration =
+  | ImageFillDeclaration
+  | ColorFillDeclaration
 
 export type FillProp =
   | Noneable
