@@ -1,3 +1,12 @@
+## [0.2.6](https://github.com/qq15725/modern-idoc/compare/v0.2.5...v0.2.6) (2025-02-27)
+
+
+### Features
+
+* image srcRect ([226ebe4](https://github.com/qq15725/modern-idoc/commit/226ebe429f8fceedb2e9a9289ee138428af9a4e5))
+
+
+
 ## [0.2.5](https://github.com/qq15725/modern-idoc/compare/v0.2.4...v0.2.5) (2025-02-21)
 
 
