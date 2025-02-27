@@ -1,3 +1,12 @@
+## [0.2.7](https://github.com/qq15725/modern-idoc/compare/v0.2.6...v0.2.7) (2025-02-27)
+
+
+### Bug Fixes
+
+* src ([ddebf97](https://github.com/qq15725/modern-idoc/commit/ddebf976dc8ea50e2db861f17601280369cb7bdc))
+
+
+
 ## [0.2.6](https://github.com/qq15725/modern-idoc/compare/v0.2.5...v0.2.6) (2025-02-27)
 
 
