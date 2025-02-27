@@ -1,7 +1,8 @@
 import type { ShadowStyleDeclaration } from '../shadow'
+import type { Noneable } from '../shared'
 import type { LayoutStyleDeclaration } from './LayoutStyleDeclaration'
 import type { TransformStyleDeclaration } from './TransformStyleDeclaration'
-import type { Visibility } from './types'
+import type { BorderStyle, PointerEvents, Visibility } from './types'
 
 export interface ElementStyleDeclaration extends
   LayoutStyleDeclaration,
@@ -11,9 +12,11 @@ export interface ElementStyleDeclaration extends
   filter: string
   opacity: number
   // background
-  backgroundImage: string
-  backgroundColor: string
+  backgroundImage: Noneable | string
+  backgroundColor: Noneable | string
   // border
   borderRadius: number
-  borderColor: string
+  borderColor: Noneable | string
+  borderStyle: BorderStyle
+  pointerEvents: PointerEvents
 }

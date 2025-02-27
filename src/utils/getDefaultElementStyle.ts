@@ -13,9 +13,11 @@ export function getDefaultElementStyle(): ElementStyleDeclaration {
     opacity: 1,
     // background
     backgroundImage: 'none',
-    backgroundColor: 'transparent',
+    backgroundColor: 'none',
     // border
     borderRadius: 0,
-    borderColor: 'transparent',
+    borderColor: 'none',
+    borderStyle: 'solid',
+    pointerEvents: 'auto',
   }
 }

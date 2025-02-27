@@ -17,7 +17,9 @@ export type FlexDirection = 'column' | 'column-reverse' | 'row' | 'row-reverse'
 export type FlexWrap = 'nowrap' | 'wrap' | 'Wrap-reverse'
 export type Justify = 'flex-start' | 'center' | 'flex-end' | 'space-between' | 'space-around' | 'space-evenly'
 export type Position = 'static' | 'relative' | 'absolute'
+export type BorderStyle = Noneable | 'dashed' | 'solid'
 export type BoxSizing = 'border-box' | 'content-box'
+export type PointerEvents = 'auto' | 'none'
 
 // listStyle
 export type ListStyleType = Noneable | 'disc' /* 'decimal' | 'circle' | 'square' | 'georgian'  | 'trad-chinese-informal' | 'kannada' */
