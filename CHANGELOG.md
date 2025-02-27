@@ -1,3 +1,12 @@
+## [0.2.8](https://github.com/qq15725/modern-idoc/compare/v0.2.7...v0.2.8) (2025-02-27)
+
+
+### Features
+
+* style types ([ec8bcb4](https://github.com/qq15725/modern-idoc/commit/ec8bcb4fa4373609f0b546e5835726e63ac66427))
+
+
+
 ## [0.2.7](https://github.com/qq15725/modern-idoc/compare/v0.2.6...v0.2.7) (2025-02-27)
 
 
