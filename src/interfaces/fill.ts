@@ -1,12 +1,5 @@
 import type { Noneable } from './shared'
 
-export interface ImageFillRect {
-  left?: number
-  top?: number
-  bottom?: number
-  right?: number
-}
-
 export interface ImageFillTile {
   alignment?: string
   scaleX?: number
@@ -25,8 +18,6 @@ export interface ImageFillDeclaration extends CommonFillDeclaration {
   image: string
   dpi?: number
   rotateWithShape?: boolean
-  srcRect?: ImageFillRect
-  fillRect?: ImageFillRect
   tile?: ImageFillTile
 }
 

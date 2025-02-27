@@ -1,7 +1,15 @@
 import type { Noneable } from './shared'
 
+export interface ImageRect {
+  left?: number
+  top?: number
+  bottom?: number
+  right?: number
+}
+
 export interface ImageDeclaration {
-  url: string
+  src: string
+  srcRect?: ImageRect
   opacity?: number
 }
 

@@ -1,7 +1,7 @@
 import type { Noneable } from './shared'
 
 export interface VideoDeclaration {
-  url: string
+  src: string
   opacity?: number
 }
 

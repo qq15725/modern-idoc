@@ -1,7 +1,7 @@
 import type { Noneable } from './shared'
 
 export interface AudioDeclaration {
-  url: string
+  src: string
 }
 
 export type AudioProp =
