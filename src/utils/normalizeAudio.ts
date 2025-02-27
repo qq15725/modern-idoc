@@ -6,7 +6,7 @@ export function normalizeAudio(audio?: AudioProp): AudioDeclaration | undefined 
   }
   else if (typeof audio === 'string') {
     return {
-      url: audio,
+      src: audio,
     }
   }
   else {

@@ -6,7 +6,7 @@ export function normalizeImage(image?: ImageProp): ImageDeclaration | undefined 
   }
   else if (typeof image === 'string') {
     return {
-      url: image,
+      src: image,
     }
   }
   else {

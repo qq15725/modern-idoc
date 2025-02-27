@@ -6,7 +6,7 @@ export function normalizeVideo(video?: VideoProp): VideoDeclaration | undefined 
   }
   else if (typeof video === 'string') {
     return {
-      url: video,
+      src: video,
     }
   }
   else {
