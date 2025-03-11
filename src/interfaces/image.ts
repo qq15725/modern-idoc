@@ -1,6 +1,8 @@
 import type { Noneable } from './shared'
 
-export interface ImageRect {
+export type ImageSource = string
+
+export interface ImageSourceRect {
   left?: number
   top?: number
   bottom?: number
@@ -8,12 +10,12 @@ export interface ImageRect {
 }
 
 export interface ImageDeclaration {
-  src: string
-  srcRect?: ImageRect
+  src: ImageSource
+  srcRect?: ImageSourceRect
   opacity?: number
 }
 
 export type ImageProp =
   | Noneable
-  | string
+  | ImageSource
   | ImageDeclaration

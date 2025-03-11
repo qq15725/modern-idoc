@@ -1,11 +1,13 @@
 import type { Noneable } from './shared'
 
+export type VideoSource = string
+
 export interface VideoDeclaration {
-  src: string
+  src: VideoSource
   opacity?: number
 }
 
 export type VideoProp =
   | Noneable
-  | string
+  | VideoSource
   | VideoDeclaration

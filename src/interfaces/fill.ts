@@ -13,9 +13,11 @@ export interface CommonFillDeclaration {
   opacity?: number
 }
 
+export type ImageFillSource = string
+
 export interface ImageFillDeclaration extends CommonFillDeclaration {
   type: 'image'
-  image: string
+  image: ImageFillSource
   dpi?: number
   rotateWithShape?: boolean
   tile?: ImageFillTile

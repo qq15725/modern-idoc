@@ -1,5 +1,7 @@
 import type { Noneable } from './shared'
 
+export type BoxShadow = Noneable | string
+
 export interface ShadowDeclaration {
   color: string
   offsetX?: number
@@ -9,11 +11,11 @@ export interface ShadowDeclaration {
 
 export type ShadowProp =
   | Noneable
-  | string
+  | BoxShadow
   | ShadowDeclaration
 
 export interface ShadowStyleDeclaration {
-  boxShadow: Noneable | string
+  boxShadow: BoxShadow
 
   // extended part
   shadowColor?: string
