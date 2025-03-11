@@ -1,4 +1,4 @@
-import type { Noneable } from './shared'
+import type { None } from './shared'
 
 export type SVGPathData = string
 export type FillRule = 'nonzero' | 'evenodd'
@@ -39,7 +39,7 @@ export interface GeometryDeclaration {
 }
 
 export type GeometryProp =
-  | Noneable
+  | None
   | SVGPathData
   | SVGPathData[]
   | Path2DDeclaration[]

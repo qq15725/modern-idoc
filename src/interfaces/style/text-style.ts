@@ -1,5 +1,5 @@
-import type { TextInlineStyleDeclaration } from './TextInlineStyleDeclaration'
-import type { TextLineStyleDeclaration } from './TextLineStyleDeclaration'
+import type { TextInlineStyleDeclaration } from './text-inline-style'
+import type { TextLineStyleDeclaration } from './text-line-style'
 
 export interface TextDrawStyleDeclaration {
   textStrokeWidth: number

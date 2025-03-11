@@ -1,4 +1,4 @@
-import type { Noneable } from './shared'
+import type { None } from './shared'
 
 export interface ImageFillTile {
   alignment?: string
@@ -33,6 +33,6 @@ export type FillDeclaration =
   | ColorFillDeclaration
 
 export type FillProp =
-  | Noneable
+  | None
   | string
   | FillDeclaration

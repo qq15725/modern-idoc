@@ -1,4 +1,4 @@
-import type { Noneable } from './shared'
+import type { None } from './shared'
 
 export type ImageSource = string
 
@@ -16,6 +16,6 @@ export interface ImageDeclaration {
 }
 
 export type ImageProp =
-  | Noneable
+  | None
   | ImageSource
   | ImageDeclaration

@@ -1,4 +1,4 @@
-import type { Noneable } from './shared'
+import type { None } from './shared'
 
 export interface OutlineDeclaration {
   width?: number
@@ -9,6 +9,6 @@ export interface OutlineDeclaration {
 }
 
 export type OutlineProp =
-  | Noneable
+  | None
   | string
   | Partial<OutlineDeclaration>

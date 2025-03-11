@@ -1,5 +1,5 @@
-import type { ElementStyleDeclaration } from './ElementStyleDeclaration'
-import type { TextStyleDeclaration } from './TextStyleDeclaration'
+import type { ElementStyleDeclaration } from './element-style'
+import type { TextStyleDeclaration } from './text-style'
 
 export interface StyleDeclaration extends
   TextStyleDeclaration,

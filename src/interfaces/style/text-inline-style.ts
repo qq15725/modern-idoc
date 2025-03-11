@@ -14,11 +14,13 @@ export interface TextInlineStyleDeclaration extends HighlightStyleDeclaration {
   verticalAlign: VerticalAlign
   letterSpacing: number
   wordSpacing: number
+  // font
   fontSize: number
   fontWeight: FontWeight
   fontFamily: string
   fontStyle: FontStyle
   fontKerning: FontKerning
+  // text
   textTransform: TextTransform
   textOrientation: TextOrientation
   textDecoration: TextDecoration

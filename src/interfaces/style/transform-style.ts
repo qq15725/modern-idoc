@@ -1,3 +1,5 @@
+import type { None } from '../shared'
+
 export interface TransformStyleDeclaration {
   rotate: number
   scaleX: number
@@ -6,6 +8,6 @@ export interface TransformStyleDeclaration {
   skewY: number
   translateX: number
   translateY: number
-  transform: string
+  transform: None | string
   transformOrigin: string
 }

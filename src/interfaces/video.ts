@@ -1,4 +1,4 @@
-import type { Noneable } from './shared'
+import type { None } from './shared'
 
 export type VideoSource = string
 
@@ -8,6 +8,6 @@ export interface VideoDeclaration {
 }
 
 export type VideoProp =
-  | Noneable
+  | None
   | VideoSource
   | VideoDeclaration

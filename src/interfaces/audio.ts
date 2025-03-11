@@ -1,4 +1,4 @@
-import type { Noneable } from './shared'
+import type { None } from './shared'
 
 export type AudioSource = string
 
@@ -7,6 +7,6 @@ export interface AudioDeclaration {
 }
 
 export type AudioProp =
-  | Noneable
+  | None
   | AudioSource
   | AudioDeclaration

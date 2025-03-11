@@ -1,6 +1,6 @@
-import type { Noneable } from './shared'
+import type { None } from './shared'
 
-export type BoxShadow = Noneable | string
+export type BoxShadow = None | string
 
 export interface ShadowDeclaration {
   color: string
@@ -10,7 +10,7 @@ export interface ShadowDeclaration {
 }
 
 export type ShadowProp =
-  | Noneable
+  | None
   | BoxShadow
   | ShadowDeclaration
 
