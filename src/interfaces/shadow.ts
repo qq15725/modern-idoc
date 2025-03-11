@@ -14,4 +14,10 @@ export type ShadowProp =
 
 export interface ShadowStyleDeclaration {
   boxShadow: Noneable | string
+
+  // extended part
+  shadowColor: string
+  shadowOffsetX?: number
+  shadowOffsetY?: number
+  shadowBlur?: number
 }
