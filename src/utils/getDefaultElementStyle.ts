@@ -25,5 +25,6 @@ export function getDefaultElementStyle(): ElementStyleDeclaration {
     filter: 'none',
     opacity: 1,
     pointerEvents: 'auto',
+    maskImage: 'none',
   }
 }

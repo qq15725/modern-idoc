@@ -3,7 +3,7 @@ import type { LayoutStyleDeclaration } from '../interfaces'
 export function getDefaultLayoutStyle(): LayoutStyleDeclaration {
   return {
     // box
-    overflow: undefined,
+    overflow: 'visible',
     direction: undefined,
     display: undefined,
     boxSizing: undefined,

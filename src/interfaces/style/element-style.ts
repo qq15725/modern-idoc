@@ -25,4 +25,5 @@ export interface ElementStyleDeclaration extends
   filter: string
   opacity: number
   pointerEvents: PointerEvents
+  maskImage: None | string
 }

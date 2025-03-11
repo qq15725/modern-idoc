@@ -1,4 +1,5 @@
 export * from './getDefaultElementStyle'
+export * from './getDefaultLayoutStyle'
 export * from './getDefaultShadowStyle'
 export * from './getDefaultStyle'
 export * from './getDefaultTextStyle'

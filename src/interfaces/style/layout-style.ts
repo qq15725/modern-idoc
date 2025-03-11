@@ -14,7 +14,7 @@ import type {
 
 export interface LayoutStyleDeclaration {
   // box
-  overflow?: Overflow
+  overflow: Overflow
   direction?: Direction
   display?: Display
   boxSizing?: BoxSizing
