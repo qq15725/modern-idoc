@@ -1,3 +1,12 @@
+## [0.2.12](https://github.com/qq15725/modern-idoc/compare/v0.2.11...v0.2.12) (2025-03-11)
+
+
+### Features
+
+* add maskImage ([04fee8f](https://github.com/qq15725/modern-idoc/commit/04fee8ffd74935e7dfb6e40054a2cb2b6d9d42cc))
+
+
+
 ## [0.2.11](https://github.com/qq15725/modern-idoc/compare/v0.2.10...v0.2.11) (2025-03-11)
 
 
