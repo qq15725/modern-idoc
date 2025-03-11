@@ -1,3 +1,17 @@
+## [0.2.11](https://github.com/qq15725/modern-idoc/compare/v0.2.10...v0.2.11) (2025-03-11)
+
+
+### Bug Fixes
+
+* default layout style ([818c8ae](https://github.com/qq15725/modern-idoc/commit/818c8aeb2c67b4977682c25d68ed1015b1ad2dcc))
+
+
+### Features
+
+* types ([ce639d3](https://github.com/qq15725/modern-idoc/commit/ce639d35c5f16fdbf685a1bf51c4b6e4c7cdbf22))
+
+
+
 ## [0.2.10](https://github.com/qq15725/modern-idoc/compare/v0.2.9...v0.2.10) (2025-03-11)
 
 
