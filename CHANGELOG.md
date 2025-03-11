@@ -1,3 +1,12 @@
+## [0.2.10](https://github.com/qq15725/modern-idoc/compare/v0.2.9...v0.2.10) (2025-03-11)
+
+
+### Bug Fixes
+
+* ShadowStyle ([886fd5b](https://github.com/qq15725/modern-idoc/commit/886fd5b0c23bd97062ea004aeea76e5060632742))
+
+
+
 ## [0.2.9](https://github.com/qq15725/modern-idoc/compare/v0.2.8...v0.2.9) (2025-03-11)
 
 
