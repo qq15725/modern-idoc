@@ -1,3 +1,12 @@
+## [0.2.13](https://github.com/qq15725/modern-idoc/compare/v0.2.12...v0.2.13) (2025-03-21)
+
+
+### Features
+
+* add ImageFillStretch type ([94cd4e7](https://github.com/qq15725/modern-idoc/commit/94cd4e79c33766c951a467b9ac88e205fa8986a1))
+
+
+
 ## [0.2.12](https://github.com/qq15725/modern-idoc/compare/v0.2.11...v0.2.12) (2025-03-11)
 
 
