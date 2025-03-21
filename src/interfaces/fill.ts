@@ -1,5 +1,16 @@
 import type { None } from './shared'
 
+export interface ImageFillStretchRect {
+  left?: number
+  top?: number
+  bottom?: number
+  right?: number
+}
+
+export interface ImageFillStretch {
+  rect?: ImageFillStretchRect
+}
+
 export interface ImageFillTile {
   alignment?: string
   scaleX?: number
@@ -20,6 +31,7 @@ export interface ImageFillDeclaration extends CommonFillDeclaration {
   image: ImageFillSource
   dpi?: number
   rotateWithShape?: boolean
+  stretch?: ImageFillStretch
   tile?: ImageFillTile
 }
 

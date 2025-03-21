@@ -35,7 +35,9 @@ export interface Path2DDeclaration extends Partial<Path2DStyle> {
 
 export interface GeometryDeclaration {
   name?: string
-  data: Path2DDeclaration[]
+  svg?: string
+  viewBox?: number[]
+  data?: Path2DDeclaration[]
 }
 
 export type GeometryProp =
