@@ -26,10 +26,7 @@ import type { IDOCDocument } from 'modern-idoc'
 const pdf: IDOCDocument = {
   children: [
     {
-      style: {
-        width: 300,
-        height: 600,
-      },
+      style: { width: 300, height: 600 },
       children: [
         {
           style: {
@@ -37,7 +34,7 @@ const pdf: IDOCDocument = {
             width: 50,
             height: 50,
           },
-          image: '/example.png',
+          background: '/example.png',
         },
         {
           style: {
@@ -66,20 +63,11 @@ const pdf: IDOCDocument = {
                   color: '#00FF00',
                   fontSize: 12,
                 },
-                {
-                  content: 'llo',
-                  color: '#000000',
-                },
+                { content: 'llo', color: '#000000' },
               ],
             },
-            {
-              content: ', ',
-              color: '#FF0000',
-            },
-            {
-              content: 'World!',
-              color: '#0000FF',
-            },
+            { content: ', ', color: '#FF0000' },
+            { content: 'World!', color: '#0000FF' },
           ],
         },
       ],
