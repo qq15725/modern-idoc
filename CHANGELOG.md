@@ -1,3 +1,13 @@
+# [0.3.0](https://github.com/qq15725/modern-idoc/compare/v0.2.13...v0.3.0) (2025-04-03)
+
+
+### Features
+
+* rename image to background ([8d526f1](https://github.com/qq15725/modern-idoc/commit/8d526f1243e954e5caaa3b56871c82ba8ed432de))
+* update idoc ([0f35552](https://github.com/qq15725/modern-idoc/commit/0f355528a373681e80be999f7debb84f5b7129bb))
+
+
+
 ## [0.2.13](https://github.com/qq15725/modern-idoc/compare/v0.2.12...v0.2.13) (2025-03-21)
 
 
