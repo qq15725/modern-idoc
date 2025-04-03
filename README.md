@@ -76,6 +76,10 @@ const pdf: IDOCDocument = {
 }
 ```
 
+## Types
+
+[view d.ts type file](https://unpkg.com/modern-idoc@0.3.1/dist/index.d.ts)
+
 ## Refer to these packages for usage
 
 - [modern-text](https://github.com/qq15725/modern-text)
