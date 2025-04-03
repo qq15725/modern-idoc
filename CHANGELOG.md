@@ -1,3 +1,12 @@
+## [0.3.3](https://github.com/qq15725/modern-idoc/compare/v0.3.2...v0.3.3) (2025-04-03)
+
+
+### Features
+
+* ColorValue ([6092c3a](https://github.com/qq15725/modern-idoc/commit/6092c3a19b0783675be566003175b78b7a175ad3))
+
+
+
 ## [0.3.2](https://github.com/qq15725/modern-idoc/compare/v0.3.1...v0.3.2) (2025-04-03)
 
 
