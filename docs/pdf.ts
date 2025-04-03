@@ -3,10 +3,7 @@ import type { IDOCDocument } from '../src'
 export const pdf: IDOCDocument = {
   children: [
     {
-      style: {
-        width: 300,
-        height: 600,
-      },
+      style: { width: 300, height: 600 },
       children: [
         {
           style: {
@@ -14,7 +11,8 @@ export const pdf: IDOCDocument = {
             width: 50,
             height: 50,
           },
-          image: '/example.png',
+          background: '/example.png',
+          fill: '#FF00FF',
         },
         {
           style: {
@@ -38,25 +36,12 @@ export const pdf: IDOCDocument = {
             {
               letterSpacing: 3,
               fragments: [
-                {
-                  content: 'He',
-                  color: '#00FF00',
-                  fontSize: 12,
-                },
-                {
-                  content: 'llo',
-                  color: '#000000',
-                },
+                { content: 'He', color: '#00FF00', fontSize: 12 },
+                { content: 'llo', color: '#000000' },
               ],
             },
-            {
-              content: ', ',
-              color: '#FF0000',
-            },
-            {
-              content: 'World!',
-              color: '#0000FF',
-            },
+            { content: ', ', color: '#FF0000' },
+            { content: 'World!', color: '#0000FF' },
           ],
         },
       ],

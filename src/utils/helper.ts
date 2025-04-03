@@ -25,7 +25,3 @@ export function clearUndef<T>(obj: T, deep = false): T {
   }
   return newObj as T
 }
-
-export function deepClearUndef<T>(obj: T): T {
-  return clearUndef(obj, true)
-}
