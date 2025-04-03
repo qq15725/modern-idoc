@@ -1,8 +1,5 @@
-import type { TextureFillDeclaration, TextureFillSourceURL } from './fill'
+import type { SingleFillDeclaration } from './fill'
 import type { None } from './types'
-
-export type TextureBackgroundSourceURL = TextureFillSourceURL
-export type TextureBackgroundDeclaration = TextureFillDeclaration
 
 export interface AudioBackgroundDeclaration {
   type: 'audio'
@@ -10,14 +7,14 @@ export interface AudioBackgroundDeclaration {
 }
 
 export type SingleBackgroundDeclaration =
+  | SingleFillDeclaration
   | AudioBackgroundDeclaration
-  | TextureBackgroundDeclaration
 
 export type BackgroundDeclaration = SingleBackgroundDeclaration[]
 
 export type BackgroundProperty =
   | None
-  | TextureBackgroundSourceURL
+  | string
   | SingleBackgroundDeclaration
   | BackgroundDeclaration
 
