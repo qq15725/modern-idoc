@@ -1,3 +1,4 @@
+import type { ColorValue } from '../types'
 import type { HighlightStyleDeclaration } from './highlight'
 import type {
   FontKerning,
@@ -11,7 +12,7 @@ import type {
 import { getDefaultHighlightStyle } from './highlight'
 
 export interface TextInlineStyleDeclaration extends HighlightStyleDeclaration {
-  color: string
+  color: ColorValue
   verticalAlign: VerticalAlign
   letterSpacing: number
   wordSpacing: number

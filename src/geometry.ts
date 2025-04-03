@@ -1,4 +1,4 @@
-import type { None } from './types'
+import type { ColorValue, None } from './types'
 
 export type SVGPathData = string
 export type FillRule = 'nonzero' | 'evenodd'
@@ -10,7 +10,7 @@ export interface GeometryPathStyle {
   opacity: number
   visibility: string
   // shadow
-  shadowColor: string
+  shadowColor: ColorValue
   shadowOffsetX: number
   shadowOffsetY: number
   shadowBlur: number

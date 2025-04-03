@@ -1,10 +1,10 @@
-import type { None } from './types'
+import type { ColorValue, None } from './types'
 
 export interface OutlineDeclaration {
   width?: number
   style?: 'dashed' | 'solid' | string
-  image?: string
-  color?: string
+  src?: string
+  color?: ColorValue
   opacity?: number
 }
 

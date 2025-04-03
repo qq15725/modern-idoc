@@ -1,9 +1,9 @@
-import type { None } from './types'
+import type { ColorValue, None } from './types'
 
 export type BoxShadow = None | string
 
 export interface ShadowDeclaration {
-  color: string
+  color: ColorValue
   offsetX?: number
   offsetY?: number
   blur?: number
@@ -18,7 +18,7 @@ export interface ShadowStyleDeclaration {
   boxShadow: BoxShadow
 
   // extended part
-  shadowColor?: string
+  shadowColor?: ColorValue
   shadowOffsetX?: number
   shadowOffsetY?: number
   shadowBlur?: number

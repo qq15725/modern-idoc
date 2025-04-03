@@ -1,5 +1,5 @@
 import type { ShadowStyleDeclaration } from '../shadow'
-import type { None } from '../types'
+import type { ColorValue, None } from '../types'
 import type { LayoutStyleDeclaration } from './layout-style'
 import type { TransformStyleDeclaration } from './transform-style'
 import type { BorderStyle, PointerEvents, Visibility } from './types'
@@ -13,15 +13,15 @@ export interface ElementStyleDeclaration extends
   ShadowStyleDeclaration {
   // background
   backgroundImage?: None | string
-  backgroundColor?: None | string
+  backgroundColor?: None | ColorValue
   // border
   borderRadius: number
-  borderColor?: None | string
+  borderColor?: None | ColorValue
   borderStyle: BorderStyle
   // outline
   outlineWidth: number
   outlineOffset: number
-  outlineColor: None | string
+  outlineColor: None | ColorValue
   outlineStyle: string
   // other
   visibility: Visibility
