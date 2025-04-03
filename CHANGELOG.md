@@ -1,3 +1,12 @@
+## [0.3.1](https://github.com/qq15725/modern-idoc/compare/v0.3.0...v0.3.1) (2025-04-03)
+
+
+### Bug Fixes
+
+* SingleBackgroundDeclaration ([71cb72b](https://github.com/qq15725/modern-idoc/commit/71cb72b7e2f10dde86c215c8acd5be40948eb40b))
+
+
+
 # [0.3.0](https://github.com/qq15725/modern-idoc/compare/v0.2.13...v0.3.0) (2025-04-03)
 
 
