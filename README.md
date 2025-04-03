@@ -75,3 +75,9 @@ const pdf: IDOCDocument = {
   ],
 }
 ```
+
+## Refer to these packages for usage
+
+- [modern-canvas](https://github.com/qq15725/modern-canvas)
+- [modern-pdf](https://github.com/qq15725/modern-pdf)
+- [modern-openxml](https://github.com/qq15725/modern-openxml)
