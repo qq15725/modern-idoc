@@ -38,12 +38,11 @@ export interface TextureFillTile {
 export type TextureFillSourceURL = string
 
 export interface TextureFillDeclaration {
-  type: 'texture'
   src: TextureFillSourceURL
   srcRect?: TextureFillSourceRect
   dpi?: number
-  rotateWithShape?: boolean
   stretch?: TextureFillStretch
   tile?: TextureFillTile
   opacity?: number
+  rotateWithShape?: boolean
 }
