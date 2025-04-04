@@ -1,3 +1,12 @@
+## [0.3.4](https://github.com/qq15725/modern-idoc/compare/v0.3.3...v0.3.4) (2025-04-04)
+
+
+### Bug Fixes
+
+* export background type ([2c0db8a](https://github.com/qq15725/modern-idoc/commit/2c0db8ae0155ba25a92532827ce948d139222271))
+
+
+
 ## [0.3.3](https://github.com/qq15725/modern-idoc/compare/v0.3.2...v0.3.3) (2025-04-03)
 
 
