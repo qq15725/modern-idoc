@@ -1,3 +1,12 @@
+## [0.3.5](https://github.com/qq15725/modern-idoc/compare/v0.3.4...v0.3.5) (2025-04-07)
+
+
+### Features
+
+* foreground ([2f78271](https://github.com/qq15725/modern-idoc/commit/2f78271ec6596f74a59c44ed9e804826d7154e6d))
+
+
+
 ## [0.3.4](https://github.com/qq15725/modern-idoc/compare/v0.3.3...v0.3.4) (2025-04-04)
 
 
