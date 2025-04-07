@@ -1,13 +1,7 @@
 import type { FillDeclaration } from './fill'
 import type { None } from './types'
 
-export interface AudioBackgroundDeclaration {
-  src: string
-}
-
-export type BackgroundDeclaration =
-  & FillDeclaration
-  & Partial<AudioBackgroundDeclaration>
+export type BackgroundDeclaration = FillDeclaration
 
 export type BackgroundProperty =
   | None
