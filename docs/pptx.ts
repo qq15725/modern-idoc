@@ -1,6 +1,6 @@
-import type { IDOCDocument } from '../src'
+import type { Document } from '../src'
 
-export const pptx: IDOCDocument = {
+export const pptx: Document = {
   children: [
     {
       name: 'ppt/slides/slide1.xml',

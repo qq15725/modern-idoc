@@ -4,7 +4,7 @@ import type { FillDeclaration, FillProperty } from './fill'
 import type { ForegroundDeclaration, ForegroundProperty } from './foreground'
 import type { GeometryDeclaration, GeometryProperty } from './geometry'
 import type { MetaProperty } from './meta'
-import type { IDOCNode } from './node'
+import type { Node } from './node'
 import type { OutlineDeclaration, OutlineProperty } from './outline'
 import type { ShadowDeclaration, ShadowProperty } from './shadow'
 import type { StyleProperty } from './style'
@@ -20,7 +20,7 @@ import { normalizeText } from './text'
 import { clearUndef } from './utils'
 import { normalizeVideo } from './video'
 
-export interface IDOCElement<T = MetaProperty> extends IDOCNode<T> {
+export interface Element<T = MetaProperty> extends Node<T> {
   style?: StyleProperty
   text?: TextProperty
   background?: BackgroundProperty
@@ -31,10 +31,10 @@ export interface IDOCElement<T = MetaProperty> extends IDOCNode<T> {
   shadow?: ShadowProperty
   video?: VideoProperty
   audio?: AudioProperty
-  children?: IDOCElement[]
+  children?: Element[]
 }
 
-export interface IDOCElementDeclaration<T = MetaProperty> extends IDOCElement<T> {
+export interface ElementDeclaration<T = MetaProperty> extends Element<T> {
   text?: TextDeclaration
   background?: BackgroundDeclaration
   geometry?: GeometryDeclaration
@@ -44,10 +44,10 @@ export interface IDOCElementDeclaration<T = MetaProperty> extends IDOCElement<T>
   shadow?: ShadowDeclaration
   video?: VideoDeclaration
   audio?: AudioDeclaration
-  children?: IDOCElementDeclaration[]
+  children?: ElementDeclaration[]
 }
 
-export function normalizeElement<T = MetaProperty>(element: IDOCElement<T>): IDOCElementDeclaration<T> {
+export function normalizeElement<T = MetaProperty>(element: Element<T>): ElementDeclaration<T> {
   return clearUndef({
     ...element,
     text: normalizeText(element.text),

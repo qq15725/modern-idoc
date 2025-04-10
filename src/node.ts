@@ -1,7 +1,7 @@
 import type { MetaProperty } from './meta'
 
-export interface IDOCNode<T = MetaProperty> {
+export interface Node<T = MetaProperty> {
   name?: string
-  children?: IDOCNode[]
+  children?: Node[]
   meta?: T
 }

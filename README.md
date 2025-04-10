@@ -21,9 +21,9 @@
 ## Usage
 
 ```ts
-import type { IDOCDocument } from 'modern-idoc'
+import type { Document } from 'modern-idoc'
 
-const pdf: IDOCDocument = {
+const pdf: Document = {
   children: [
     {
       style: { width: 300, height: 600 },

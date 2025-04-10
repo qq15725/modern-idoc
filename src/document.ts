@@ -1,14 +1,14 @@
-import type { IDOCElement, IDOCElementDeclaration } from './element'
+import type { Element, ElementDeclaration } from './element'
 import { normalizeElement } from './element'
 
-export interface IDOCDocument extends IDOCElement {
+export interface Document extends Element {
   fonts?: any // modern-font > Fonts
 }
 
-export interface IDOCDocumentDeclaration extends IDOCElementDeclaration {
+export interface DocumentDeclaration extends ElementDeclaration {
   fonts?: any
 }
 
-export function normalizeDocument(doc: IDOCDocument): IDOCDocumentDeclaration {
+export function normalizeDocument(doc: Document): DocumentDeclaration {
   return normalizeElement(doc)
 }

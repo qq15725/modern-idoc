@@ -1,6 +1,6 @@
-import type { IDOCDocument } from '../src'
+import type { Document } from '../src'
 
-export const pdf: IDOCDocument = {
+export const pdf: Document = {
   children: [
     {
       style: { width: 300, height: 600 },
