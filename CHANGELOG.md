@@ -1,3 +1,12 @@
+# [0.4.0](https://github.com/qq15725/modern-idoc/compare/v0.3.5...v0.4.0) (2025-04-10)
+
+
+### Features
+
+* remove IDOC prefix ([50cd65c](https://github.com/qq15725/modern-idoc/commit/50cd65c96b3bebcc315b378ff98e6f795637990b))
+
+
+
 ## [0.3.5](https://github.com/qq15725/modern-idoc/compare/v0.3.4...v0.3.5) (2025-04-07)
 
 
