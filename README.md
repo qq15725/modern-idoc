@@ -82,7 +82,7 @@ const pdf: Document = {
 
 ## Refer to these packages for usage
 
-- [modern-text](https://github.com/qq15725/modern-text)
-- [modern-pdf](https://github.com/qq15725/modern-pdf)
-- [modern-openxml](https://github.com/qq15725/modern-openxml)
-- [modern-canvas](https://github.com/qq15725/modern-canvas)
+- [modern-text](https://github.com/qq15725/modern-text) text renderer
+- [modern-pdf](https://github.com/qq15725/modern-pdf) PDF codec
+- [modern-openxml](https://github.com/qq15725/modern-openxml) PPTX、etc... codec
+- [modern-canvas](https://github.com/qq15725/modern-canvas) IDoc WebGL renderer
