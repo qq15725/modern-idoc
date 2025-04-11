@@ -1,5 +1,6 @@
 import type { AudioDeclaration, AudioProperty } from './audio'
 import type { BackgroundDeclaration, BackgroundProperty } from './background'
+import type { EffectDeclaration, EffectProperty } from './effect'
 import type { FillDeclaration, FillProperty } from './fill'
 import type { ForegroundDeclaration, ForegroundProperty } from './foreground'
 import type { GeometryDeclaration, GeometryProperty } from './geometry'
@@ -11,6 +12,7 @@ import type { StyleProperty } from './style'
 import type { TextDeclaration, TextProperty } from './text'
 import type { VideoDeclaration, VideoProperty } from './video'
 import { normalizeBackground } from './background'
+import { normalizeEffect } from './effect'
 import { normalizeFill } from './fill'
 import { normalizeForeground } from './foreground'
 import { normalizeGeometry } from './geometry'
@@ -31,6 +33,7 @@ export interface Element<T = MetaProperty> extends Node<T> {
   shadow?: ShadowProperty
   video?: VideoProperty
   audio?: AudioProperty
+  effect?: EffectProperty
   children?: Element[]
 }
 
@@ -44,6 +47,7 @@ export interface ElementDeclaration<T = MetaProperty> extends Element<T> {
   shadow?: ShadowDeclaration
   video?: VideoDeclaration
   audio?: AudioDeclaration
+  effect?: EffectDeclaration
   children?: ElementDeclaration[]
 }
 
@@ -59,6 +63,7 @@ export function normalizeElement<T = MetaProperty>(element: Element<T>): Element
     shadow: normalizeShadow(element.shadow),
     video: normalizeVideo(element.video),
     audio: normalizeVideo(element.audio),
+    effect: normalizeEffect(element.effect),
     children: element.children?.map(child => normalizeElement(child)),
   })
 }
