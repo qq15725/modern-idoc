@@ -1,3 +1,12 @@
+## [0.4.2](https://github.com/qq15725/modern-idoc/compare/v0.4.1...v0.4.2) (2025-04-11)
+
+
+### Bug Fixes
+
+* EffectDeclaration ([f969655](https://github.com/qq15725/modern-idoc/commit/f969655b1e5aa31eb68961a0b0951b969b3d5f0f))
+
+
+
 ## [0.4.1](https://github.com/qq15725/modern-idoc/compare/v0.4.0...v0.4.1) (2025-04-11)
 
 
