@@ -1,3 +1,12 @@
+## [0.4.1](https://github.com/qq15725/modern-idoc/compare/v0.4.0...v0.4.1) (2025-04-11)
+
+
+### Features
+
+* add effect prop to element ([1da185a](https://github.com/qq15725/modern-idoc/commit/1da185a23c8cf88526fbe00a86bb48d1968359b2))
+
+
+
 # [0.4.0](https://github.com/qq15725/modern-idoc/compare/v0.3.5...v0.4.0) (2025-04-10)
 
 
