@@ -1,3 +1,12 @@
+## [0.4.3](https://github.com/qq15725/modern-idoc/compare/v0.4.2...v0.4.3) (2025-04-12)
+
+
+### Bug Fixes
+
+* text-align justify ([fc53c86](https://github.com/qq15725/modern-idoc/commit/fc53c860649ccb1a7541b04cee3f4a56893baa34))
+
+
+
 ## [0.4.2](https://github.com/qq15725/modern-idoc/compare/v0.4.1...v0.4.2) (2025-04-11)
 
 
