@@ -4,7 +4,7 @@ export interface InnerShadowDeclaration {
   color: ColorValue
   offsetX?: number
   offsetY?: number
-  blur?: number
+  blurRadius?: number
 }
 
 export type InnerShadowProperty =
