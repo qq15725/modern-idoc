@@ -1,3 +1,12 @@
+## [0.4.4](https://github.com/qq15725/modern-idoc/compare/v0.4.3...v0.4.4) (2025-04-16)
+
+
+### Features
+
+* shadow ([368f9c7](https://github.com/qq15725/modern-idoc/commit/368f9c7ca6d9e3f62128525bc5da1b8c4d55975c))
+
+
+
 ## [0.4.3](https://github.com/qq15725/modern-idoc/compare/v0.4.2...v0.4.3) (2025-04-12)
 
 
