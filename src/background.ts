@@ -1,7 +1,9 @@
 import type { FillDeclaration } from './fill'
 import type { None } from './types'
 
-export type BackgroundDeclaration = FillDeclaration
+export interface BackgroundDeclaration extends FillDeclaration {
+  withGeometry?: boolean
+}
 
 export type BackgroundProperty =
   | None
