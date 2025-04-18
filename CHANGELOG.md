@@ -1,3 +1,13 @@
+## [0.4.5](https://github.com/qq15725/modern-idoc/compare/v0.4.4...v0.4.5) (2025-04-18)
+
+
+### Features
+
+* add Outline LineEnd define ([9ab52b7](https://github.com/qq15725/modern-idoc/commit/9ab52b754b54b55de243ba16d18947c7d416d922))
+* add withGeometry prop to background and foreground ([bc1ca65](https://github.com/qq15725/modern-idoc/commit/bc1ca65fdbff63846b55dca4ce714f6210c33fb3))
+
+
+
 ## [0.4.4](https://github.com/qq15725/modern-idoc/compare/v0.4.3...v0.4.4) (2025-04-16)
 
 
