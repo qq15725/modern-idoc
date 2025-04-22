@@ -1,4 +1,5 @@
 import type { StyleDeclaration, StylePropertyObject } from './style'
+import { normalizeStyle } from './style'
 
 export interface FragmentContent extends StylePropertyObject {
   content: string
@@ -20,7 +21,7 @@ export type TextContent =
   | ParagraphContent
   | TextContentFlat[]
 
-export type TextContentDeclaration = (ParagraphContent & Partial<StyleDeclaration>)[]
+export type TextContentDeclaration = (ParagraphContent & StyleDeclaration)[]
 
 export interface TextDeclaration {
   content: TextContentDeclaration
@@ -48,14 +49,14 @@ export function normalizeTextContent(content: TextContent = ''): TextContentDecl
     else if ('content' in p) {
       return {
         fragments: [
-          { ...p },
+          normalizeStyle(p),
         ],
       }
     }
     else if ('fragments' in p) {
       return {
-        ...p,
-        fragments: p.fragments.map(f => ({ ...f })),
+        ...normalizeStyle(p),
+        fragments: p.fragments.map(f => normalizeStyle(f) as any),
       }
     }
     else if (Array.isArray(p)) {
@@ -67,7 +68,7 @@ export function normalizeTextContent(content: TextContent = ''): TextContentDecl
             }
           }
           else {
-            return { ...f }
+            return normalizeStyle(f) as any
           }
         }),
       }
