@@ -16,18 +16,19 @@ export interface HighlightDeclaration {
   thickness: HighlightThickness
 }
 
-export interface HighlightStyleDeclaration {
-  highlight?: Partial<HighlightDeclaration>
+export type HighlightStyleDeclaration = Partial<{
+  highlight: Partial<HighlightDeclaration>
   highlightImage: HighlightImage
   highlightReferImage: HighlightReferImage
   highlightColormap: HighlightColormap
   highlightLine: HighlightLine
   highlightSize: HighlightSize
   highlightThickness: HighlightThickness
-}
+}>
 
-export function getDefaultHighlightStyle(): HighlightStyleDeclaration {
+export function getDefaultHighlightStyle(): Required<HighlightStyleDeclaration> {
   return {
+    highlight: {},
     highlightImage: 'none',
     highlightReferImage: 'none',
     highlightColormap: 'none',

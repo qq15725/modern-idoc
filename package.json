@@ -15,8 +15,8 @@
     "url": "https://github.com/qq15725/modern-idoc/issues"
   },
   "keywords": [
-    "starter",
-    "template",
+    "idoc",
+    "intermediate-document",
     "typescript"
   ],
   "sideEffects": false,
@@ -71,5 +71,8 @@
   },
   "lint-staged": {
     "*": "eslint --fix"
+  },
+  "dependencies": {
+    "colord": "^2.9.3"
   }
 }

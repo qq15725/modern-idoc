@@ -1,6 +1,6 @@
 import type { None } from '../types'
 
-export interface TransformStyleDeclaration {
+export type TransformStyleDeclaration = Partial<{
   rotate: number
   scaleX: number
   scaleY: number
@@ -10,9 +10,9 @@ export interface TransformStyleDeclaration {
   translateY: number
   transform: None | string
   transformOrigin: string
-}
+}>
 
-export function getDefaultTransformStyle(): TransformStyleDeclaration {
+export function getDefaultTransformStyle(): Required<TransformStyleDeclaration> {
   return {
     rotate: 0,
     scaleX: 1,

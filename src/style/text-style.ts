@@ -1,27 +1,25 @@
-import type { ColorValue } from '../types'
+import type { ColorDeclaration } from '../color'
 import type { TextInlineStyleDeclaration } from './text-inline-style'
 import type { TextLineStyleDeclaration } from './text-line-style'
 import { getDefaultTextInlineStyle } from './text-inline-style'
 import { getDefaultTextLineStyle } from './text-line-style'
 
-export interface TextDrawStyleDeclaration {
+export type TextDrawStyleDeclaration = Partial<{
   textStrokeWidth: number
-  textStrokeColor: ColorValue
-}
+  textStrokeColor: ColorDeclaration
+}>
 
-export interface TextStyleDeclaration extends
-  TextLineStyleDeclaration,
-  TextInlineStyleDeclaration,
-  TextDrawStyleDeclaration {
-  //
-}
+export type TextStyleDeclaration =
+  & TextLineStyleDeclaration
+  & TextInlineStyleDeclaration
+  & TextDrawStyleDeclaration
 
-export function getDefaultTextStyle(): TextStyleDeclaration {
+export function getDefaultTextStyle(): Required<TextStyleDeclaration> {
   return {
     ...getDefaultTextLineStyle(),
     ...getDefaultTextInlineStyle(),
     // textStroke
     textStrokeWidth: 0,
-    textStrokeColor: 'black',
+    textStrokeColor: 'rgb(0, 0, 0)',
   }
 }

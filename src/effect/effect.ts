@@ -1,7 +1,11 @@
 import type { None } from '../types'
-import type { InnerShadowDeclaration } from './inner-shadow'
-import type { OuterShadowDeclaration } from './outer-shadow'
-import type { SoftEdgeDeclaration } from './soft-edge'
+import type { InnerShadowDeclaration, InnerShadowProperty } from './inner-shadow'
+import type { OuterShadowDeclaration, OuterShadowProperty } from './outer-shadow'
+import type { SoftEdgeDeclaration, SoftEdgeProperty } from './soft-edge'
+import { clearUndef } from '../utils'
+import { normalizeInnerShadow } from './inner-shadow'
+import { normalizeOuterShadow } from './outer-shadow'
+import { normalizeSoftEdge } from './soft-edge'
 
 export interface EffectDeclaration {
   innerShadow?: InnerShadowDeclaration
@@ -9,15 +13,26 @@ export interface EffectDeclaration {
   softEdge?: SoftEdgeDeclaration
 }
 
+export interface EffectPropertyObject {
+  innerShadow?: InnerShadowProperty
+  outerShadow?: OuterShadowProperty
+  softEdge?: SoftEdgeProperty
+}
+
 export type EffectProperty =
   | None
-  | EffectDeclaration
+  | EffectPropertyObject
 
 export function normalizeEffect(effect?: EffectProperty): EffectDeclaration | undefined {
   if (!effect || effect === 'none') {
     return undefined
   }
   else {
-    return effect
+    return clearUndef({
+      ...effect,
+      softEdge: normalizeSoftEdge(effect.softEdge),
+      outerShadow: normalizeOuterShadow(effect.outerShadow),
+      innerShadow: normalizeInnerShadow(effect.innerShadow),
+    })
   }
 }

@@ -8,9 +8,10 @@ import type { MetaProperty } from './meta'
 import type { Node } from './node'
 import type { OutlineDeclaration, OutlineProperty } from './outline'
 import type { ShadowDeclaration, ShadowProperty } from './shadow'
-import type { StyleProperty } from './style'
+import type { StyleDeclaration, StyleProperty } from './style'
 import type { TextDeclaration, TextProperty } from './text'
 import type { VideoDeclaration, VideoProperty } from './video'
+import { normalizeAudio } from './audio'
 import { normalizeBackground } from './background'
 import { normalizeEffect } from './effect'
 import { normalizeFill } from './fill'
@@ -18,6 +19,7 @@ import { normalizeForeground } from './foreground'
 import { normalizeGeometry } from './geometry'
 import { normalizeOutline } from './outline'
 import { normalizeShadow } from './shadow'
+import { normalizeStyle } from './style'
 import { normalizeText } from './text'
 import { clearUndef } from './utils'
 import { normalizeVideo } from './video'
@@ -38,6 +40,7 @@ export interface Element<T = MetaProperty> extends Node<T> {
 }
 
 export interface ElementDeclaration<T = MetaProperty> extends Element<T> {
+  style?: Partial<StyleDeclaration>
   text?: TextDeclaration
   background?: BackgroundDeclaration
   geometry?: GeometryDeclaration
@@ -54,6 +57,7 @@ export interface ElementDeclaration<T = MetaProperty> extends Element<T> {
 export function normalizeElement<T = MetaProperty>(element: Element<T>): ElementDeclaration<T> {
   return clearUndef({
     ...element,
+    style: normalizeStyle(element.style),
     text: normalizeText(element.text),
     background: normalizeBackground(element.background),
     geometry: normalizeGeometry(element.geometry),
@@ -62,7 +66,7 @@ export function normalizeElement<T = MetaProperty>(element: Element<T>): Element
     foreground: normalizeForeground(element.foreground),
     shadow: normalizeShadow(element.shadow),
     video: normalizeVideo(element.video),
-    audio: normalizeVideo(element.audio),
+    audio: normalizeAudio(element.audio),
     effect: normalizeEffect(element.effect),
     children: element.children?.map(child => normalizeElement(child)),
   })

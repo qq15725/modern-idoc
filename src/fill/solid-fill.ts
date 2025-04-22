@@ -1,5 +1,5 @@
-import type { ColorValue } from '../types'
+import type { ColorDeclaration } from '../color'
 
 export interface SolidFillDeclaration {
-  color: ColorValue
+  color: ColorDeclaration
 }

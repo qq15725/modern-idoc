@@ -12,56 +12,56 @@ import type {
   StyleUnit,
 } from './types'
 
-export interface LayoutStyleDeclaration {
+export type LayoutStyleDeclaration = Partial<{
   // box
   overflow: Overflow
-  direction?: Direction
-  display?: Display
-  boxSizing?: BoxSizing
-  width?: StyleUnit | 'auto'
-  height?: StyleUnit | 'auto'
-  maxHeight?: StyleUnit
-  maxWidth?: StyleUnit
-  minHeight?: StyleUnit
-  minWidth?: StyleUnit
+  direction: Direction
+  display: Display
+  boxSizing: BoxSizing
+  width: StyleUnit | 'auto'
+  height: StyleUnit | 'auto'
+  maxHeight: StyleUnit
+  maxWidth: StyleUnit
+  minHeight: StyleUnit
+  minWidth: StyleUnit
   // position
-  position?: Position
+  position: Position
   left: StyleUnit
   top: StyleUnit
-  right?: StyleUnit
-  bottom?: StyleUnit
+  right: StyleUnit
+  bottom: StyleUnit
   // border
-  borderTop?: string
-  borderLeft?: string
-  borderRight?: string
-  borderBottom?: string
-  borderWidth?: number
-  border?: string
+  borderTop: string
+  borderLeft: string
+  borderRight: string
+  borderBottom: string
+  borderWidth: number
+  border: string
   // flex
-  flex?: number
-  flexBasis?: StyleUnit | 'auto'
-  flexDirection?: FlexDirection
-  flexGrow?: number
-  flexShrink?: number
-  flexWrap?: FlexWrap
-  alignContent?: Align
-  alignItems?: Align
-  alignSelf?: Align
-  justifyContent?: Justify
-  gap?: StyleUnit
+  flex: number
+  flexBasis: StyleUnit | 'auto'
+  flexDirection: FlexDirection
+  flexGrow: number
+  flexShrink: number
+  flexWrap: FlexWrap
+  alignContent: Align
+  alignItems: Align
+  alignSelf: Align
+  justifyContent: Justify
+  gap: StyleUnit
   // margin
-  marginTop?: None | StyleUnit | 'auto'
-  marginLeft?: None | StyleUnit | 'auto'
-  marginRight?: None | StyleUnit | 'auto'
-  marginBottom?: None | StyleUnit | 'auto'
-  margin?: None | StyleUnit | 'auto'
+  marginTop: None | StyleUnit | 'auto'
+  marginLeft: None | StyleUnit | 'auto'
+  marginRight: None | StyleUnit | 'auto'
+  marginBottom: None | StyleUnit | 'auto'
+  margin: None | StyleUnit | 'auto'
   // padding
-  paddingTop?: StyleUnit
-  paddingLeft?: StyleUnit
-  paddingRight?: StyleUnit
-  paddingBottom?: StyleUnit
-  padding?: StyleUnit
-}
+  paddingTop: StyleUnit
+  paddingLeft: StyleUnit
+  paddingRight: StyleUnit
+  paddingBottom: StyleUnit
+  padding: StyleUnit
+}>
 
 export function getDefaultLayoutStyle(): LayoutStyleDeclaration {
   return {

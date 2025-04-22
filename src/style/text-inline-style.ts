@@ -1,4 +1,4 @@
-import type { ColorValue } from '../types'
+import type { ColorDeclaration } from '../color'
 import type { HighlightStyleDeclaration } from './highlight'
 import type {
   FontKerning,
@@ -11,27 +11,29 @@ import type {
 } from './types'
 import { getDefaultHighlightStyle } from './highlight'
 
-export interface TextInlineStyleDeclaration extends HighlightStyleDeclaration {
-  color: ColorValue
-  verticalAlign: VerticalAlign
-  letterSpacing: number
-  wordSpacing: number
-  // font
-  fontSize: number
-  fontWeight: FontWeight
-  fontFamily: string
-  fontStyle: FontStyle
-  fontKerning: FontKerning
-  // text
-  textTransform: TextTransform
-  textOrientation: TextOrientation
-  textDecoration: TextDecoration
-}
+export type TextInlineStyleDeclaration =
+  & HighlightStyleDeclaration
+  & Partial<{
+    color: ColorDeclaration
+    verticalAlign: VerticalAlign
+    letterSpacing: number
+    wordSpacing: number
+    // font
+    fontSize: number
+    fontWeight: FontWeight
+    fontFamily: string
+    fontStyle: FontStyle
+    fontKerning: FontKerning
+    // text
+    textTransform: TextTransform
+    textOrientation: TextOrientation
+    textDecoration: TextDecoration
+  }>
 
-export function getDefaultTextInlineStyle(): TextInlineStyleDeclaration {
+export function getDefaultTextInlineStyle(): Required<TextInlineStyleDeclaration> {
   return {
     ...getDefaultHighlightStyle(),
-    color: 'black',
+    color: 'rgb(0, 0, 0)',
     verticalAlign: 'baseline',
     letterSpacing: 0,
     wordSpacing: 0,

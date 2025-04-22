@@ -1,10 +1,10 @@
-import type { StyleDeclaration } from './style'
+import type { StyleDeclaration, StylePropertyObject } from './style'
 
-export interface FragmentContent extends Partial<StyleDeclaration> {
+export interface FragmentContent extends StylePropertyObject {
   content: string
 }
 
-export interface ParagraphContent extends Partial<StyleDeclaration> {
+export interface ParagraphContent extends StylePropertyObject {
   fragments: FragmentContent[]
 }
 
@@ -20,11 +20,11 @@ export type TextContent =
   | ParagraphContent
   | TextContentFlat[]
 
-export type TextContentDeclaration = ParagraphContent[]
+export type TextContentDeclaration = (ParagraphContent & Partial<StyleDeclaration>)[]
 
 export interface TextDeclaration {
   content: TextContentDeclaration
-  effects?: Partial<StyleDeclaration>[]
+  effects?: StylePropertyObject[]
   measureDom?: any // HTMLElement
   fonts?: any // modern-font > Fonts
 }

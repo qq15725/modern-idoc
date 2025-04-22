@@ -1,14 +1,23 @@
-import type { FillDeclaration } from './fill'
+import type { FillDeclaration, FillPropertyObject } from './fill'
 import type { None } from './types'
+import { normalizeFill } from './fill'
 
-export interface ForegroundDeclaration extends FillDeclaration {
+export interface BaseForegroundDeclaration {
   withGeometry?: boolean
 }
+
+export type ForegroundDeclaration =
+  & BaseForegroundDeclaration
+  & FillDeclaration
+
+export type ForegroundPropertyObject =
+  & BaseForegroundDeclaration
+  & FillPropertyObject
 
 export type ForegroundProperty =
   | None
   | string
-  | ForegroundDeclaration
+  | ForegroundPropertyObject
 
 export function normalizeForeground(foreground?: ForegroundProperty): ForegroundDeclaration | undefined {
   if (!foreground || foreground === 'none') {
@@ -18,6 +27,9 @@ export function normalizeForeground(foreground?: ForegroundProperty): Foreground
     return { src: foreground }
   }
   else {
-    return foreground
+    return {
+      ...foreground,
+      ...normalizeFill(foreground),
+    }
   }
 }
