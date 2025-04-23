@@ -1,3 +1,13 @@
+# [0.5.0](https://github.com/qq15725/modern-idoc/compare/v0.4.5...v0.5.0) (2025-04-23)
+
+
+### Features
+
+* color ([bc00dcc](https://github.com/qq15725/modern-idoc/commit/bc00dccbca2c99981aa25ab14ab5591c387ad9fd))
+* color ([5a87407](https://github.com/qq15725/modern-idoc/commit/5a874070f5718f3de32d20d56edfa49133186d46))
+
+
+
 ## [0.4.5](https://github.com/qq15725/modern-idoc/compare/v0.4.4...v0.4.5) (2025-04-18)
 
 
