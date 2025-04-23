@@ -20,22 +20,6 @@ export type ShadowProperty =
   | BoxShadow
   | ShadowPropertyObject
 
-export type ShadowStyleDeclaration = Partial<{
-  boxShadow: BoxShadow
-
-  // extended part
-  shadowColor: ColorDeclaration
-  shadowOffsetX: number
-  shadowOffsetY: number
-  shadowBlur: number
-}>
-
-export function getDefaultShadowStyle(): ShadowStyleDeclaration {
-  return {
-    boxShadow: 'none',
-  }
-}
-
 export function normalizeShadow(shadow?: ShadowProperty): ShadowDeclaration | undefined {
   if (!shadow || shadow === 'none') {
     return undefined
@@ -50,5 +34,21 @@ export function normalizeShadow(shadow?: ShadowProperty): ShadowDeclaration | un
       ...shadow,
       color: normalizeColor(shadow.color)!,
     }
+  }
+}
+
+export interface ShadowStyleDeclaration {
+  boxShadow: BoxShadow
+
+  // extended part
+  shadowColor?: ColorDeclaration
+  shadowOffsetX?: number
+  shadowOffsetY?: number
+  shadowBlur?: number
+}
+
+export function getDefaultShadowStyle(): ShadowStyleDeclaration {
+  return {
+    boxShadow: 'none',
   }
 }

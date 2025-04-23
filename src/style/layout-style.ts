@@ -12,7 +12,7 @@ import type {
   StyleUnit,
 } from './types'
 
-export type LayoutStyleDeclaration = Partial<{
+export interface LayoutStyleDeclaration {
   // box
   overflow: Overflow
   direction: Direction
@@ -61,9 +61,9 @@ export type LayoutStyleDeclaration = Partial<{
   paddingRight: StyleUnit
   paddingBottom: StyleUnit
   padding: StyleUnit
-}>
+}
 
-export function getDefaultLayoutStyle(): LayoutStyleDeclaration {
+export function getDefaultLayoutStyle(): Partial<LayoutStyleDeclaration> {
   return {
     // box
     overflow: 'visible',

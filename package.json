@@ -53,6 +53,9 @@
     "typecheck": "tsc --noEmit",
     "prepare": "simple-git-hooks"
   },
+  "dependencies": {
+    "colord": "^2.9.3"
+  },
   "devDependencies": {
     "@antfu/eslint-config": "^4.3.0",
     "@types/node": "^22.13.4",
@@ -71,8 +74,5 @@
   },
   "lint-staged": {
     "*": "eslint --fix"
-  },
-  "dependencies": {
-    "colord": "^2.9.3"
   }
 }

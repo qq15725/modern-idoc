@@ -9,10 +9,10 @@ import { getDefaultLayoutStyle } from './layout-style'
 import { getDefaultTransformStyle } from './transform-style'
 
 export type ElementStyleDeclaration =
-  & LayoutStyleDeclaration
+  & Partial<LayoutStyleDeclaration>
   & TransformStyleDeclaration
   & ShadowStyleDeclaration
-  & Partial<{
+  & {
   // background
     backgroundImage: None | string
     backgroundColor: None | ColorDeclaration
@@ -31,7 +31,7 @@ export type ElementStyleDeclaration =
     opacity: number
     pointerEvents: PointerEvents
     maskImage: None | string
-  }>
+  }
 
 export function getDefaultElementStyle(): ElementStyleDeclaration {
   return {

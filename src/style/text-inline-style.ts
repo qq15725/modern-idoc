@@ -13,7 +13,7 @@ import { getDefaultHighlightStyle } from './highlight'
 
 export type TextInlineStyleDeclaration =
   & HighlightStyleDeclaration
-  & Partial<{
+  & {
     color: ColorDeclaration
     verticalAlign: VerticalAlign
     letterSpacing: number
@@ -28,7 +28,7 @@ export type TextInlineStyleDeclaration =
     textTransform: TextTransform
     textOrientation: TextOrientation
     textDecoration: TextDecoration
-  }>
+  }
 
 export function getDefaultTextInlineStyle(): Required<TextInlineStyleDeclaration> {
   return {

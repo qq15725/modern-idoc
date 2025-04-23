@@ -4,15 +4,15 @@ import { getDefaultListStyleStyle } from './list-style'
 
 export type TextLineStyleDeclaration =
   & ListStyleStyleDeclaration
-  & Partial<{
+  & {
     writingMode: WritingMode
     textWrap: TextWrap
     textAlign: TextAlign
     textIndent: number
     lineHeight: number
-  }>
+  }
 
-export function getDefaultTextLineStyle(): Required<TextLineStyleDeclaration> {
+export function getDefaultTextLineStyle(): TextLineStyleDeclaration {
   return {
     ...getDefaultListStyleStyle(),
     writingMode: 'horizontal-tb',

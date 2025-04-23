@@ -4,10 +4,10 @@ import type { TextLineStyleDeclaration } from './text-line-style'
 import { getDefaultTextInlineStyle } from './text-inline-style'
 import { getDefaultTextLineStyle } from './text-line-style'
 
-export type TextDrawStyleDeclaration = Partial<{
+export interface TextDrawStyleDeclaration {
   textStrokeWidth: number
   textStrokeColor: ColorDeclaration
-}>
+}
 
 export type TextStyleDeclaration =
   & TextLineStyleDeclaration

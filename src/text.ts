@@ -1,4 +1,4 @@
-import type { StyleDeclaration, StylePropertyObject } from './style'
+import type { StylePropertyObject } from './style'
 import { normalizeStyle } from './style'
 
 export interface FragmentContent extends StylePropertyObject {
@@ -21,7 +21,7 @@ export type TextContent =
   | ParagraphContent
   | TextContentFlat[]
 
-export type TextContentDeclaration = (ParagraphContent & StyleDeclaration)[]
+export type TextContentDeclaration = (ParagraphContent & StylePropertyObject)[]
 
 export interface TextDeclaration {
   content: TextContentDeclaration

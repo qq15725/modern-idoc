@@ -8,16 +8,16 @@ export interface ListStyleDeclaration {
   position: ListStylePosition
 }
 
-export type ListStyleStyleDeclaration = Partial<{
+export interface ListStyleStyleDeclaration {
   listStyle: Partial<ListStyleDeclaration>
   listStyleType: ListStyleType
   listStyleImage: ListStyleImage
   listStyleColormap: ListStyleColormap
   listStyleSize: ListStyleSize
   listStylePosition: ListStylePosition
-}>
+}
 
-export function getDefaultListStyleStyle(): Required<ListStyleStyleDeclaration> {
+export function getDefaultListStyleStyle(): ListStyleStyleDeclaration {
   return {
     listStyle: {},
     listStyleType: 'none',
