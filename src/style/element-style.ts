@@ -8,6 +8,11 @@ import { getDefaultShadowStyle } from '../shadow'
 import { getDefaultLayoutStyle } from './layout-style'
 import { getDefaultTransformStyle } from './transform-style'
 
+export type BackgroundSize =
+  | 'contain' | 'cover' | string
+  // custom
+  | 'stretch' | 'rigid'
+
 export type ElementStyleDeclaration =
   & Partial<LayoutStyleDeclaration>
   & TransformStyleDeclaration
@@ -15,6 +20,7 @@ export type ElementStyleDeclaration =
   & {
   // background
     backgroundImage: None | string
+    backgroundSize: BackgroundSize
     backgroundColor: None | ColorDeclaration
     // border
     borderRadius: number
@@ -40,6 +46,7 @@ export function getDefaultElementStyle(): ElementStyleDeclaration {
     ...getDefaultShadowStyle(),
     // background
     backgroundImage: 'none',
+    backgroundSize: 'auto, auto',
     backgroundColor: 'none',
     // border
     borderRadius: 0,
