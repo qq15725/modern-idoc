@@ -1,3 +1,12 @@
+## [0.5.2](https://github.com/qq15725/modern-idoc/compare/v0.5.1...v0.5.2) (2025-04-25)
+
+
+### Features
+
+* add BackgroundSize ([bbd1c4c](https://github.com/qq15725/modern-idoc/commit/bbd1c4c25000237c354cf50f309ad04ed69c5549))
+
+
+
 ## [0.5.1](https://github.com/qq15725/modern-idoc/compare/v0.5.0...v0.5.1) (2025-04-23)
 
 
