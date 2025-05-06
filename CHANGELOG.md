@@ -1,3 +1,12 @@
+## [0.5.3](https://github.com/qq15725/modern-idoc/compare/v0.5.2...v0.5.3) (2025-05-06)
+
+
+### Features
+
+* backgroundColormap ([749f540](https://github.com/qq15725/modern-idoc/commit/749f540d2814716bac147b51a7c7e96e480d8c3f))
+
+
+
 ## [0.5.2](https://github.com/qq15725/modern-idoc/compare/v0.5.1...v0.5.2) (2025-04-25)
 
 
