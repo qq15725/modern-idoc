@@ -22,6 +22,7 @@ export type ElementStyleDeclaration =
     backgroundImage: None | string
     backgroundSize: BackgroundSize
     backgroundColor: None | ColorDeclaration
+    backgroundColormap: None | Record<string, string>
     // border
     borderRadius: number
     borderColor: None | ColorDeclaration
@@ -48,6 +49,7 @@ export function getDefaultElementStyle(): ElementStyleDeclaration {
     backgroundImage: 'none',
     backgroundSize: 'auto, auto',
     backgroundColor: 'none',
+    backgroundColormap: 'none',
     // border
     borderRadius: 0,
     borderColor: 'none',
