@@ -50,6 +50,11 @@ export function normalizeColor(color?: Color, orFail = false): ColorDeclaration 
   const parsed = parseColor(color)
 
   if (!parsed.isValid()) {
+    if (typeof color === 'string') {
+      // linear-gradient radial-gradient
+      return color
+    }
+
     const message = `Failed to normalizeColor ${color}`
     if (orFail) {
       throw new Error(message)
