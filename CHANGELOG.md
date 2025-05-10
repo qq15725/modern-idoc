@@ -1,3 +1,12 @@
+## [0.5.4](https://github.com/qq15725/modern-idoc/compare/v0.5.3...v0.5.4) (2025-05-10)
+
+
+### Bug Fixes
+
+* normalizeColor ([3f5eecc](https://github.com/qq15725/modern-idoc/commit/3f5eecc2c11e06cf7099b2a2eedf8541f7d75e94))
+
+
+
 ## [0.5.3](https://github.com/qq15725/modern-idoc/compare/v0.5.2...v0.5.3) (2025-05-06)
 
 
