@@ -1,3 +1,12 @@
+## [0.5.5](https://github.com/qq15725/modern-idoc/compare/v0.5.4...v0.5.5) (2025-05-20)
+
+
+### Features
+
+* normalizeColor fixed to rgba string ([5c355c4](https://github.com/qq15725/modern-idoc/commit/5c355c49153d07ae389e5396b1894241d1c87435))
+
+
+
 ## [0.5.4](https://github.com/qq15725/modern-idoc/compare/v0.5.3...v0.5.4) (2025-05-10)
 
 
