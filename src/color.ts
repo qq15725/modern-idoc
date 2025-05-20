@@ -61,9 +61,11 @@ export function normalizeColor(color?: Color, orFail = false): ColorDeclaration 
     }
     else {
       console.warn(message)
-      return `rgb(0, 0, 0)`
+      return `rgba(0, 0, 0, 1)`
     }
   }
 
-  return parsed.toRgbString()
+  const { r, g, b, a } = parsed.rgba
+
+  return `rgba(${r}, ${g}, ${b}, ${a})`
 }
