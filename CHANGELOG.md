@@ -1,3 +1,14 @@
+# [0.6.0](https://github.com/qq15725/modern-idoc/compare/v0.5.6...v0.6.0) (2025-05-21)
+
+
+### Features
+
+* gradient-parser ([fa0007d](https://github.com/qq15725/modern-idoc/commit/fa0007d650b0ea56f3fd126489a27586669ba1f5))
+* normalizeGradient ([f76c9ae](https://github.com/qq15725/modern-idoc/commit/f76c9aecc0a6f41e851afdfab81d3ff167cb1bb7))
+* normalizeGradient ([d5f8493](https://github.com/qq15725/modern-idoc/commit/d5f8493ddfb1433d42327ecd18e487737cdd33f9))
+
+
+
 ## [0.5.6](https://github.com/qq15725/modern-idoc/compare/v0.5.5...v0.5.6) (2025-05-21)
 
 
