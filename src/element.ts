@@ -10,6 +10,7 @@ import type { OutlineDeclaration, OutlineProperty } from './outline'
 import type { ShadowDeclaration, ShadowProperty } from './shadow'
 import type { StyleDeclaration, StyleProperty } from './style'
 import type { TextDeclaration, TextProperty } from './text'
+import type { WithNone } from './types'
 import type { VideoDeclaration, VideoProperty } from './video'
 import { normalizeAudio } from './audio'
 import { normalizeBackground } from './background'
@@ -21,25 +22,25 @@ import { normalizeOutline } from './outline'
 import { normalizeShadow } from './shadow'
 import { normalizeStyle } from './style'
 import { normalizeText } from './text'
-import { clearUndef } from './utils'
+import { clearUndef, isNone } from './utils'
 import { normalizeVideo } from './video'
 
 export interface Element<T = MetaProperty> extends Node<T> {
-  style?: StyleProperty
-  text?: TextProperty
-  background?: BackgroundProperty
-  geometry?: GeometryProperty
-  fill?: FillProperty
-  outline?: OutlineProperty
-  foreground?: ForegroundProperty
-  shadow?: ShadowProperty
-  video?: VideoProperty
-  audio?: AudioProperty
-  effect?: EffectProperty
+  style?: WithNone<StyleProperty>
+  text?: WithNone<TextProperty>
+  background?: WithNone<BackgroundProperty>
+  geometry?: WithNone<GeometryProperty>
+  fill?: WithNone<FillProperty>
+  outline: WithNone<OutlineProperty>
+  foreground?: WithNone<ForegroundProperty>
+  shadow?: WithNone<ShadowProperty>
+  video?: WithNone<VideoProperty>
+  audio?: WithNone<AudioProperty>
+  effect?: WithNone<EffectProperty>
   children?: Element[]
 }
 
-export interface ElementDeclaration<T = MetaProperty> extends Element<T> {
+export type ElementDeclaration<T = MetaProperty> = Node<T> & {
   style?: Partial<StyleDeclaration>
   text?: TextDeclaration
   background?: BackgroundDeclaration
@@ -57,17 +58,17 @@ export interface ElementDeclaration<T = MetaProperty> extends Element<T> {
 export function normalizeElement<T = MetaProperty>(element: Element<T>): ElementDeclaration<T> {
   return clearUndef({
     ...element,
-    style: normalizeStyle(element.style),
-    text: normalizeText(element.text),
-    background: normalizeBackground(element.background),
-    geometry: normalizeGeometry(element.geometry),
-    fill: normalizeFill(element.fill),
-    outline: normalizeOutline(element.outline),
-    foreground: normalizeForeground(element.foreground),
-    shadow: normalizeShadow(element.shadow),
-    video: normalizeVideo(element.video),
-    audio: normalizeAudio(element.audio),
-    effect: normalizeEffect(element.effect),
+    style: isNone(element.style) ? undefined : normalizeStyle(element.style),
+    text: isNone(element.text) ? undefined : normalizeText(element.text),
+    background: isNone(element.background) ? undefined : normalizeBackground(element.background),
+    geometry: isNone(element.geometry) ? undefined : normalizeGeometry(element.geometry),
+    fill: isNone(element.fill) ? undefined : normalizeFill(element.fill),
+    outline: isNone(element.outline) ? undefined : normalizeOutline(element.outline),
+    foreground: isNone(element.foreground) ? undefined : normalizeForeground(element.foreground),
+    shadow: isNone(element.shadow) ? undefined : normalizeShadow(element.shadow),
+    video: isNone(element.video) ? undefined : normalizeVideo(element.video),
+    audio: isNone(element.audio) ? undefined : normalizeAudio(element.audio),
+    effect: isNone(element.effect) ? undefined : normalizeEffect(element.effect),
     children: element.children?.map(child => normalizeElement(child)),
   })
 }

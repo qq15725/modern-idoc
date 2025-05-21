@@ -1,5 +1,4 @@
 import type { FillDeclaration, FillPropertyObject } from './fill'
-import type { None } from './types'
 import { normalizeFill } from './fill'
 
 export interface BaseBackgroundDeclaration {
@@ -15,15 +14,11 @@ export type BackgroundPropertyObject =
   & FillPropertyObject
 
 export type BackgroundProperty =
-  | None
   | string
   | BackgroundPropertyObject
 
-export function normalizeBackground(background?: BackgroundProperty): BackgroundDeclaration | undefined {
-  if (!background || background === 'none') {
-    return undefined
-  }
-  else if (typeof background === 'string') {
+export function normalizeBackground(background: BackgroundProperty): BackgroundDeclaration {
+  if (typeof background === 'string') {
     return { src: background }
   }
   else {

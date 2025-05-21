@@ -1,8 +1,9 @@
 import type { Color, ColorDeclaration } from './color'
-import type { None } from './types'
-import { normalizeColor } from './color'
+import type { WithNone } from './types'
+import { defaultColor, normalizeColor } from './color'
+import { isNone } from './utils'
 
-export type BoxShadow = None | string
+export type BoxShadow = string
 
 export interface ShadowDeclaration {
   color: ColorDeclaration
@@ -13,18 +14,14 @@ export interface ShadowDeclaration {
 
 export type ShadowPropertyObject =
   & Partial<ShadowDeclaration>
-  & { color?: Color }
+  & { color: WithNone<Color> }
 
 export type ShadowProperty =
-  | None
   | BoxShadow
   | ShadowPropertyObject
 
-export function normalizeShadow(shadow?: ShadowProperty): ShadowDeclaration | undefined {
-  if (!shadow || shadow === 'none') {
-    return undefined
-  }
-  else if (typeof shadow === 'string') {
+export function normalizeShadow(shadow: ShadowProperty): ShadowDeclaration {
+  if (typeof shadow === 'string') {
     return {
       color: normalizeColor(shadow)!,
     }
@@ -32,7 +29,7 @@ export function normalizeShadow(shadow?: ShadowProperty): ShadowDeclaration | un
   else {
     return {
       ...shadow,
-      color: normalizeColor(shadow.color)!,
+      color: isNone(shadow.color) ? defaultColor : normalizeColor(shadow.color)!,
     }
   }
 }

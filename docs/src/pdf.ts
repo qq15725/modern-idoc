@@ -1,10 +1,9 @@
-import type { Document } from '../src'
+import type { Document } from '../../src'
 
-export const pptx: Document = {
+export const pdf: Document = {
   children: [
     {
-      name: 'ppt/slides/slide1.xml',
-      style: { width: 960, height: 540 },
+      style: { width: 300, height: 600 },
       children: [
         {
           style: {
@@ -12,7 +11,8 @@ export const pptx: Document = {
             width: 50,
             height: 50,
           },
-          background: '/static/example.png',
+          background: '/example.png',
+          fill: '#FF00FF',
         },
         {
           style: {

@@ -1,9 +1,9 @@
 import type { Color } from '../color'
-import type { None } from '../types'
+import type { WithNone } from '../types'
 import type { ElementStyleDeclaration } from './element-style'
 import type { TextStyleDeclaration } from './text-style'
 import { normalizeColor } from '../color'
-import { clearUndef } from '../utils'
+import { clearUndef, isNone } from '../utils'
 import { getDefaultElementStyle } from './element-style'
 import { getDefaultTextStyle } from './text-style'
 
@@ -16,28 +16,23 @@ export interface StyleDeclaration extends
 export type StylePropertyObject =
   & Partial<StyleDeclaration>
   & {
-    color?: Color
-    backgroundColor?: Color
-    borderColor?: Color
-    outlineColor?: Color
-    shadowColor?: Color
+    color?: WithNone<Color>
+    backgroundColor?: WithNone<Color>
+    borderColor?: WithNone<Color>
+    outlineColor?: WithNone<Color>
+    shadowColor?: WithNone<Color>
   }
 
-export type StyleProperty =
-  | None
-  | StylePropertyObject
+export type StyleProperty = StylePropertyObject
 
-export function normalizeStyle(style?: StyleProperty): Partial<StyleDeclaration> | undefined {
-  if (!style || style === 'none') {
-    return undefined
-  }
+export function normalizeStyle(style: StyleProperty): Partial<StyleDeclaration> {
   return clearUndef({
     ...style,
-    color: normalizeColor(style.color),
-    backgroundColor: normalizeColor(style.backgroundColor),
-    borderColor: normalizeColor(style.borderColor),
-    outlineColor: normalizeColor(style.outlineColor),
-    shadowColor: normalizeColor(style.shadowColor),
+    color: isNone(style.color) ? undefined : normalizeColor(style.color),
+    backgroundColor: isNone(style.backgroundColor) ? undefined : normalizeColor(style.backgroundColor),
+    borderColor: isNone(style.borderColor) ? undefined : normalizeColor(style.borderColor),
+    outlineColor: isNone(style.outlineColor) ? undefined : normalizeColor(style.outlineColor),
+    shadowColor: isNone(style.shadowColor) ? undefined : normalizeColor(style.shadowColor),
   })
 }
 

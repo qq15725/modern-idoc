@@ -1,5 +1,4 @@
 import type { Colord } from 'colord'
-import type { None } from './types'
 import { colord } from 'colord'
 
 export interface RgbColor { r: number, g: number, b: number }
@@ -21,7 +20,7 @@ export type LchaColor = WithAlpha<LchColor>
 export type CmykaColor = WithAlpha<CmykColor>
 export type ObjectColor = RgbColor | RgbaColor | HslColor | HslaColor | HsvColor | HsvaColor | HwbColor | HwbaColor | XyzColor | XyzaColor | LabColor | LabaColor | LchColor | LchaColor | CmykColor | CmykaColor
 export type Uint32Color = number
-export type Color = None | Uint32Color | ObjectColor | string
+export type Color = Uint32Color | ObjectColor | string
 export type Hex8Color = string
 export type ColorDeclaration = Hex8Color
 
@@ -60,11 +59,9 @@ function format(number: number): string {
   return hex.length < 2 ? `0${hex}` : hex
 }
 
-export function normalizeColor(color?: Color, orFail = false): ColorDeclaration | undefined {
-  if (color === undefined || color === 'none') {
-    return undefined
-  }
+export const defaultColor: ColorDeclaration = '#000000FF'
 
+export function normalizeColor(color: Color, orFail = false): ColorDeclaration {
   const parsed = parseColor(color)
 
   if (!parsed.isValid()) {
@@ -79,7 +76,7 @@ export function normalizeColor(color?: Color, orFail = false): ColorDeclaration 
     }
     else {
       console.warn(message)
-      return '#000000FF'
+      return defaultColor
     }
   }
 

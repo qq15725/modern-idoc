@@ -1,6 +1,6 @@
 import type { ColorDeclaration } from '../color'
 import type { ShadowStyleDeclaration } from '../shadow'
-import type { None } from '../types'
+import type { WithNone } from '../types'
 import type { LayoutStyleDeclaration } from './layout-style'
 import type { TransformStyleDeclaration } from './transform-style'
 import type { BorderStyle, PointerEvents, Visibility } from './types'
@@ -19,25 +19,25 @@ export type ElementStyleDeclaration =
   & ShadowStyleDeclaration
   & {
   // background
-    backgroundImage: None | string
+    backgroundImage: WithNone<string>
     backgroundSize: BackgroundSize
-    backgroundColor: None | ColorDeclaration
-    backgroundColormap: None | Record<string, string>
+    backgroundColor: WithNone<ColorDeclaration>
+    backgroundColormap: WithNone<Record<string, string>>
     // border
     borderRadius: number
-    borderColor: None | ColorDeclaration
+    borderColor: WithNone<ColorDeclaration>
     borderStyle: BorderStyle
     // outline
     outlineWidth: number
     outlineOffset: number
-    outlineColor: None | ColorDeclaration
+    outlineColor: WithNone<ColorDeclaration>
     outlineStyle: string
     // other
     visibility: Visibility
     filter: string
     opacity: number
     pointerEvents: PointerEvents
-    maskImage: None | string
+    maskImage: WithNone<string>
   }
 
 export function getDefaultElementStyle(): ElementStyleDeclaration {

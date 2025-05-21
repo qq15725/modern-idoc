@@ -81,11 +81,8 @@ export function normalizeTextContent(content: TextContent = ''): TextContentDecl
   })
 }
 
-export function normalizeText(text?: TextProperty): TextDeclaration | undefined {
-  if (!text || text === 'none') {
-    return undefined
-  }
-  else if (typeof text === 'string') {
+export function normalizeText(text: TextProperty): TextDeclaration {
+  if (typeof text === 'string') {
     return {
       content: [
         {

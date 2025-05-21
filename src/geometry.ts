@@ -1,5 +1,4 @@
 import type { ColorDeclaration } from './color'
-import type { None } from './types'
 
 export type SVGPathData = string
 export type FillRule = 'nonzero' | 'evenodd'
@@ -42,17 +41,13 @@ export interface GeometryDeclaration {
 }
 
 export type GeometryProperty =
-  | None
   | SVGPathData
   | SVGPathData[]
   | GeometryPathDeclaration[]
   | GeometryDeclaration
 
-export function normalizeGeometry(geometry?: GeometryProperty): GeometryDeclaration | undefined {
-  if (!geometry || geometry === 'none') {
-    return undefined
-  }
-  else if (typeof geometry === 'string') {
+export function normalizeGeometry(geometry: GeometryProperty): GeometryDeclaration {
+  if (typeof geometry === 'string') {
     return {
       paths: [
         { data: geometry },

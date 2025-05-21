@@ -1,9 +1,10 @@
 import type { Color, ColorDeclaration } from '../color'
 import type { GradientFillDeclaration, SolidFillDeclaration } from '../fill'
-import type { None } from '../types'
+import type { WithNone } from '../types'
 import type { HeadEnd } from './head-end'
 import type { TailEnd } from './tail-end'
 import { normalizeColor } from '../color'
+import { isNone } from '../utils'
 
 export type OutlineFillDeclaration =
   & Partial<SolidFillDeclaration>
@@ -21,18 +22,14 @@ export interface OutlineDeclaration extends OutlineFillDeclaration {
 
 export type OutlinePropertyObject =
   & Partial<OutlineDeclaration>
-  & { color?: Color }
+  & { color: WithNone<Color> }
 
 export type OutlineProperty =
-  | None
   | string
   | OutlinePropertyObject
 
-export function normalizeOutline(outline?: OutlineProperty): OutlineDeclaration | undefined {
-  if (!outline || outline === 'none') {
-    return undefined
-  }
-  else if (typeof outline === 'string') {
+export function normalizeOutline(outline: OutlineProperty): OutlineDeclaration {
+  if (typeof outline === 'string') {
     return {
       color: normalizeColor(outline),
     }
@@ -40,7 +37,7 @@ export function normalizeOutline(outline?: OutlineProperty): OutlineDeclaration 
   else {
     return {
       ...outline,
-      color: normalizeColor(outline.color),
+      color: isNone(outline.color) ? undefined : normalizeColor(outline.color),
     }
   }
 }

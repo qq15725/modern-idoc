@@ -1,3 +1,7 @@
+export function isNone<T>(value: T): value is Extract<T, null | undefined | 'none'> {
+  return value === null || value === undefined || value === 'none'
+}
+
 export function clearUndef<T>(obj: T, deep = false): T {
   if (typeof obj !== 'object' || !obj) {
     return obj
