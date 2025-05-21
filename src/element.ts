@@ -31,7 +31,7 @@ export interface Element<T = MetaProperty> extends Node<T> {
   background?: WithNone<BackgroundProperty>
   geometry?: WithNone<GeometryProperty>
   fill?: WithNone<FillProperty>
-  outline: WithNone<OutlineProperty>
+  outline?: WithNone<OutlineProperty>
   foreground?: WithNone<ForegroundProperty>
   shadow?: WithNone<ShadowProperty>
   video?: WithNone<VideoProperty>
