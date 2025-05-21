@@ -1,3 +1,12 @@
+## [0.5.6](https://github.com/qq15725/modern-idoc/compare/v0.5.5...v0.5.6) (2025-05-21)
+
+
+### Features
+
+* normalize color to hex8 ([f9415b6](https://github.com/qq15725/modern-idoc/commit/f9415b6d52d9a54eff3ae27475d91ab9f5306fcd))
+
+
+
 ## [0.5.5](https://github.com/qq15725/modern-idoc/compare/v0.5.4...v0.5.5) (2025-05-20)
 
 
