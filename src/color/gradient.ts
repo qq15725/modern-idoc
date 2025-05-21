@@ -14,8 +14,16 @@ export interface ColorStop {
 }
 
 export interface LinearGradient {
+  type: 'linear-gradient'
   angle: number
   stops: ColorStop[]
+  repeat?: boolean
+}
+
+export interface RadialGradient {
+  type: 'radial-gradient'
+  stops: ColorStop[]
+  repeat?: boolean
 }
 
 function parseLinearGradientNode(node: LinearGradientNode | RepeatingLinearGradientNode): LinearGradient {
@@ -70,10 +78,14 @@ function parseLinearGradientNode(node: LinearGradientNode | RepeatingLinearGradi
     return { offset, color }
   })
 
-  return { angle, stops }
+  return {
+    type: 'linear-gradient',
+    angle,
+    stops,
+  }
 }
 
-function parseRadialGradientNode(ast: RadialGradientNode | RepeatingRadialGradientNode): any {
+function parseRadialGradientNode(ast: RadialGradientNode | RepeatingRadialGradientNode): RadialGradient {
   ast.orientation?.map((item) => {
     switch (item?.type) {
       case 'shape':
@@ -125,22 +137,27 @@ function parseRadialGradientNode(ast: RadialGradientNode | RepeatingRadialGradie
     return { offset, color }
   })
 
-  return { stops }
+  return {
+    type: 'radial-gradient',
+    stops,
+  }
 }
 
-export function normalizeGradient(cssText: string): (LinearGradient | undefined)[] {
-  return parseGradient(cssText).map((node) => {
-    switch (node?.type) {
-      case 'linear-gradient':
-        return parseLinearGradientNode(node)
-      case 'repeating-linear-gradient':
-        return parseLinearGradientNode(node)
-      case 'radial-gradient':
-        return parseRadialGradientNode(node)
-      case 'repeating-radial-gradient':
-        return parseRadialGradientNode(node)
-      default:
-        return undefined
-    }
-  })
+export function normalizeGradient(cssText: string): (LinearGradient | RadialGradient)[] {
+  return parseGradient(cssText)
+    .map((node) => {
+      switch (node?.type) {
+        case 'linear-gradient':
+          return parseLinearGradientNode(node)
+        case 'repeating-linear-gradient':
+          return { ...parseLinearGradientNode(node), repeat: true }
+        case 'radial-gradient':
+          return parseRadialGradientNode(node)
+        case 'repeating-radial-gradient':
+          return { ...parseRadialGradientNode(node), repeat: true }
+        default:
+          return undefined
+      }
+    })
+    .filter(Boolean) as (LinearGradient | RadialGradient)[]
 }
