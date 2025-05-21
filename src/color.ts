@@ -22,8 +22,8 @@ export type CmykaColor = WithAlpha<CmykColor>
 export type ObjectColor = RgbColor | RgbaColor | HslColor | HslaColor | HsvColor | HsvaColor | HwbColor | HwbaColor | XyzColor | XyzaColor | LabColor | LabaColor | LchColor | LchaColor | CmykColor | CmykaColor
 export type Uint32Color = number
 export type Color = None | Uint32Color | ObjectColor | string
-export type RgbString = string
-export type ColorDeclaration = RgbString
+export type Hex8Color = string
+export type ColorDeclaration = Hex8Color
 
 export function parseColor(color: Color): Colord {
   let input: ObjectColor | string
@@ -40,6 +40,24 @@ export function parseColor(color: Color): Colord {
   }
 
   return colord(input)
+}
+
+function round(number: number, digits = 0, base = 10 ** digits): number {
+  return Math.round(base * number) / base + 0
+}
+
+function roundRgba(rgba: RgbaColor): RgbaColor {
+  return {
+    r: round(rgba.r),
+    g: round(rgba.g),
+    b: round(rgba.b),
+    a: round(rgba.a, 3),
+  }
+}
+
+function format(number: number): string {
+  const hex = number.toString(16)
+  return hex.length < 2 ? `0${hex}` : hex
 }
 
 export function normalizeColor(color?: Color, orFail = false): ColorDeclaration | undefined {
@@ -61,11 +79,11 @@ export function normalizeColor(color?: Color, orFail = false): ColorDeclaration 
     }
     else {
       console.warn(message)
-      return `rgba(0, 0, 0, 1)`
+      return '#000000FF'
     }
   }
 
-  const { r, g, b, a } = parsed.rgba
+  const { r, g, b, a } = roundRgba(parsed.rgba)
 
-  return `rgba(${r}, ${g}, ${b}, ${a})`
+  return `#${format(r)}${format(g)}${format(b)}${format(round(a * 255))}`
 }
