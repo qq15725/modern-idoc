@@ -1,3 +1,12 @@
+## [0.6.4](https://github.com/qq15725/modern-idoc/compare/v0.6.3...v0.6.4) (2025-05-22)
+
+
+### Features
+
+* style add fill and outline type ([041feab](https://github.com/qq15725/modern-idoc/commit/041feabbe221b63a5141e8ad4c12c21b226cd037))
+
+
+
 ## [0.6.3](https://github.com/qq15725/modern-idoc/compare/v0.6.2...v0.6.3) (2025-05-22)
 
 
