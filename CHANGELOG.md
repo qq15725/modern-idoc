@@ -1,3 +1,12 @@
+## [0.6.3](https://github.com/qq15725/modern-idoc/compare/v0.6.2...v0.6.3) (2025-05-22)
+
+
+### Bug Fixes
+
+* gradient type ([6b61c56](https://github.com/qq15725/modern-idoc/commit/6b61c56c9a0363404ac3ae9edb1cc73d6755facb))
+
+
+
 ## [0.6.2](https://github.com/qq15725/modern-idoc/compare/v0.6.1...v0.6.2) (2025-05-22)
 
 
