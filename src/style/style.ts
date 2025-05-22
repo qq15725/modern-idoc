@@ -13,7 +13,7 @@ export interface NormalizedStyle extends
   //
 }
 
-export type StylePropertyObject =
+export type StyleObject =
   & Partial<NormalizedStyle>
   & {
     color?: WithNone<Color>
@@ -23,9 +23,9 @@ export type StylePropertyObject =
     shadowColor?: WithNone<Color>
   }
 
-export type StyleProperty = StylePropertyObject
+export type Style = StyleObject
 
-export function normalizeStyle(style: StyleProperty): Partial<NormalizedStyle> {
+export function normalizeStyle(style: Style): Partial<NormalizedStyle> {
   return clearUndef({
     ...style,
     color: isNone(style.color) ? undefined : normalizeColor(style.color),

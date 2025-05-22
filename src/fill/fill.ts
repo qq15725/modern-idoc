@@ -1,7 +1,7 @@
-import type { ColorFillPropertyObject, NormalizedColorFill } from './color-fill'
-import type { GradientFillPropertyObject, NormalizedGradientFill } from './gradient-fill'
-import type { ImageFillPropertyObject, NormalizedImageFill } from './image-fill'
-import type { NormalizedPresetFill, PresetFillPropertyObject } from './preset-fill'
+import type { ColorFillObject, NormalizedColorFill } from './color-fill'
+import type { GradientFillObject, NormalizedGradientFill } from './gradient-fill'
+import type { ImageFillObject, NormalizedImageFill } from './image-fill'
+import type { NormalizedPresetFill, PresetFillObject } from './preset-fill'
 import { isColor, isGradient } from '../color'
 import { isNone } from '../utils'
 import { normalizeColorFill } from './color-fill'
@@ -15,42 +15,42 @@ export type NormalizedFill =
   & Partial<NormalizedImageFill>
   & Partial<NormalizedPresetFill>
 
-export type FillPropertyObject =
-  & Partial<ColorFillPropertyObject>
-  & Partial<GradientFillPropertyObject>
-  & Partial<ImageFillPropertyObject>
-  & Partial<PresetFillPropertyObject>
+export type FillObject =
+  & Partial<ColorFillObject>
+  & Partial<GradientFillObject>
+  & Partial<ImageFillObject>
+  & Partial<PresetFillObject>
 
-export type FillProperty =
+export type Fill =
   | string
-  | FillPropertyObject
+  | FillObject
 
-export function normalizeFill(fill: FillProperty): NormalizedFill {
+export function normalizeFill(fill: Fill): NormalizedFill {
   if (typeof fill === 'string') {
     if (isColor(fill)) {
-      return normalizeColorFill({ color: fill } as ColorFillPropertyObject)
+      return normalizeColorFill({ color: fill } as ColorFillObject)
     }
     else if (isGradient(fill)) {
-      return normalizeGradientFill({ image: fill } as GradientFillPropertyObject)
+      return normalizeGradientFill({ image: fill } as GradientFillObject)
     }
     else {
-      return normalizeImageFill({ image: fill } as ImageFillPropertyObject)
+      return normalizeImageFill({ image: fill } as ImageFillObject)
     }
   }
   else {
     if (!isNone(fill.color)) {
-      return normalizeColorFill(fill as ColorFillPropertyObject)
+      return normalizeColorFill(fill as ColorFillObject)
     }
     else if (!isNone(fill.image)) {
       if (isGradient(fill.image)) {
-        return normalizeGradientFill(fill as GradientFillPropertyObject)
+        return normalizeGradientFill(fill as GradientFillObject)
       }
       else {
-        return normalizeImageFill(fill as ImageFillPropertyObject)
+        return normalizeImageFill(fill as ImageFillObject)
       }
     }
     else if (isNone(fill.preset)) {
-      return normalizePresetFill(fill as PresetFillPropertyObject)
+      return normalizePresetFill(fill as PresetFillObject)
     }
   }
   throw new Error('Unknown fill property object')

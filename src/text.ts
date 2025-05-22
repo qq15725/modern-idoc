@@ -1,11 +1,11 @@
-import type { StylePropertyObject } from './style'
+import type { StyleObject } from './style'
 import { normalizeStyle } from './style'
 
-export interface FragmentContent extends StylePropertyObject {
+export interface FragmentContent extends StyleObject {
   content: string
 }
 
-export interface ParagraphContent extends StylePropertyObject {
+export interface ParagraphContent extends StyleObject {
   fragments: FragmentContent[]
 }
 
@@ -21,16 +21,16 @@ export type TextContent =
   | ParagraphContent
   | TextContentFlat[]
 
-export type NormalizedTextContent = (ParagraphContent & StylePropertyObject)[]
+export type NormalizedTextContent = (ParagraphContent & StyleObject)[]
 
 export interface NormalizedText {
   content: NormalizedTextContent
-  effects?: StylePropertyObject[]
+  effects?: StyleObject[]
   measureDom?: any // HTMLElement
   fonts?: any // modern-font > Fonts
 }
 
-export type TextProperty =
+export type Text =
   | string
   | TextContent
   | (NormalizedText & { content: TextContent })
@@ -81,7 +81,7 @@ export function normalizeTextContent(content: TextContent = ''): NormalizedTextC
   })
 }
 
-export function normalizeText(text: TextProperty): NormalizedText {
+export function normalizeText(text: Text): NormalizedText {
   if (typeof text === 'string') {
     return {
       content: [

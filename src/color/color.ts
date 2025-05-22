@@ -22,7 +22,7 @@ export type ObjectColor = RgbColor | RgbaColor | HslColor | HslaColor | HsvColor
 export type Uint32Color = number
 export type Color = Uint32Color | ObjectColor | string
 export type Hex8Color = string
-export type ColorDeclaration = Hex8Color
+export type NormalizedColor = Hex8Color
 
 export function parseColor(color: Color): Colord {
   let input: ObjectColor | string
@@ -59,13 +59,13 @@ function format(number: number): string {
   return hex.length < 2 ? `0${hex}` : hex
 }
 
-export const defaultColor: ColorDeclaration = '#000000FF'
+export const defaultColor: NormalizedColor = '#000000FF'
 
 export function isColor(value: string): boolean {
   return parseColor(value).isValid()
 }
 
-export function normalizeColor(color: Color, orFail = false): ColorDeclaration {
+export function normalizeColor(color: Color, orFail = false): NormalizedColor {
   const parsed = parseColor(color)
 
   if (!parsed.isValid()) {

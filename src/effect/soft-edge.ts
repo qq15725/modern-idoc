@@ -1,9 +1,9 @@
-export interface SoftEdgeDeclaration {
+export interface NormalizedSoftEdge {
   radius: number
 }
 
-export type SoftEdgeProperty = SoftEdgeDeclaration
+export type SoftEdge = NormalizedSoftEdge
 
-export function normalizeSoftEdge(softEdge: SoftEdgeProperty): SoftEdgeDeclaration {
+export function normalizeSoftEdge(softEdge: SoftEdge): NormalizedSoftEdge {
   return softEdge
 }

@@ -1,4 +1,4 @@
-import type { ColorDeclaration } from './color'
+import type { NormalizedColor } from './color'
 import type {
   LinearGradientNode,
   RadialGradientNode,
@@ -10,7 +10,7 @@ import { parseGradient } from './gradient-parser'
 
 export interface ColorStop {
   offset: number
-  color: ColorDeclaration
+  color: NormalizedColor
 }
 
 export interface LinearGradient {

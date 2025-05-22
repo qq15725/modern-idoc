@@ -1,4 +1,4 @@
-import type { ColorDeclaration } from '../color'
+import type { NormalizedColor } from '../color'
 import type { NormalizedShadowStyle } from '../shadow'
 import type { WithNone } from '../types'
 import type { NormalizedLayoutStyle } from './layout-style'
@@ -21,16 +21,16 @@ export type NormalizedElementStyle =
   // background
     backgroundImage: WithNone<string>
     backgroundSize: BackgroundSize
-    backgroundColor: WithNone<ColorDeclaration>
+    backgroundColor: WithNone<NormalizedColor>
     backgroundColormap: WithNone<Record<string, string>>
     // border
     borderRadius: number
-    borderColor: WithNone<ColorDeclaration>
+    borderColor: WithNone<NormalizedColor>
     borderStyle: BorderStyle
     // outline
     outlineWidth: number
     outlineOffset: number
-    outlineColor: WithNone<ColorDeclaration>
+    outlineColor: WithNone<NormalizedColor>
     outlineStyle: string
     // other
     visibility: Visibility

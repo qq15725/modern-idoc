@@ -1,4 +1,4 @@
-import type { ColorDeclaration } from '../color'
+import type { NormalizedColor } from '../color'
 import type { NormalizedHighlightStyle } from './highlight'
 import type {
   FontKerning,
@@ -14,7 +14,7 @@ import { getDefaultHighlightStyle } from './highlight'
 export type NormalizedTextInlineStyle =
   & NormalizedHighlightStyle
   & {
-    color: ColorDeclaration
+    color: NormalizedColor
     verticalAlign: VerticalAlign
     letterSpacing: number
     wordSpacing: number

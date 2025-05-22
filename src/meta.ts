@@ -1,3 +1,3 @@
-export interface MetaProperty {
+export interface Meta {
   [key: string]: any
 }

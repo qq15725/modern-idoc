@@ -31,7 +31,7 @@ export interface ImageFillTile {
   flip?: string
 }
 
-export interface ImageFillPropertyObject {
+export interface ImageFillObject {
   image: string
   cropRect?: ImageFillCropRect
   stretchRect?: ImageFillStretchRect
@@ -41,10 +41,10 @@ export interface ImageFillPropertyObject {
   rotateWithShape?: boolean
 }
 
-export interface NormalizedImageFill extends ImageFillPropertyObject {
+export interface NormalizedImageFill extends ImageFillObject {
   //
 }
 
-export function normalizeImageFill(fill: ImageFillPropertyObject): NormalizedImageFill {
+export function normalizeImageFill(fill: ImageFillObject): NormalizedImageFill {
   return fill
 }

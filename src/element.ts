@@ -1,17 +1,17 @@
-import type { AudioProperty, NormalizedAudio } from './audio'
-import type { BackgroundProperty, NormalizedBackground } from './background'
-import type { EffectProperty, NormalizedEffect } from './effect'
-import type { FillProperty, NormalizedFill } from './fill'
-import type { ForegroundProperty, NormalizedForeground } from './foreground'
-import type { MetaProperty } from './meta'
+import type { Audio, NormalizedAudio } from './audio'
+import type { Background, NormalizedBackground } from './background'
+import type { Effect, NormalizedEffect } from './effect'
+import type { Fill, NormalizedFill } from './fill'
+import type { Foreground, NormalizedForeground } from './foreground'
+import type { Meta } from './meta'
 import type { Node } from './node'
-import type { NormalizedOutline, OutlineProperty } from './outline'
-import type { NormalizedShadow, ShadowProperty } from './shadow'
-import type { NormalizedShape, ShapeProperty } from './shape'
-import type { NormalizedStyle, StyleProperty } from './style'
-import type { NormalizedText, TextProperty } from './text'
+import type { NormalizedOutline, Outline } from './outline'
+import type { NormalizedShadow, Shadow } from './shadow'
+import type { NormalizedShape, Shape } from './shape'
+import type { NormalizedStyle, Style } from './style'
+import type { NormalizedText, Text } from './text'
 import type { WithNone } from './types'
-import type { NormalizedVideo, VideoProperty } from './video'
+import type { NormalizedVideo, Video } from './video'
 import { normalizeAudio } from './audio'
 import { normalizeBackground } from './background'
 import { normalizeEffect } from './effect'
@@ -25,22 +25,22 @@ import { normalizeText } from './text'
 import { clearUndef, isNone } from './utils'
 import { normalizeVideo } from './video'
 
-export interface Element<T = MetaProperty> extends Node<T> {
-  style?: WithNone<StyleProperty>
-  text?: WithNone<TextProperty>
-  background?: WithNone<BackgroundProperty>
-  shape?: WithNone<ShapeProperty>
-  fill?: WithNone<FillProperty>
-  outline?: WithNone<OutlineProperty>
-  foreground?: WithNone<ForegroundProperty>
-  shadow?: WithNone<ShadowProperty>
-  video?: WithNone<VideoProperty>
-  audio?: WithNone<AudioProperty>
-  effect?: WithNone<EffectProperty>
+export interface Element<T = Meta> extends Node<T> {
+  style?: WithNone<Style>
+  text?: WithNone<Text>
+  background?: WithNone<Background>
+  shape?: WithNone<Shape>
+  fill?: WithNone<Fill>
+  outline?: WithNone<Outline>
+  foreground?: WithNone<Foreground>
+  shadow?: WithNone<Shadow>
+  video?: WithNone<Video>
+  audio?: WithNone<Audio>
+  effect?: WithNone<Effect>
   children?: Element[]
 }
 
-export type NormalizedElement<T = MetaProperty> = Node<T> & {
+export type NormalizedElement<T = Meta> = Node<T> & {
   style?: Partial<NormalizedStyle>
   text?: NormalizedText
   background?: NormalizedBackground
@@ -55,7 +55,7 @@ export type NormalizedElement<T = MetaProperty> = Node<T> & {
   children?: NormalizedElement[]
 }
 
-export function normalizeElement<T = MetaProperty>(element: Element<T>): NormalizedElement<T> {
+export function normalizeElement<T = Meta>(element: Element<T>): NormalizedElement<T> {
   return clearUndef({
     ...element,
     style: isNone(element.style) ? undefined : normalizeStyle(element.style),

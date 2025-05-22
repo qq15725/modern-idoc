@@ -1,4 +1,4 @@
-import type { FillPropertyObject, NormalizedFill } from './fill'
+import type { FillObject, NormalizedFill } from './fill'
 import { normalizeFill } from './fill'
 
 export interface NormalizedBaseForeground {
@@ -9,15 +9,15 @@ export type NormalizedForeground =
   & NormalizedBaseForeground
   & NormalizedFill
 
-export type ForegroundPropertyObject =
+export type ForegroundObject =
   & Partial<NormalizedBaseForeground>
-  & FillPropertyObject
+  & FillObject
 
-export type ForegroundProperty =
+export type Foreground =
   | string
-  | ForegroundPropertyObject
+  | ForegroundObject
 
-export function normalizeForeground(foreground: ForegroundProperty): NormalizedForeground | undefined {
+export function normalizeForeground(foreground: Foreground): NormalizedForeground | undefined {
   if (typeof foreground === 'string') {
     return {
       ...normalizeFill(foreground),

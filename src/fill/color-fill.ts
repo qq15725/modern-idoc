@@ -1,15 +1,15 @@
-import type { Color, ColorDeclaration } from '../color'
+import type { Color, NormalizedColor } from '../color'
 import { normalizeColor } from '../color'
 
-export interface ColorFillPropertyObject {
+export interface ColorFillObject {
   color: Color
 }
 
 export interface NormalizedColorFill {
-  color: ColorDeclaration
+  color: NormalizedColor
 }
 
-export function normalizeColorFill(fill: ColorFillPropertyObject): NormalizedColorFill {
+export function normalizeColorFill(fill: ColorFillObject): NormalizedColorFill {
   return {
     color: normalizeColor(fill.color),
   }

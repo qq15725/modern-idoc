@@ -2,11 +2,11 @@ export interface NormalizedVideo {
   src: string
 }
 
-export type VideoProperty =
+export type Video =
   | string
   | NormalizedVideo
 
-export function normalizeVideo(video: VideoProperty): NormalizedVideo | undefined {
+export function normalizeVideo(video: Video): NormalizedVideo | undefined {
   if (typeof video === 'string') {
     return { src: video }
   }

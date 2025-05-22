@@ -1,4 +1,4 @@
-import type { ColorDeclaration } from './color'
+import type { NormalizedColor } from './color'
 
 export type SVGPathData = string
 export type FillRule = 'nonzero' | 'evenodd'
@@ -10,7 +10,7 @@ export interface ShapePathStyle {
   opacity: number
   visibility: string
   // shadow
-  shadowColor: ColorDeclaration
+  shadowColor: NormalizedColor
   shadowOffsetX: number
   shadowOffsetY: number
   shadowBlur: number
@@ -29,23 +29,23 @@ export interface ShapePathStyle {
   strokeDashoffset: number
 }
 
-export interface ShapePathDeclaration extends Partial<ShapePathStyle> {
+export interface ShapePath extends Partial<ShapePathStyle> {
   data: SVGPathData
 }
 
 export interface NormalizedShape {
   preset?: string
   viewBox?: number[]
-  paths?: ShapePathDeclaration[]
+  paths?: ShapePath[]
 }
 
-export type ShapeProperty =
+export type Shape =
   | SVGPathData
   | SVGPathData[]
-  | ShapePathDeclaration[]
+  | ShapePath[]
   | NormalizedShape
 
-export function normalizeShape(shape: ShapeProperty): NormalizedShape {
+export function normalizeShape(shape: Shape): NormalizedShape {
   if (typeof shape === 'string') {
     return {
       paths: [
