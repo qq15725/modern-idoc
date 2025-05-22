@@ -2,7 +2,7 @@ import type { FillDeclaration, FillPropertyObject } from './fill'
 import { normalizeFill } from './fill'
 
 export interface BaseForegroundDeclaration {
-  withGeometry?: boolean
+  fillWithShape: boolean
 }
 
 export type ForegroundDeclaration =
@@ -10,7 +10,7 @@ export type ForegroundDeclaration =
   & FillDeclaration
 
 export type ForegroundPropertyObject =
-  & BaseForegroundDeclaration
+  & Partial<BaseForegroundDeclaration>
   & FillPropertyObject
 
 export type ForegroundProperty =
@@ -19,12 +19,15 @@ export type ForegroundProperty =
 
 export function normalizeForeground(foreground: ForegroundProperty): ForegroundDeclaration | undefined {
   if (typeof foreground === 'string') {
-    return { src: foreground }
+    return {
+      ...normalizeFill(foreground),
+      fillWithShape: false,
+    }
   }
   else {
     return {
-      ...foreground,
       ...normalizeFill(foreground),
+      fillWithShape: Boolean(foreground.fillWithShape),
     }
   }
 }

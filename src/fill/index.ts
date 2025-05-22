@@ -1,4 +1,5 @@
+export * from './color-fill'
 export * from './fill'
 export * from './gradient-fill'
-export * from './solid-fill'
-export * from './texture-fill'
+export * from './image-fill'
+export * from './preset-fill'

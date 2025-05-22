@@ -12,6 +12,14 @@ export const pptx: Document = {
             width: 50,
             height: 50,
           },
+          background: 'linear-gradient(#e66465, #9198e5)',
+        },
+        {
+          style: {
+            rotate: 60,
+            width: 50,
+            height: 50,
+          },
           background: '/static/example.png',
         },
         {

@@ -61,6 +61,10 @@ function format(number: number): string {
 
 export const defaultColor: ColorDeclaration = '#000000FF'
 
+export function isColor(value: string): boolean {
+  return parseColor(value).isValid()
+}
+
 export function normalizeColor(color: Color, orFail = false): ColorDeclaration {
   const parsed = parseColor(color)
 
