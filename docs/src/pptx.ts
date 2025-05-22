@@ -29,7 +29,6 @@ export const pptx: Document = {
             top: 100,
             fontSize: 20,
             color: 'rgba(255, 0, 0, 0.2)',
-            backgroundColor: 'linear-gradient(0deg, blue, green 40%, red)',
           },
           text: 'test',
         },

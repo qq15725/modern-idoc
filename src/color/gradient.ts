@@ -1,12 +1,16 @@
 import type { NormalizedColor } from './color'
 import type {
+  ColorStopNode,
   LinearGradientNode,
   RadialGradientNode,
   RepeatingLinearGradientNode,
   RepeatingRadialGradientNode,
 } from './gradient-parser'
+import { round } from '../utils'
 import { normalizeColor } from './color'
-import { parseGradient } from './gradient-parser'
+import {
+  parseGradient,
+} from './gradient-parser'
 
 export interface ColorStop {
   offset: number
@@ -26,6 +30,50 @@ export interface RadialGradient {
   repeat?: boolean
 }
 
+function parseColorStopNodeList(colorStops: ColorStopNode[]): ColorStop[] {
+  const count = colorStops.length - 1
+  return colorStops.map((stop, index) => {
+    const value = stop.value
+    let offset = round(index / count, 3)
+    let color = '#00000000'
+    switch (stop.type) {
+      case 'rgb':
+        color = normalizeColor({
+          r: Number(value[0] ?? 0),
+          g: Number(value[1] ?? 0),
+          b: Number(value[2] ?? 0),
+        })
+        break
+      case 'rgba':
+        color = normalizeColor({
+          r: Number(value[0] ?? 0),
+          g: Number(value[1] ?? 0),
+          b: Number(value[2] ?? 0),
+          a: Number(value[3] ?? 0),
+        })
+        break
+      case 'literal':
+        color = normalizeColor(stop.value)
+        break
+      case 'hex':
+        color = normalizeColor(stop.value)
+        break
+    }
+    switch (stop.length?.type) {
+      case '%':
+        offset = Number(stop.length.value) / 100
+        break
+      case 'px':
+        // TODO
+        break
+      case 'em':
+        // TODO
+        break
+    }
+    return { offset, color }
+  })
+}
+
 function parseLinearGradientNode(node: LinearGradientNode | RepeatingLinearGradientNode): LinearGradient {
   let angle = 0
   switch (node.orientation?.type) {
@@ -37,56 +85,15 @@ function parseLinearGradientNode(node: LinearGradientNode | RepeatingLinearGradi
       break
   }
 
-  const stops = node.colorStops.map((stop) => {
-    const value = stop.value
-    let offset = 0
-    let color = '#00000000'
-    switch (stop.type) {
-      case 'rgb':
-        color = normalizeColor({
-          r: Number(value[0] ?? 0),
-          g: Number(value[1] ?? 0),
-          b: Number(value[2] ?? 0),
-        })
-        break
-      case 'rgba':
-        color = normalizeColor({
-          r: Number(value[0] ?? 0),
-          g: Number(value[1] ?? 0),
-          b: Number(value[2] ?? 0),
-          a: Number(value[3] ?? 0),
-        })
-        break
-      case 'literal':
-        color = normalizeColor(stop.value)
-        break
-      case 'hex':
-        color = normalizeColor(stop.value)
-        break
-    }
-    switch (stop.length?.type) {
-      case '%':
-        offset = Number(stop.length.value) / 100
-        break
-      case 'px':
-        // TODO
-        break
-      case 'em':
-        // TODO
-        break
-    }
-    return { offset, color }
-  })
-
   return {
     type: 'linear-gradient',
     angle,
-    stops,
+    stops: parseColorStopNodeList(node.colorStops),
   }
 }
 
-function parseRadialGradientNode(ast: RadialGradientNode | RepeatingRadialGradientNode): RadialGradient {
-  ast.orientation?.map((item) => {
+function parseRadialGradientNode(node: RadialGradientNode | RepeatingRadialGradientNode): RadialGradient {
+  node.orientation?.map((item) => {
     switch (item?.type) {
       case 'shape':
       case 'default-radial':
@@ -96,50 +103,9 @@ function parseRadialGradientNode(ast: RadialGradientNode | RepeatingRadialGradie
     }
   })
 
-  const stops = ast.colorStops.map((stop) => {
-    const value = stop.value
-    let offset = 0
-    let color = '#00000000'
-    switch (stop.type) {
-      case 'rgb':
-        color = normalizeColor({
-          r: Number(value[0] ?? 0),
-          g: Number(value[1] ?? 0),
-          b: Number(value[2] ?? 0),
-        })
-        break
-      case 'rgba':
-        color = normalizeColor({
-          r: Number(value[0] ?? 0),
-          g: Number(value[1] ?? 0),
-          b: Number(value[2] ?? 0),
-          a: Number(value[3] ?? 0),
-        })
-        break
-      case 'literal':
-        color = normalizeColor(stop.value)
-        break
-      case 'hex':
-        color = normalizeColor(stop.value)
-        break
-    }
-    switch (stop.length?.type) {
-      case '%':
-        offset = Number(stop.length.value) / 100
-        break
-      case 'px':
-        // TODO
-        break
-      case 'em':
-        // TODO
-        break
-    }
-    return { offset, color }
-  })
-
   return {
     type: 'radial-gradient',
-    stops,
+    stops: parseColorStopNodeList(node.colorStops),
   }
 }
 

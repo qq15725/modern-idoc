@@ -2,6 +2,10 @@ export function isNone<T>(value: T): value is Extract<T, null | undefined | 'non
   return value === null || value === undefined || value === 'none'
 }
 
+export function round(number: number, digits = 0, base = 10 ** digits): number {
+  return Math.round(base * number) / base + 0
+}
+
 export function clearUndef<T>(obj: T, deep = false): T {
   if (typeof obj !== 'object' || !obj) {
     return obj

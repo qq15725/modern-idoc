@@ -9,12 +9,6 @@ import { normalizeGradientFill } from './gradient-fill'
 import { normalizeImageFill } from './image-fill'
 import { normalizePresetFill } from './preset-fill'
 
-export type NormalizedFill =
-  & Partial<NormalizedColorFill>
-  & Partial<NormalizedGradientFill>
-  & Partial<NormalizedImageFill>
-  & Partial<NormalizedPresetFill>
-
 export type FillObject =
   & Partial<ColorFillObject>
   & Partial<GradientFillObject>
@@ -24,6 +18,12 @@ export type FillObject =
 export type Fill =
   | string
   | FillObject
+
+export type NormalizedFill =
+  & Partial<NormalizedColorFill>
+  & Partial<NormalizedGradientFill>
+  & Partial<NormalizedImageFill>
+  & Partial<NormalizedPresetFill>
 
 export function normalizeFill(fill: Fill): NormalizedFill {
   if (typeof fill === 'string') {

@@ -1,5 +1,6 @@
 import type { Colord } from 'colord'
 import { colord } from 'colord'
+import { round } from '../utils'
 
 export interface RgbColor { r: number, g: number, b: number }
 export interface HslColor { h: number, s: number, l: number }
@@ -39,10 +40,6 @@ export function parseColor(color: Color): Colord {
   }
 
   return colord(input)
-}
-
-function round(number: number, digits = 0, base = 10 ** digits): number {
-  return Math.round(base * number) / base + 0
 }
 
 function roundRgba(rgba: RgbaColor): RgbaColor {
