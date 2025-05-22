@@ -12,7 +12,7 @@ import type {
   StyleUnit,
 } from './types'
 
-export interface LayoutStyleDeclaration {
+export interface NormalizedLayoutStyle {
   // box
   overflow: Overflow
   direction: Direction
@@ -63,7 +63,7 @@ export interface LayoutStyleDeclaration {
   padding: StyleUnit
 }
 
-export function getDefaultLayoutStyle(): Partial<LayoutStyleDeclaration> {
+export function getDefaultLayoutStyle(): Partial<NormalizedLayoutStyle> {
   return {
     // box
     overflow: 'visible',

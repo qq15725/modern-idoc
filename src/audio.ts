@@ -1,12 +1,12 @@
-export interface AudioDeclaration {
+export interface NormalizedAudio {
   src: string
 }
 
 export type AudioProperty =
   | string
-  | AudioDeclaration
+  | NormalizedAudio
 
-export function normalizeAudio(audio: AudioProperty): AudioDeclaration | undefined {
+export function normalizeAudio(audio: AudioProperty): NormalizedAudio | undefined {
   if (typeof audio === 'string') {
     return { src: audio }
   }

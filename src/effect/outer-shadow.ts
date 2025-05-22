@@ -1,22 +1,22 @@
-import type { InnerShadowDeclaration, InnerShadowPropertyObject } from './inner-shadow'
+import type { InnerNormalizedShadow, InnerShadowPropertyObject } from './inner-shadow'
 import { getDefaultInnerShadow, normalizeInnerShadow } from './inner-shadow'
 
-export interface BaseOuterShadowDeclaration {
+export interface BaseOuterNormalizedShadow {
   scaleX: number
   scaleY: number
 }
 
-export type OuterShadowDeclaration =
-  & BaseOuterShadowDeclaration
-  & InnerShadowDeclaration
+export type OuterNormalizedShadow =
+  & BaseOuterNormalizedShadow
+  & InnerNormalizedShadow
 
 export type OuterShadowPropertyObject =
-  & Partial<BaseOuterShadowDeclaration>
+  & Partial<BaseOuterNormalizedShadow>
   & InnerShadowPropertyObject
 
 export type OuterShadowProperty = OuterShadowPropertyObject
 
-export function getDefaultOuterShadow(): OuterShadowDeclaration {
+export function getDefaultOuterShadow(): OuterNormalizedShadow {
   return {
     ...getDefaultInnerShadow(),
     scaleX: 1,
@@ -24,7 +24,7 @@ export function getDefaultOuterShadow(): OuterShadowDeclaration {
   }
 }
 
-export function normalizeOuterShadow(shadow: OuterShadowProperty): OuterShadowDeclaration {
+export function normalizeOuterShadow(shadow: OuterShadowProperty): OuterNormalizedShadow {
   return {
     ...getDefaultOuterShadow(),
     ...normalizeInnerShadow(shadow),

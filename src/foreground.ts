@@ -1,23 +1,23 @@
-import type { FillDeclaration, FillPropertyObject } from './fill'
+import type { FillPropertyObject, NormalizedFill } from './fill'
 import { normalizeFill } from './fill'
 
-export interface BaseForegroundDeclaration {
+export interface NormalizedBaseForeground {
   fillWithShape: boolean
 }
 
-export type ForegroundDeclaration =
-  & BaseForegroundDeclaration
-  & FillDeclaration
+export type NormalizedForeground =
+  & NormalizedBaseForeground
+  & NormalizedFill
 
 export type ForegroundPropertyObject =
-  & Partial<BaseForegroundDeclaration>
+  & Partial<NormalizedBaseForeground>
   & FillPropertyObject
 
 export type ForegroundProperty =
   | string
   | ForegroundPropertyObject
 
-export function normalizeForeground(foreground: ForegroundProperty): ForegroundDeclaration | undefined {
+export function normalizeForeground(foreground: ForegroundProperty): NormalizedForeground | undefined {
   if (typeof foreground === 'string') {
     return {
       ...normalizeFill(foreground),

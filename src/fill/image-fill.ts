@@ -41,10 +41,10 @@ export interface ImageFillPropertyObject {
   rotateWithShape?: boolean
 }
 
-export interface ImageFillDeclaration extends ImageFillPropertyObject {
+export interface NormalizedImageFill extends ImageFillPropertyObject {
   //
 }
 
-export function normalizeImageFill(fill: ImageFillPropertyObject): ImageFillDeclaration {
+export function normalizeImageFill(fill: ImageFillPropertyObject): NormalizedImageFill {
   return fill
 }

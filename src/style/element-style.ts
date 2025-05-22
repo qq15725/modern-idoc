@@ -1,8 +1,8 @@
 import type { ColorDeclaration } from '../color'
-import type { ShadowStyleDeclaration } from '../shadow'
+import type { NormalizedShadowStyle } from '../shadow'
 import type { WithNone } from '../types'
-import type { LayoutStyleDeclaration } from './layout-style'
-import type { TransformStyleDeclaration } from './transform-style'
+import type { NormalizedLayoutStyle } from './layout-style'
+import type { NormalizedTransformStyle } from './transform-style'
 import type { BorderStyle, PointerEvents, Visibility } from './types'
 import { getDefaultShadowStyle } from '../shadow'
 import { getDefaultLayoutStyle } from './layout-style'
@@ -13,10 +13,10 @@ export type BackgroundSize =
   // custom
   | 'stretch' | 'rigid'
 
-export type ElementStyleDeclaration =
-  & Partial<LayoutStyleDeclaration>
-  & TransformStyleDeclaration
-  & ShadowStyleDeclaration
+export type NormalizedElementStyle =
+  & Partial<NormalizedLayoutStyle>
+  & NormalizedTransformStyle
+  & NormalizedShadowStyle
   & {
   // background
     backgroundImage: WithNone<string>
@@ -40,7 +40,7 @@ export type ElementStyleDeclaration =
     maskImage: WithNone<string>
   }
 
-export function getDefaultElementStyle(): ElementStyleDeclaration {
+export function getDefaultElementStyle(): NormalizedElementStyle {
   return {
     ...getDefaultLayoutStyle(),
     ...getDefaultTransformStyle(),

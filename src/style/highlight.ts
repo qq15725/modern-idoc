@@ -7,7 +7,7 @@ import type {
   HighlightThickness,
 } from './types'
 
-export interface HighlightDeclaration {
+export interface NormalizedHighlight {
   image: HighlightImage
   referImage: HighlightReferImage
   colormap: HighlightColormap
@@ -16,8 +16,8 @@ export interface HighlightDeclaration {
   thickness: HighlightThickness
 }
 
-export interface HighlightStyleDeclaration {
-  highlight: Partial<HighlightDeclaration>
+export interface NormalizedHighlightStyle {
+  highlight: Partial<NormalizedHighlight>
   highlightImage: HighlightImage
   highlightReferImage: HighlightReferImage
   highlightColormap: HighlightColormap
@@ -26,7 +26,7 @@ export interface HighlightStyleDeclaration {
   highlightThickness: HighlightThickness
 }
 
-export function getDefaultHighlightStyle(): Required<HighlightStyleDeclaration> {
+export function getDefaultHighlightStyle(): Required<NormalizedHighlightStyle> {
   return {
     highlight: {},
     highlightImage: 'none',

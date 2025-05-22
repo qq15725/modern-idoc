@@ -21,10 +21,10 @@ export type TextContent =
   | ParagraphContent
   | TextContentFlat[]
 
-export type TextContentDeclaration = (ParagraphContent & StylePropertyObject)[]
+export type NormalizedTextContent = (ParagraphContent & StylePropertyObject)[]
 
-export interface TextDeclaration {
-  content: TextContentDeclaration
+export interface NormalizedText {
+  content: NormalizedTextContent
   effects?: StylePropertyObject[]
   measureDom?: any // HTMLElement
   fonts?: any // modern-font > Fonts
@@ -33,10 +33,10 @@ export interface TextDeclaration {
 export type TextProperty =
   | string
   | TextContent
-  | (TextDeclaration & { content: TextContent })
-  | TextDeclaration
+  | (NormalizedText & { content: TextContent })
+  | NormalizedText
 
-export function normalizeTextContent(content: TextContent = ''): TextContentDeclaration {
+export function normalizeTextContent(content: TextContent = ''): NormalizedTextContent {
   const list: TextContentFlat[] = Array.isArray(content) ? content : [content]
   return list.map((p) => {
     if (typeof p === 'string') {
@@ -81,7 +81,7 @@ export function normalizeTextContent(content: TextContent = ''): TextContentDecl
   })
 }
 
-export function normalizeText(text: TextProperty): TextDeclaration {
+export function normalizeText(text: TextProperty): NormalizedText {
   if (typeof text === 'string') {
     return {
       content: [

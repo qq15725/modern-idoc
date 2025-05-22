@@ -1,6 +1,6 @@
 import type { ListStyleColormap, ListStyleImage, ListStylePosition, ListStyleSize, ListStyleType } from './types'
 
-export interface ListStyleDeclaration {
+export interface NormalizedListStyle {
   type: ListStyleType
   image: ListStyleImage
   colormap: ListStyleColormap
@@ -8,8 +8,8 @@ export interface ListStyleDeclaration {
   position: ListStylePosition
 }
 
-export interface ListStyleStyleDeclaration {
-  listStyle: Partial<ListStyleDeclaration>
+export interface NormalizedListStyleStyle {
+  listStyle: Partial<NormalizedListStyle>
   listStyleType: ListStyleType
   listStyleImage: ListStyleImage
   listStyleColormap: ListStyleColormap
@@ -17,7 +17,7 @@ export interface ListStyleStyleDeclaration {
   listStylePosition: ListStylePosition
 }
 
-export function getDefaultListStyleStyle(): ListStyleStyleDeclaration {
+export function getDefaultListStyleStyle(): NormalizedListStyleStyle {
   return {
     listStyle: {},
     listStyleType: 'none',

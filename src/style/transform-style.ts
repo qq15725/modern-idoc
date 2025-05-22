@@ -1,6 +1,6 @@
 import type { WithNone } from '../types'
 
-export interface TransformStyleDeclaration {
+export interface NormalizedTransformStyle {
   rotate: number
   scaleX: number
   scaleY: number
@@ -12,7 +12,7 @@ export interface TransformStyleDeclaration {
   transformOrigin: string
 }
 
-export function getDefaultTransformStyle(): TransformStyleDeclaration {
+export function getDefaultTransformStyle(): NormalizedTransformStyle {
   return {
     rotate: 0,
     scaleX: 1,

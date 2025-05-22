@@ -5,12 +5,12 @@ export interface GradientFillPropertyObject {
   image: `linear-gradient(${string})` | `radial-gradient(${string})`
 }
 
-export interface GradientFillDeclaration {
+export interface NormalizedGradientFill {
   linearGradient: LinearGradient
   radialGradient: RadialGradient
   rotateWithShape?: boolean
 }
 
-export function normalizeGradientFill(fill: GradientFillPropertyObject): GradientFillDeclaration {
+export function normalizeGradientFill(fill: GradientFillPropertyObject): NormalizedGradientFill {
   return normalizeGradient(fill.image) as any
 }

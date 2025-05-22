@@ -3,7 +3,7 @@ import type { WithNone } from '../types'
 import { defaultColor, normalizeColor } from '../color'
 import { clearUndef, isNone } from '../utils'
 
-export interface InnerShadowDeclaration {
+export interface InnerNormalizedShadow {
   color: ColorDeclaration
   offsetX: number
   offsetY: number
@@ -11,12 +11,12 @@ export interface InnerShadowDeclaration {
 }
 
 export type InnerShadowPropertyObject =
-  & Partial<InnerShadowDeclaration>
+  & Partial<InnerNormalizedShadow>
   & { color: WithNone<Color> }
 
 export type InnerShadowProperty = InnerShadowPropertyObject
 
-export function getDefaultInnerShadow(): InnerShadowDeclaration {
+export function getDefaultInnerShadow(): InnerNormalizedShadow {
   return {
     color: defaultColor,
     offsetX: 0,
@@ -25,7 +25,7 @@ export function getDefaultInnerShadow(): InnerShadowDeclaration {
   }
 }
 
-export function normalizeInnerShadow(shadow: InnerShadowProperty): InnerShadowDeclaration {
+export function normalizeInnerShadow(shadow: InnerShadowProperty): InnerNormalizedShadow {
   return {
     ...getDefaultInnerShadow(),
     ...clearUndef({

@@ -1,9 +1,9 @@
-import type { ListStyleStyleDeclaration } from './list-style'
+import type { NormalizedListStyleStyle } from './list-style'
 import type { TextAlign, TextWrap, WritingMode } from './types'
 import { getDefaultListStyleStyle } from './list-style'
 
-export type TextLineStyleDeclaration =
-  & ListStyleStyleDeclaration
+export type NormalizedTextLineStyle =
+  & NormalizedListStyleStyle
   & {
     writingMode: WritingMode
     textWrap: TextWrap
@@ -12,7 +12,7 @@ export type TextLineStyleDeclaration =
     lineHeight: number
   }
 
-export function getDefaultTextLineStyle(): TextLineStyleDeclaration {
+export function getDefaultTextLineStyle(): NormalizedTextLineStyle {
   return {
     ...getDefaultListStyleStyle(),
     writingMode: 'horizontal-tb',

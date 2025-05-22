@@ -1,12 +1,12 @@
-export interface VideoDeclaration {
+export interface NormalizedVideo {
   src: string
 }
 
 export type VideoProperty =
   | string
-  | VideoDeclaration
+  | NormalizedVideo
 
-export function normalizeVideo(video: VideoProperty): VideoDeclaration | undefined {
+export function normalizeVideo(video: VideoProperty): NormalizedVideo | undefined {
   if (typeof video === 'string') {
     return { src: video }
   }

@@ -5,7 +5,7 @@ import { isNone } from './utils'
 
 export type BoxShadow = string
 
-export interface ShadowDeclaration {
+export interface NormalizedShadow {
   color: ColorDeclaration
   offsetX?: number
   offsetY?: number
@@ -13,14 +13,14 @@ export interface ShadowDeclaration {
 }
 
 export type ShadowPropertyObject =
-  & Partial<ShadowDeclaration>
+  & Partial<NormalizedShadow>
   & { color: WithNone<Color> }
 
 export type ShadowProperty =
   | BoxShadow
   | ShadowPropertyObject
 
-export function normalizeShadow(shadow: ShadowProperty): ShadowDeclaration {
+export function normalizeShadow(shadow: ShadowProperty): NormalizedShadow {
   if (typeof shadow === 'string') {
     return {
       color: normalizeColor(shadow)!,
@@ -34,7 +34,7 @@ export function normalizeShadow(shadow: ShadowProperty): ShadowDeclaration {
   }
 }
 
-export interface ShadowStyleDeclaration {
+export interface NormalizedShadowStyle {
   boxShadow: BoxShadow
 
   // extended part
@@ -44,7 +44,7 @@ export interface ShadowStyleDeclaration {
   shadowBlur?: number
 }
 
-export function getDefaultShadowStyle(): ShadowStyleDeclaration {
+export function getDefaultShadowStyle(): NormalizedShadowStyle {
   return {
     boxShadow: 'none',
   }

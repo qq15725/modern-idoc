@@ -9,12 +9,12 @@ export interface PresetFillPropertyObject {
   backgroundColor?: WithNone<Color>
 }
 
-export interface PresetFillDeclaration extends PresetFillPropertyObject {
+export interface NormalizedPresetFill extends PresetFillPropertyObject {
   foregroundColor?: ColorDeclaration
   backgroundColor?: ColorDeclaration
 }
 
-export function normalizePresetFill(fill: PresetFillPropertyObject): PresetFillDeclaration {
+export function normalizePresetFill(fill: PresetFillPropertyObject): NormalizedPresetFill {
   return {
     preset: fill.preset,
     foregroundColor: isNone(fill.foregroundColor) ? undefined : normalizeColor(fill.foregroundColor),

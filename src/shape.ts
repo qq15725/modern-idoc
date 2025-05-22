@@ -33,7 +33,7 @@ export interface ShapePathDeclaration extends Partial<ShapePathStyle> {
   data: SVGPathData
 }
 
-export interface ShapeDeclaration {
+export interface NormalizedShape {
   preset?: string
   viewBox?: number[]
   paths?: ShapePathDeclaration[]
@@ -43,9 +43,9 @@ export type ShapeProperty =
   | SVGPathData
   | SVGPathData[]
   | ShapePathDeclaration[]
-  | ShapeDeclaration
+  | NormalizedShape
 
-export function normalizeShape(shape: ShapeProperty): ShapeDeclaration {
+export function normalizeShape(shape: ShapeProperty): NormalizedShape {
   if (typeof shape === 'string') {
     return {
       paths: [

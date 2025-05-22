@@ -1,20 +1,20 @@
 import type { Color } from '../color'
 import type { WithNone } from '../types'
-import type { ElementStyleDeclaration } from './element-style'
-import type { TextStyleDeclaration } from './text-style'
+import type { NormalizedElementStyle } from './element-style'
+import type { NormalizedTextStyle } from './text-style'
 import { normalizeColor } from '../color'
 import { clearUndef, isNone } from '../utils'
 import { getDefaultElementStyle } from './element-style'
 import { getDefaultTextStyle } from './text-style'
 
-export interface StyleDeclaration extends
-  TextStyleDeclaration,
-  ElementStyleDeclaration {
+export interface NormalizedStyle extends
+  NormalizedTextStyle,
+  NormalizedElementStyle {
   //
 }
 
 export type StylePropertyObject =
-  & Partial<StyleDeclaration>
+  & Partial<NormalizedStyle>
   & {
     color?: WithNone<Color>
     backgroundColor?: WithNone<Color>
@@ -25,7 +25,7 @@ export type StylePropertyObject =
 
 export type StyleProperty = StylePropertyObject
 
-export function normalizeStyle(style: StyleProperty): Partial<StyleDeclaration> {
+export function normalizeStyle(style: StyleProperty): Partial<NormalizedStyle> {
   return clearUndef({
     ...style,
     color: isNone(style.color) ? undefined : normalizeColor(style.color),
@@ -36,7 +36,7 @@ export function normalizeStyle(style: StyleProperty): Partial<StyleDeclaration> 
   })
 }
 
-export function getDefaultStyle(): StyleDeclaration {
+export function getDefaultStyle(): NormalizedStyle {
   return {
     ...getDefaultElementStyle(),
     ...getDefaultTextStyle(),

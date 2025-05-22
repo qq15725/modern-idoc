@@ -1,7 +1,7 @@
-import type { ColorFillDeclaration, ColorFillPropertyObject } from './color-fill'
-import type { GradientFillDeclaration, GradientFillPropertyObject } from './gradient-fill'
-import type { ImageFillDeclaration, ImageFillPropertyObject } from './image-fill'
-import type { PresetFillDeclaration, PresetFillPropertyObject } from './preset-fill'
+import type { ColorFillPropertyObject, NormalizedColorFill } from './color-fill'
+import type { GradientFillPropertyObject, NormalizedGradientFill } from './gradient-fill'
+import type { ImageFillPropertyObject, NormalizedImageFill } from './image-fill'
+import type { NormalizedPresetFill, PresetFillPropertyObject } from './preset-fill'
 import { isColor, isGradient } from '../color'
 import { isNone } from '../utils'
 import { normalizeColorFill } from './color-fill'
@@ -9,11 +9,11 @@ import { normalizeGradientFill } from './gradient-fill'
 import { normalizeImageFill } from './image-fill'
 import { normalizePresetFill } from './preset-fill'
 
-export type FillDeclaration =
-  & Partial<ColorFillDeclaration>
-  & Partial<GradientFillDeclaration>
-  & Partial<ImageFillDeclaration>
-  & Partial<PresetFillDeclaration>
+export type NormalizedFill =
+  & Partial<NormalizedColorFill>
+  & Partial<NormalizedGradientFill>
+  & Partial<NormalizedImageFill>
+  & Partial<NormalizedPresetFill>
 
 export type FillPropertyObject =
   & Partial<ColorFillPropertyObject>
@@ -25,7 +25,7 @@ export type FillProperty =
   | string
   | FillPropertyObject
 
-export function normalizeFill(fill: FillProperty): FillDeclaration {
+export function normalizeFill(fill: FillProperty): NormalizedFill {
   if (typeof fill === 'string') {
     if (isColor(fill)) {
       return normalizeColorFill({ color: fill } as ColorFillPropertyObject)

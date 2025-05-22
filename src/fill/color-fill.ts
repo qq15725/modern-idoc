@@ -5,11 +5,11 @@ export interface ColorFillPropertyObject {
   color: Color
 }
 
-export interface ColorFillDeclaration {
+export interface NormalizedColorFill {
   color: ColorDeclaration
 }
 
-export function normalizeColorFill(fill: ColorFillPropertyObject): ColorFillDeclaration {
+export function normalizeColorFill(fill: ColorFillPropertyObject): NormalizedColorFill {
   return {
     color: normalizeColor(fill.color),
   }

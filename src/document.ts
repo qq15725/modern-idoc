@@ -1,14 +1,14 @@
-import type { Element, ElementDeclaration } from './element'
+import type { Element, NormalizedElement } from './element'
 import { normalizeElement } from './element'
 
 export interface Document extends Element {
   fonts?: any // modern-font > Fonts
 }
 
-export interface DocumentDeclaration extends ElementDeclaration {
+export interface NormalizedDocument extends NormalizedElement {
   fonts?: any
 }
 
-export function normalizeDocument(doc: Document): DocumentDeclaration {
+export function normalizeDocument(doc: Document): NormalizedDocument {
   return normalizeElement(doc)
 }

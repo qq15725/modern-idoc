@@ -1,20 +1,20 @@
 import type { ColorDeclaration } from '../color'
-import type { TextInlineStyleDeclaration } from './text-inline-style'
-import type { TextLineStyleDeclaration } from './text-line-style'
+import type { NormalizedTextInlineStyle } from './text-inline-style'
+import type { NormalizedTextLineStyle } from './text-line-style'
 import { getDefaultTextInlineStyle } from './text-inline-style'
 import { getDefaultTextLineStyle } from './text-line-style'
 
-export interface TextDrawStyleDeclaration {
+export interface NormalizedTextDrawStyle {
   textStrokeWidth: number
   textStrokeColor: ColorDeclaration
 }
 
-export type TextStyleDeclaration =
-  & TextLineStyleDeclaration
-  & TextInlineStyleDeclaration
-  & TextDrawStyleDeclaration
+export type NormalizedTextStyle =
+  & NormalizedTextLineStyle
+  & NormalizedTextInlineStyle
+  & NormalizedTextDrawStyle
 
-export function getDefaultTextStyle(): Required<TextStyleDeclaration> {
+export function getDefaultTextStyle(): Required<NormalizedTextStyle> {
   return {
     ...getDefaultTextLineStyle(),
     ...getDefaultTextInlineStyle(),
