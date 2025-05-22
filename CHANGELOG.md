@@ -1,3 +1,12 @@
+## [0.6.2](https://github.com/qq15725/modern-idoc/compare/v0.6.1...v0.6.2) (2025-05-22)
+
+
+### Bug Fixes
+
+* parseColorStopNodeList ([e570f1a](https://github.com/qq15725/modern-idoc/commit/e570f1a7588809508ddace867bb10a394df45640))
+
+
+
 ## [0.6.1](https://github.com/qq15725/modern-idoc/compare/v0.6.0...v0.6.1) (2025-05-22)
 
 
