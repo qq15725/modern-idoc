@@ -1,3 +1,20 @@
+## [0.6.1](https://github.com/qq15725/modern-idoc/compare/v0.6.0...v0.6.1) (2025-05-22)
+
+
+### Bug Fixes
+
+* normalizeGradientFill ([83025ec](https://github.com/qq15725/modern-idoc/commit/83025ec79f97549888e404f14fd1c4cfad907d5d))
+
+
+### Features
+
+* rename geometry to shape ([0554ae2](https://github.com/qq15725/modern-idoc/commit/0554ae236df2a40237f076bd8ce3a18f9ff62d5d))
+* rename SolidFill to ColorFill, add PresetFill, rename withGeometry to fillWithShape, add normalizeGradientFill ([ba995a5](https://github.com/qq15725/modern-idoc/commit/ba995a5d12d0c52582e5e09fc688c2080a60df37))
+* type name semantic adjust ([8d74456](https://github.com/qq15725/modern-idoc/commit/8d744566b6e3bcc0b51193d6ea049bddbafc3b72))
+* type name semantic adjust ([f38da4d](https://github.com/qq15725/modern-idoc/commit/f38da4d64a1f3edd579f8ee1315dca68666f5afd))
+
+
+
 # [0.6.0](https://github.com/qq15725/modern-idoc/compare/v0.5.6...v0.6.0) (2025-05-21)
 
 
