@@ -18,16 +18,22 @@ export interface ColorStop {
 }
 
 export interface LinearGradient {
-  type: 'linear-gradient'
   angle: number
   stops: ColorStop[]
   repeat?: boolean
 }
 
+export type LinearGradientWithType = LinearGradient & {
+  type: 'linear-gradient'
+}
+
 export interface RadialGradient {
-  type: 'radial-gradient'
   stops: ColorStop[]
   repeat?: boolean
+}
+
+export type RadialGradientWithType = RadialGradient & {
+  type: 'radial-gradient'
 }
 
 function parseColorStopNodeList(colorStops: ColorStopNode[]): ColorStop[] {
@@ -74,7 +80,7 @@ function parseColorStopNodeList(colorStops: ColorStopNode[]): ColorStop[] {
   })
 }
 
-function parseLinearGradientNode(node: LinearGradientNode | RepeatingLinearGradientNode): LinearGradient {
+function parseLinearGradientNode(node: LinearGradientNode | RepeatingLinearGradientNode): LinearGradientWithType {
   let angle = 0
   switch (node.orientation?.type) {
     case 'angular':
@@ -92,7 +98,7 @@ function parseLinearGradientNode(node: LinearGradientNode | RepeatingLinearGradi
   }
 }
 
-function parseRadialGradientNode(node: RadialGradientNode | RepeatingRadialGradientNode): RadialGradient {
+function parseRadialGradientNode(node: RadialGradientNode | RepeatingRadialGradientNode): RadialGradientWithType {
   node.orientation?.map((item) => {
     switch (item?.type) {
       case 'shape':
@@ -114,7 +120,7 @@ export function isGradient(cssText: string): boolean {
     || cssText.startsWith('radial-gradient')
 }
 
-export function normalizeGradient(cssText: string): (LinearGradient | RadialGradient)[] {
+export function normalizeGradient(cssText: string): (LinearGradientWithType | RadialGradientWithType)[] {
   return parseGradient(cssText)
     .map((node) => {
       switch (node?.type) {
@@ -130,5 +136,5 @@ export function normalizeGradient(cssText: string): (LinearGradient | RadialGrad
           return undefined
       }
     })
-    .filter(Boolean) as (LinearGradient | RadialGradient)[]
+    .filter(Boolean) as (LinearGradientWithType | RadialGradientWithType)[]
 }

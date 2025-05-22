@@ -24,15 +24,15 @@ export function normalizeGradientFill(fill: GradientFill): NormalizedGradientFil
   else {
     obj = fill
   }
-  const res = normalizeGradient(obj.image)[0]
-  switch (res?.type) {
+  const { type, ...props } = normalizeGradient(obj.image)[0] ?? {}
+  switch (type) {
     case 'radial-gradient':
       return {
-        radialGradient: res,
+        radialGradient: props as any,
       }
     case 'linear-gradient':
       return {
-        linearGradient: res,
+        linearGradient: props as any,
       }
   }
   return {}
