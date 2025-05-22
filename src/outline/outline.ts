@@ -1,5 +1,5 @@
 import type { Color, ColorDeclaration } from '../color'
-import type { GradientFillDeclaration, SolidFillDeclaration } from '../fill'
+import type { ColorFillDeclaration, GradientFillDeclaration } from '../fill'
 import type { WithNone } from '../types'
 import type { HeadEnd } from './head-end'
 import type { TailEnd } from './tail-end'
@@ -7,7 +7,7 @@ import { normalizeColor } from '../color'
 import { isNone } from '../utils'
 
 export type OutlineFillDeclaration =
-  & Partial<SolidFillDeclaration>
+  & Partial<ColorFillDeclaration>
   & Partial<GradientFillDeclaration>
 
 export type OutlineStyle = 'dashed' | 'solid' | string

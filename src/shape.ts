@@ -5,7 +5,7 @@ export type FillRule = 'nonzero' | 'evenodd'
 export type StrokeLinecap = 'butt' | 'round' | 'square'
 export type StrokeLinejoin = 'arcs' | 'bevel' | 'miter' | 'miter-clip' | 'round'
 
-export interface GeometryPathStyle {
+export interface ShapePathStyle {
   [key: string]: any
   opacity: number
   visibility: string
@@ -29,34 +29,33 @@ export interface GeometryPathStyle {
   strokeDashoffset: number
 }
 
-export interface GeometryPathDeclaration extends Partial<GeometryPathStyle> {
+export interface ShapePathDeclaration extends Partial<ShapePathStyle> {
   data: SVGPathData
 }
 
-export interface GeometryDeclaration {
-  name?: string
-  svg?: string
+export interface ShapeDeclaration {
+  preset?: string
   viewBox?: number[]
-  paths?: GeometryPathDeclaration[]
+  paths?: ShapePathDeclaration[]
 }
 
-export type GeometryProperty =
+export type ShapeProperty =
   | SVGPathData
   | SVGPathData[]
-  | GeometryPathDeclaration[]
-  | GeometryDeclaration
+  | ShapePathDeclaration[]
+  | ShapeDeclaration
 
-export function normalizeGeometry(geometry: GeometryProperty): GeometryDeclaration {
-  if (typeof geometry === 'string') {
+export function normalizeShape(shape: ShapeProperty): ShapeDeclaration {
+  if (typeof shape === 'string') {
     return {
       paths: [
-        { data: geometry },
+        { data: shape },
       ],
     }
   }
-  else if (Array.isArray(geometry)) {
+  else if (Array.isArray(shape)) {
     return {
-      paths: geometry.map((data) => {
+      paths: shape.map((data) => {
         if (typeof data === 'string') {
           return {
             data,
@@ -67,6 +66,6 @@ export function normalizeGeometry(geometry: GeometryProperty): GeometryDeclarati
     }
   }
   else {
-    return geometry
+    return shape
   }
 }

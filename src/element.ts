@@ -3,11 +3,11 @@ import type { BackgroundDeclaration, BackgroundProperty } from './background'
 import type { EffectDeclaration, EffectProperty } from './effect'
 import type { FillDeclaration, FillProperty } from './fill'
 import type { ForegroundDeclaration, ForegroundProperty } from './foreground'
-import type { GeometryDeclaration, GeometryProperty } from './geometry'
 import type { MetaProperty } from './meta'
 import type { Node } from './node'
 import type { OutlineDeclaration, OutlineProperty } from './outline'
 import type { ShadowDeclaration, ShadowProperty } from './shadow'
+import type { ShapeDeclaration, ShapeProperty } from './shape'
 import type { StyleDeclaration, StyleProperty } from './style'
 import type { TextDeclaration, TextProperty } from './text'
 import type { WithNone } from './types'
@@ -17,9 +17,9 @@ import { normalizeBackground } from './background'
 import { normalizeEffect } from './effect'
 import { normalizeFill } from './fill'
 import { normalizeForeground } from './foreground'
-import { normalizeGeometry } from './geometry'
 import { normalizeOutline } from './outline'
 import { normalizeShadow } from './shadow'
+import { normalizeShape } from './shape'
 import { normalizeStyle } from './style'
 import { normalizeText } from './text'
 import { clearUndef, isNone } from './utils'
@@ -29,7 +29,7 @@ export interface Element<T = MetaProperty> extends Node<T> {
   style?: WithNone<StyleProperty>
   text?: WithNone<TextProperty>
   background?: WithNone<BackgroundProperty>
-  geometry?: WithNone<GeometryProperty>
+  shape?: WithNone<ShapeProperty>
   fill?: WithNone<FillProperty>
   outline?: WithNone<OutlineProperty>
   foreground?: WithNone<ForegroundProperty>
@@ -44,7 +44,7 @@ export type ElementDeclaration<T = MetaProperty> = Node<T> & {
   style?: Partial<StyleDeclaration>
   text?: TextDeclaration
   background?: BackgroundDeclaration
-  geometry?: GeometryDeclaration
+  shape?: ShapeDeclaration
   fill?: FillDeclaration
   outline?: OutlineDeclaration
   foreground?: ForegroundDeclaration
@@ -61,7 +61,7 @@ export function normalizeElement<T = MetaProperty>(element: Element<T>): Element
     style: isNone(element.style) ? undefined : normalizeStyle(element.style),
     text: isNone(element.text) ? undefined : normalizeText(element.text),
     background: isNone(element.background) ? undefined : normalizeBackground(element.background),
-    geometry: isNone(element.geometry) ? undefined : normalizeGeometry(element.geometry),
+    shape: isNone(element.shape) ? undefined : normalizeShape(element.shape),
     fill: isNone(element.fill) ? undefined : normalizeFill(element.fill),
     outline: isNone(element.outline) ? undefined : normalizeOutline(element.outline),
     foreground: isNone(element.foreground) ? undefined : normalizeForeground(element.foreground),
