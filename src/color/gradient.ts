@@ -56,7 +56,7 @@ function parseColorStopNodeList(colorStops: ColorStopNode[]): ColorStop[] {
         color = normalizeColor(stop.value)
         break
       case 'hex':
-        color = normalizeColor(stop.value)
+        color = normalizeColor(`#${stop.value}`)
         break
     }
     switch (stop.length?.type) {
