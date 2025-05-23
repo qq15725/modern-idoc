@@ -6,12 +6,12 @@ export interface NormalizedBaseBackground {
 }
 
 export type NormalizedBackground =
-  & NormalizedBaseBackground
   & NormalizedFill
+  & NormalizedBaseBackground
 
 export type BackgroundObject =
-  & Partial<NormalizedBaseBackground>
   & FillObject
+  & Partial<NormalizedBaseBackground>
 
 export type Background =
   | string
