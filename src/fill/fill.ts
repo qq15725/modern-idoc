@@ -36,7 +36,9 @@ export function isColorFill(fill: Fill): fill is ColorFill {
 }
 
 export function isGradientFillObject(fill: FillObject): fill is GradientFillObject {
-  return !isNone(fill.image) && isGradient(fill.image)
+  return (!isNone(fill.image) && isGradient(fill.image))
+    || Boolean(fill.linearGradient)
+    || Boolean(fill.radialGradient)
 }
 
 export function isGradientFill(fill: Fill): fill is GradientFill {

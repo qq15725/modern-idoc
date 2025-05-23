@@ -1,8 +1,9 @@
 import type { FillObject, NormalizedFill } from './fill'
 import { normalizeFill } from './fill'
+import { pick } from './utils'
 
 export interface NormalizedBaseBackground {
-  fillWithShape: boolean
+  fillWithShape?: boolean
 }
 
 export type NormalizedBackground =
@@ -21,13 +22,12 @@ export function normalizeBackground(background: Background): NormalizedBackgroun
   if (typeof background === 'string') {
     return {
       ...normalizeFill(background),
-      fillWithShape: false,
     }
   }
   else {
     return {
       ...normalizeFill(background),
-      fillWithShape: Boolean(background.fillWithShape),
+      ...pick(background, ['fillWithShape']),
     }
   }
 }

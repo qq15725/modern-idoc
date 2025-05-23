@@ -2,6 +2,7 @@ import type { FillObject, NormalizedFill } from '../fill'
 import type { HeadEnd } from './head-end'
 import type { TailEnd } from './tail-end'
 import { normalizeFill } from '../fill'
+import { pick } from '../utils'
 
 export type OutlineStyle = 'dashed' | 'solid' | string
 
@@ -33,10 +34,7 @@ export function normalizeOutline(outline: Outline): NormalizedOutline {
   else {
     return {
       ...normalizeFill(outline),
-      width: outline.width,
-      style: outline.style,
-      headEnd: outline.headEnd,
-      tailEnd: outline.tailEnd,
+      ...pick(outline, ['width', 'style', 'headEnd', 'tailEnd']),
     }
   }
 }

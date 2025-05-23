@@ -1,10 +1,10 @@
 import type { LinearGradient, RadialGradient } from '../color'
 import { normalizeGradient } from '../color'
 
-export interface GradientFillObject {
+export type GradientFillObject =
   // `linear-gradient(${string})` | `radial-gradient(${string})`
-  image: string
-}
+  & { image?: string }
+  & Partial<NormalizedGradientFill>
 
 export type GradientFill =
   | string
@@ -24,16 +24,20 @@ export function normalizeGradientFill(fill: GradientFill): NormalizedGradientFil
   else {
     obj = fill
   }
-  const { type, ...props } = normalizeGradient(obj.image)[0] ?? {}
-  switch (type) {
-    case 'radial-gradient':
-      return {
-        radialGradient: props as any,
-      }
-    case 'linear-gradient':
-      return {
-        linearGradient: props as any,
-      }
+
+  if (obj.image) {
+    const { type, ...props } = normalizeGradient(obj.image)[0] ?? {}
+    switch (type) {
+      case 'radial-gradient':
+        return {
+          radialGradient: props as any,
+        }
+      case 'linear-gradient':
+        return {
+          linearGradient: props as any,
+        }
+    }
   }
-  return {}
+
+  return obj
 }

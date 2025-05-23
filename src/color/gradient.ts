@@ -116,8 +116,8 @@ function parseRadialGradientNode(node: RadialGradientNode | RepeatingRadialGradi
 }
 
 export function isGradient(cssText: string): boolean {
-  return cssText.startsWith('linear-gradient')
-    || cssText.startsWith('radial-gradient')
+  return cssText.startsWith('linear-gradient(')
+    || cssText.startsWith('radial-gradient(')
 }
 
 export function normalizeGradient(cssText: string): (LinearGradientWithType | RadialGradientWithType)[] {
