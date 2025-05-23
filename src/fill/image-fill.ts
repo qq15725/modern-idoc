@@ -41,10 +41,21 @@ export interface ImageFillObject {
   rotateWithShape?: boolean
 }
 
+export type ImageFill =
+  | string
+  | ImageFillObject
+
 export interface NormalizedImageFill extends ImageFillObject {
   //
 }
 
-export function normalizeImageFill(fill: ImageFillObject): NormalizedImageFill {
-  return fill
+export function normalizeImageFill(fill: ImageFill): NormalizedImageFill {
+  let obj: ImageFillObject
+  if (typeof fill === 'string') {
+    obj = { image: fill }
+  }
+  else {
+    obj = fill
+  }
+  return obj
 }

@@ -1,4 +1,4 @@
-import type { WithNone } from '../types'
+import type { WithStyleNone } from '../types'
 
 export interface NormalizedTransformStyle {
   rotate: number
@@ -8,7 +8,7 @@ export interface NormalizedTransformStyle {
   skewY: number
   translateX: number
   translateY: number
-  transform: WithNone<string>
+  transform: WithStyleNone<string>
   transformOrigin: string
 }
 

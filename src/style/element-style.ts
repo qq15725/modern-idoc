@@ -1,6 +1,6 @@
 import type { NormalizedColor } from '../color'
 import type { NormalizedShadowStyle } from '../shadow'
-import type { WithNone } from '../types'
+import type { WithStyleNone } from '../types'
 import type { NormalizedLayoutStyle } from './layout-style'
 import type { NormalizedTransformStyle } from './transform-style'
 import type { BorderStyle, PointerEvents, Visibility } from './types'
@@ -19,25 +19,25 @@ export type NormalizedElementStyle =
   & NormalizedShadowStyle
   & {
   // background
-    backgroundImage: WithNone<string>
+    backgroundImage: WithStyleNone<string>
     backgroundSize: BackgroundSize
-    backgroundColor: WithNone<NormalizedColor>
-    backgroundColormap: WithNone<Record<string, string>>
+    backgroundColor: WithStyleNone<NormalizedColor>
+    backgroundColormap: WithStyleNone<Record<string, string>>
     // border
     borderRadius: number
-    borderColor: WithNone<NormalizedColor>
+    borderColor: WithStyleNone<NormalizedColor>
     borderStyle: BorderStyle
     // outline
     outlineWidth: number
     outlineOffset: number
-    outlineColor: WithNone<NormalizedColor>
+    outlineColor: WithStyleNone<NormalizedColor>
     outlineStyle: string
     // other
     visibility: Visibility
     filter: string
     opacity: number
     pointerEvents: PointerEvents
-    maskImage: WithNone<string>
+    maskImage: WithStyleNone<string>
   }
 
 export function getDefaultElementStyle(): NormalizedElementStyle {

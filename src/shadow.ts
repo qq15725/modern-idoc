@@ -14,7 +14,9 @@ export interface NormalizedShadow {
 
 export type ShadowObject =
   & Partial<NormalizedShadow>
-  & { color: WithNone<Color> }
+  & {
+    color?: WithNone<Color>
+  }
 
 export type Shadow =
   | BoxShadow

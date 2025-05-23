@@ -22,7 +22,9 @@ export interface NormalizedOutline extends NormalizedOutlineFill {
 
 export type OutlineObject =
   & Partial<NormalizedOutline>
-  & { color: WithNone<Color> }
+  & {
+    color?: WithNone<Color>
+  }
 
 export type Outline =
   | string

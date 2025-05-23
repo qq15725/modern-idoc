@@ -12,7 +12,9 @@ export interface NormalizedInnerShadow {
 
 export type InnerShadowObject =
   & Partial<NormalizedInnerShadow>
-  & { color: WithNone<Color> }
+  & {
+    color?: WithNone<Color>
+  }
 
 export type InnerShadow = InnerShadowObject
 

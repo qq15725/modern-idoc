@@ -1,4 +1,4 @@
-import type { WithNone } from '../types'
+import type { WithStyleNone } from '../types'
 import type {
   Align,
   BoxSizing,
@@ -50,11 +50,11 @@ export interface NormalizedLayoutStyle {
   justifyContent: Justify
   gap: StyleUnit
   // margin
-  marginTop: WithNone<StyleUnit | 'auto'>
-  marginLeft: WithNone<StyleUnit | 'auto'>
-  marginRight: WithNone<StyleUnit | 'auto'>
-  marginBottom: WithNone<StyleUnit | 'auto'>
-  margin: WithNone<StyleUnit | 'auto'>
+  marginTop: WithStyleNone<StyleUnit | 'auto'>
+  marginLeft: WithStyleNone<StyleUnit | 'auto'>
+  marginRight: WithStyleNone<StyleUnit | 'auto'>
+  marginBottom: WithStyleNone<StyleUnit | 'auto'>
+  margin: WithStyleNone<StyleUnit | 'auto'>
   // padding
   paddingTop: StyleUnit
   paddingLeft: StyleUnit

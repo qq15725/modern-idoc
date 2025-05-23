@@ -1,7 +1,7 @@
 import type { Color } from '../color'
 import type { Fill, NormalizedFill } from '../fill'
 import type { NormalizedOutline, Outline } from '../outline'
-import type { WithNone } from '../types'
+import type { WithStyleNone } from '../types'
 import type { NormalizedElementStyle } from './element-style'
 import type { NormalizedTextStyle } from './text-style'
 import { normalizeColor } from '../color'
@@ -20,11 +20,11 @@ export type NormalizedStyle =
 export type StyleObject =
   & Partial<NormalizedStyle>
   & {
-    color?: WithNone<Color>
-    backgroundColor?: WithNone<Color>
-    borderColor?: WithNone<Color>
-    outlineColor?: WithNone<Color>
-    shadowColor?: WithNone<Color>
+    color?: WithStyleNone<Color>
+    backgroundColor?: WithStyleNone<Color>
+    borderColor?: WithStyleNone<Color>
+    outlineColor?: WithStyleNone<Color>
+    shadowColor?: WithStyleNone<Color>
     fill?: Fill
     outline?: Outline
   }
