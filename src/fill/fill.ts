@@ -80,5 +80,5 @@ export function normalizeFill(fill: Fill): NormalizedFill {
   else if (isPresetFill(fill)) {
     return normalizePresetFill(fill)
   }
-  throw new Error('Unknown fill property object')
+  return {}
 }
