@@ -1,3 +1,12 @@
+## [0.6.9](https://github.com/qq15725/modern-idoc/compare/v0.6.8...v0.6.9) (2025-05-23)
+
+
+### Bug Fixes
+
+* normalizeFill ([f989197](https://github.com/qq15725/modern-idoc/commit/f989197a0ea9975690b900a8a27da74db4b8498b))
+
+
+
 ## [0.6.8](https://github.com/qq15725/modern-idoc/compare/v0.6.7...v0.6.8) (2025-05-23)
 
 
