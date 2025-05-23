@@ -1,3 +1,12 @@
+## [0.6.7](https://github.com/qq15725/modern-idoc/compare/v0.6.6...v0.6.7) (2025-05-23)
+
+
+### Bug Fixes
+
+* NormalizedOutline ([4fbafa6](https://github.com/qq15725/modern-idoc/commit/4fbafa6f1f94c9d65d087167320d6e05a68d6f91))
+
+
+
 ## [0.6.6](https://github.com/qq15725/modern-idoc/compare/v0.6.5...v0.6.6) (2025-05-23)
 
 
