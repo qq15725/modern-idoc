@@ -1,3 +1,12 @@
+## [0.6.5](https://github.com/qq15725/modern-idoc/compare/v0.6.4...v0.6.5) (2025-05-23)
+
+
+### Bug Fixes
+
+* style none type ([1027d58](https://github.com/qq15725/modern-idoc/commit/1027d58784123af4e919d80b93fdbad134a10312))
+
+
+
 ## [0.6.4](https://github.com/qq15725/modern-idoc/compare/v0.6.3...v0.6.4) (2025-05-22)
 
 
