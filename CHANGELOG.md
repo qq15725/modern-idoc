@@ -1,3 +1,12 @@
+## [0.6.8](https://github.com/qq15725/modern-idoc/compare/v0.6.7...v0.6.8) (2025-05-23)
+
+
+### Bug Fixes
+
+* normalizeGradientFill ([ec71b9f](https://github.com/qq15725/modern-idoc/commit/ec71b9f46ae7cf831486b4d9dbc40fa890158b70))
+
+
+
 ## [0.6.7](https://github.com/qq15725/modern-idoc/compare/v0.6.6...v0.6.7) (2025-05-23)
 
 
