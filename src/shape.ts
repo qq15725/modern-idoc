@@ -36,6 +36,7 @@ export interface ShapePath extends Partial<ShapePathStyle> {
 export interface NormalizedShape {
   preset?: string
   viewBox?: number[]
+  svg?: string
   paths?: ShapePath[]
 }
 
@@ -47,10 +48,17 @@ export type Shape =
 
 export function normalizeShape(shape: Shape): NormalizedShape {
   if (typeof shape === 'string') {
-    return {
-      paths: [
-        { data: shape },
-      ],
+    if (shape.startsWith('<svg')) {
+      return {
+        svg: shape,
+      }
+    }
+    else {
+      return {
+        paths: [
+          { data: shape },
+        ],
+      }
     }
   }
   else if (Array.isArray(shape)) {
