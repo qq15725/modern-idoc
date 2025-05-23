@@ -1,3 +1,12 @@
+## [0.6.6](https://github.com/qq15725/modern-idoc/compare/v0.6.5...v0.6.6) (2025-05-23)
+
+
+### Features
+
+* support svg prop in NormalizedShape ([3111ce9](https://github.com/qq15725/modern-idoc/commit/3111ce9e9cae06a9b6948441338035091cdbb487))
+
+
+
 ## [0.6.5](https://github.com/qq15725/modern-idoc/compare/v0.6.4...v0.6.5) (2025-05-23)
 
 
