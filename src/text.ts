@@ -21,7 +21,7 @@ export type TextContent =
   | ParagraphContent
   | TextContentFlat[]
 
-export type NormalizedTextContent = (ParagraphContent & StyleObject)[]
+export type NormalizedTextContent = ParagraphContent[]
 
 export interface NormalizedText {
   content: NormalizedTextContent
