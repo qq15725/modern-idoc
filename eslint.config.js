@@ -10,6 +10,7 @@ export default antfu(
       'antfu/consistent-list-newline': ['off'],
       'ts/no-unsafe-declaration-merging': ['off'],
       'eslint-comments/no-unlimited-disable': ['off'],
+      'style/operator-linebreak': ['off'],
     },
   },
 )
