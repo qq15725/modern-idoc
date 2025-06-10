@@ -1,6 +1,7 @@
 import { normalizeDocument, normalizeGradient } from '../../src'
 import { pdf } from './pdf'
 import { pptx } from './pptx'
+import './text'
 
 // pdf
 console.warn('PDF', normalizeDocument(pdf))

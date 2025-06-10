@@ -1,27 +1,25 @@
 import type { StyleObject } from './style'
 import { normalizeStyle } from './style'
 
-export interface FragmentContent extends StyleObject {
+export interface FragmentObject extends StyleObject {
   content: string
 }
 
-export interface ParagraphContent extends StyleObject {
-  fragments: FragmentContent[]
+export interface ParagraphObject extends StyleObject {
+  fragments: FragmentObject[]
 }
 
-export type TextContentFlat =
+export type FlatTextContent =
   | string
-  | FragmentContent
-  | ParagraphContent
-  | (string | FragmentContent)[]
+  | FragmentObject
+  | ParagraphObject
+  | (string | FragmentObject)[]
 
 export type TextContent =
-  | string
-  | FragmentContent
-  | ParagraphContent
-  | TextContentFlat[]
+  | FlatTextContent
+  | FlatTextContent[]
 
-export type NormalizedTextContent = ParagraphContent[]
+export type NormalizedTextContent = ParagraphObject[]
 
 export interface NormalizedText {
   content: NormalizedTextContent
@@ -36,72 +34,132 @@ export type Text =
   | (NormalizedText & { content: TextContent })
   | NormalizedText
 
-export function normalizeTextContent(content: TextContent = ''): NormalizedTextContent {
-  const list: TextContentFlat[] = Array.isArray(content) ? content : [content]
-  return list.map((p) => {
-    if (typeof p === 'string') {
-      return {
-        fragments: [
-          { content: p },
-        ],
-      }
-    }
-    else if ('content' in p) {
-      return {
-        fragments: [
-          normalizeStyle(p),
-        ],
-      }
-    }
-    else if ('fragments' in p) {
-      return {
-        ...normalizeStyle(p),
-        fragments: p.fragments.map(f => normalizeStyle(f) as any),
-      }
-    }
-    else if (Array.isArray(p)) {
-      return {
-        fragments: p.map((f) => {
-          if (typeof f === 'string') {
-            return {
-              content: f,
-            }
-          }
-          else {
-            return normalizeStyle(f) as any
-          }
-        }),
-      }
-    }
-    else {
-      return {
-        fragments: [],
-      }
-    }
-  })
+const CRLF_RE = /\r\n|\n\r|\n|\r/
+const NORMALIZE_CRLF_RE = new RegExp(`${CRLF_RE.source}|<br\\/>`, 'g')
+// eslint-disable-next-line regexp/no-unused-capturing-group
+const IS_CRLF_RE = new RegExp(`^(${CRLF_RE.source})$`)
+const NORMALIZED_CRLF = '\n'
+
+export function hasCRLF(content: string): boolean {
+  return CRLF_RE.test(content)
 }
 
-export function normalizeText(text: Text): NormalizedText {
-  if (typeof text === 'string') {
+export function isCRLF(char: string): boolean {
+  return IS_CRLF_RE.test(char)
+}
+
+export function normalizeCRLF(content: string): string {
+  return content.replace(NORMALIZE_CRLF_RE, NORMALIZED_CRLF)
+}
+
+export function normalizeTextContent(value: TextContent): NormalizedTextContent {
+  const paragraphs: ParagraphObject[] = []
+
+  function getParagraph(): ParagraphObject {
+    return paragraphs[paragraphs.length - 1] || addParagraph()
+  }
+
+  function addParagraph(style?: StyleObject): ParagraphObject {
+    let paragraph = paragraphs[paragraphs.length - 1]
+    if (paragraph?.fragments.length === 0) {
+      paragraph = { ...style, fragments: [] }
+      paragraphs[paragraphs.length - 1] = paragraph
+    }
+    else {
+      paragraph = { ...style, fragments: [] }
+      paragraphs.push(paragraph)
+    }
+    return paragraph
+  }
+
+  function addFragment(content: string, style?: StyleObject): void {
+    Array.from(content).forEach((c) => {
+      if (isCRLF(c)) {
+        const { fragments, ...pStyle } = getParagraph()
+        if (!fragments.length) {
+          fragments.push({ ...style, content: NORMALIZED_CRLF })
+        }
+        addParagraph(pStyle)
+      }
+      else {
+        const paragraph = getParagraph()
+        if (paragraph.fragments[paragraph.fragments.length - 1]) {
+          paragraph.fragments[paragraph.fragments.length - 1].content += c
+        }
+        else {
+          paragraph.fragments.push({ ...style, content: c })
+        }
+      }
+    })
+  }
+
+  const list: FlatTextContent[] = Array.isArray(value) ? value : [value]
+  list.forEach((p) => {
+    if (typeof p === 'string') {
+      addFragment(p)
+    }
+    else if ('content' in p) {
+      addFragment(p.content, normalizeStyle(p))
+    }
+    else if ('fragments' in p) {
+      addParagraph(normalizeStyle(p))
+      p.fragments.forEach((f) => {
+        addFragment(f.content, normalizeStyle(f))
+      })
+    }
+    else if (Array.isArray(p)) {
+      p.forEach((f) => {
+        if (typeof f === 'string') {
+          addFragment(f)
+        }
+        else {
+          addFragment(f.content, normalizeStyle(f))
+        }
+      })
+    }
+    else {
+      paragraphs.push({
+        fragments: [],
+      })
+    }
+  })
+
+  if (!getParagraph().fragments.length) {
+    addFragment(NORMALIZED_CRLF)
+  }
+
+  return paragraphs
+}
+
+export function normalizeText(value: Text): NormalizedText {
+  if (typeof value === 'string') {
     return {
-      content: [
-        {
-          fragments: [
-            { content: text },
-          ],
-        },
-      ],
+      content: normalizeTextContent(value),
     }
   }
-  else if ('content' in text) {
+  else if ('content' in value) {
     return {
-      ...text,
-      content: normalizeTextContent(text.content),
+      ...value,
+      content: normalizeTextContent(value.content),
     }
   }
   else {
     return {
-      content: normalizeTextContent(text),
+      content: normalizeTextContent(value),
     }
   }
+}
+
+export function textContentToString(value: TextContent): string {
+  return normalizeTextContent(value)
+    .map((p) => {
+      const content = normalizeCRLF(
+        p.fragments.flatMap(f => f.content).join(''),
+      )
+      if (isCRLF(content)) {
+        return ''
+      }
+      return content
+    })
+    .join(NORMALIZED_CRLF)
 }
