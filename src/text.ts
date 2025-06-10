@@ -23,6 +23,7 @@ export type NormalizedTextContent = ParagraphObject[]
 
 export interface NormalizedText {
   content: NormalizedTextContent
+  style?: StyleObject
   effects?: StyleObject[]
   measureDom?: any // HTMLElement
   fonts?: any // modern-font > Fonts
@@ -30,9 +31,7 @@ export interface NormalizedText {
 
 export type Text =
   | string
-  | TextContent
-  | (NormalizedText & { content: TextContent })
-  | NormalizedText
+  | (Omit<NormalizedText, 'content'> & { content: TextContent })
 
 const CRLF_RE = /\r\n|\n\r|\n|\r/
 const NORMALIZE_CRLF_RE = new RegExp(`${CRLF_RE.source}|<br\\/>`, 'g')
@@ -111,20 +110,24 @@ export function normalizeTextContent(value: TextContent): NormalizedTextContent 
   const list: FlatTextContent[] = Array.isArray(value) ? value : [value]
   list.forEach((p) => {
     if (typeof p === 'string') {
+      addParagraph()
       addFragment(p)
     }
     else if ('content' in p) {
       const { content, ...pStyle } = p
-      addFragment(content, normalizeStyle(pStyle))
+      addParagraph(normalizeStyle(pStyle))
+      addFragment(content)
     }
     else if ('fragments' in p) {
-      addParagraph(normalizeStyle(p))
-      p.fragments.forEach((f) => {
+      const { fragments, ...pStyle } = p
+      addParagraph(normalizeStyle(pStyle))
+      fragments.forEach((f) => {
         const { content, ...fStyle } = f
         addFragment(content, normalizeStyle(fStyle))
       })
     }
     else if (Array.isArray(p)) {
+      addParagraph()
       p.forEach((f) => {
         if (typeof f === 'string') {
           addFragment(f)
