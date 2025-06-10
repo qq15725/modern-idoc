@@ -1,3 +1,12 @@
+## [0.6.10](https://github.com/qq15725/modern-idoc/compare/v0.6.9...v0.6.10) (2025-06-10)
+
+
+### Bug Fixes
+
+* NormalizedTextContent type ([1e27102](https://github.com/qq15725/modern-idoc/commit/1e271026a622f04047295e42ac57c000df4f1d0c))
+
+
+
 ## [0.6.9](https://github.com/qq15725/modern-idoc/compare/v0.6.8...v0.6.9) (2025-05-23)
 
 
