@@ -1,4 +1,20 @@
-import { normalizeTextContent } from '../../src'
+import { normalizeText, normalizeTextContent } from '../../src'
+
+console.warn(normalizeText({
+  style: {
+    fontSize: 40,
+    padding: 20,
+    backgroundColor: 'red',
+  },
+  content: [
+    {
+      fragments: [
+        { backgroundColor: 'blue', content: 'Back' },
+        { content: 'ground1' },
+      ],
+    },
+  ],
+}))
 
 console.warn(normalizeTextContent('textContent'))
 

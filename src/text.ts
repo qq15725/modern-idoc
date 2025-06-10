@@ -52,6 +52,11 @@ export function normalizeCRLF(content: string): string {
   return content.replace(NORMALIZE_CRLF_RE, NORMALIZED_CRLF)
 }
 
+export function isEqualStyle(style1: Record<string, any>, style2: Record<string, any>): boolean {
+  const keys = Array.from(new Set([...Object.keys(style1), ...Object.keys(style2)]))
+  return !keys.length || keys.every(key => style1[key] === style2[key])
+}
+
 export function normalizeTextContent(value: TextContent): NormalizedTextContent {
   const paragraphs: ParagraphObject[] = []
 
@@ -59,7 +64,7 @@ export function normalizeTextContent(value: TextContent): NormalizedTextContent 
     return paragraphs[paragraphs.length - 1] || addParagraph()
   }
 
-  function addParagraph(style?: StyleObject): ParagraphObject {
+  function addParagraph(style: StyleObject = {}): ParagraphObject {
     let paragraph = paragraphs[paragraphs.length - 1]
     if (paragraph?.fragments.length === 0) {
       paragraph = { ...style, fragments: [] }
@@ -72,23 +77,33 @@ export function normalizeTextContent(value: TextContent): NormalizedTextContent 
     return paragraph
   }
 
-  function addFragment(content: string, style?: StyleObject): void {
+  function addFragment(content = '', style: StyleObject = {}): void {
     Array.from(content).forEach((c) => {
       if (isCRLF(c)) {
         const { fragments, ...pStyle } = getParagraph()
         if (!fragments.length) {
-          fragments.push({ ...style, content: NORMALIZED_CRLF })
+          fragments.push({
+            ...style,
+            content: NORMALIZED_CRLF,
+          })
         }
         addParagraph(pStyle)
       }
       else {
         const paragraph = getParagraph()
-        if (paragraph.fragments[paragraph.fragments.length - 1]) {
-          paragraph.fragments[paragraph.fragments.length - 1].content += c
+        const fragment = paragraph.fragments[paragraph.fragments.length - 1]
+        if (fragment) {
+          const { content, ...fStyle } = fragment
+          // TODO opz
+          if (isEqualStyle(style, fStyle)) {
+            fragment.content = `${content}${c}`
+            return
+          }
         }
-        else {
-          paragraph.fragments.push({ ...style, content: c })
-        }
+        paragraph.fragments.push({
+          ...style,
+          content: c,
+        })
       }
     })
   }
@@ -99,12 +114,14 @@ export function normalizeTextContent(value: TextContent): NormalizedTextContent 
       addFragment(p)
     }
     else if ('content' in p) {
-      addFragment(p.content, normalizeStyle(p))
+      const { content, ...pStyle } = p
+      addFragment(content, normalizeStyle(pStyle))
     }
     else if ('fragments' in p) {
       addParagraph(normalizeStyle(p))
       p.fragments.forEach((f) => {
-        addFragment(f.content, normalizeStyle(f))
+        const { content, ...fStyle } = f
+        addFragment(content, normalizeStyle(fStyle))
       })
     }
     else if (Array.isArray(p)) {
@@ -113,14 +130,13 @@ export function normalizeTextContent(value: TextContent): NormalizedTextContent 
           addFragment(f)
         }
         else {
-          addFragment(f.content, normalizeStyle(f))
+          const { content, ...fStyle } = f
+          addFragment(content, normalizeStyle(fStyle))
         }
       })
     }
     else {
-      paragraphs.push({
-        fragments: [],
-      })
+      console.warn('Failed to parse text content', p)
     }
   })
 
