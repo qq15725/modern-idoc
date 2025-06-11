@@ -1,3 +1,12 @@
+## [0.6.14](https://github.com/qq15725/modern-idoc/compare/v0.6.13...v0.6.14) (2025-06-11)
+
+
+### Features
+
+* decorator ([338746a](https://github.com/qq15725/modern-idoc/commit/338746a89dd0806d90edd755ae65686daa957ac7))
+
+
+
 ## [0.6.13](https://github.com/qq15725/modern-idoc/compare/v0.6.12...v0.6.13) (2025-06-10)
 
 
