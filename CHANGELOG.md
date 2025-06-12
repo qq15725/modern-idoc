@@ -1,3 +1,12 @@
+## [0.6.15](https://github.com/qq15725/modern-idoc/compare/v0.6.14...v0.6.15) (2025-06-12)
+
+
+### Features
+
+* decorator property alias support get nested value ([5a8949e](https://github.com/qq15725/modern-idoc/commit/5a8949e13b8ae204a3f8de7faae369116b5fdeb0))
+
+
+
 ## [0.6.14](https://github.com/qq15725/modern-idoc/compare/v0.6.13...v0.6.14) (2025-06-11)
 
 
