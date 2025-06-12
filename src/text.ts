@@ -59,8 +59,8 @@ export function isEqualStyle(style1: Record<string, any>, style2: Record<string,
 export function normalizeTextContent(value: TextContent): NormalizedTextContent {
   const paragraphs: ParagraphObject[] = []
 
-  function getParagraph(): ParagraphObject {
-    return paragraphs[paragraphs.length - 1] || addParagraph()
+  function lastParagraph(): ParagraphObject | undefined {
+    return paragraphs[paragraphs.length - 1]
   }
 
   function addParagraph(style: StyleObject = {}): ParagraphObject {
@@ -79,7 +79,7 @@ export function normalizeTextContent(value: TextContent): NormalizedTextContent 
   function addFragment(content = '', style: StyleObject = {}): void {
     Array.from(content).forEach((c) => {
       if (isCRLF(c)) {
-        const { fragments, ...pStyle } = getParagraph()
+        const { fragments, ...pStyle } = lastParagraph() || addParagraph()
         if (!fragments.length) {
           fragments.push({
             ...style,
@@ -89,7 +89,7 @@ export function normalizeTextContent(value: TextContent): NormalizedTextContent 
         addParagraph(pStyle)
       }
       else {
-        const paragraph = getParagraph()
+        const paragraph = lastParagraph() || addParagraph()
         const fragment = paragraph.fragments[paragraph.fragments.length - 1]
         if (fragment) {
           const { content, ...fStyle } = fragment
@@ -143,8 +143,11 @@ export function normalizeTextContent(value: TextContent): NormalizedTextContent 
     }
   })
 
-  if (!getParagraph().fragments.length) {
-    addFragment(NORMALIZED_CRLF)
+  const lastP = lastParagraph()
+  if (lastP && !lastP.fragments.length) {
+    lastP.fragments.push({
+      content: NORMALIZED_CRLF,
+    })
   }
 
   return paragraphs
