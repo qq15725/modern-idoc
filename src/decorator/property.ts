@@ -1,4 +1,4 @@
-import { RawWeakMap } from './RawWeakMap'
+import { getObjectValueByPath, RawWeakMap, setObjectValueByPath } from '../utils'
 
 export interface Definable {
   requestUpdate?: (
@@ -12,7 +12,7 @@ export interface Definable {
 export interface PropertyDeclaration {
   readonly [key: string]: any
   readonly default?: any | (() => any)
-  readonly alias?: string
+  readonly alias?: string | symbol
 }
 
 const declarationMap = new RawWeakMap<object, Map<PropertyKey, PropertyDeclaration>>()
@@ -40,8 +40,22 @@ export function defineProperty(constructor: any, key: PropertyKey, declaration: 
 
   const descriptor = Object.getOwnPropertyDescriptor(constructor.prototype, key)
     || {
-      get(this: Definable) { return (this as any)[alias] },
-      set(this: Definable, v: unknown) { (this as any)[alias] = v },
+      get(this: Definable) {
+        if (typeof alias === 'string') {
+          return getObjectValueByPath(this as any, alias)
+        }
+        else {
+          return (this as any)[alias]
+        }
+      },
+      set(this: Definable, v: unknown) {
+        if (typeof alias === 'string') {
+          setObjectValueByPath(this as any, alias, v)
+        }
+        else {
+          (this as any)[alias] = v
+        }
+      },
     }
 
   Object.defineProperty(constructor.prototype, key, {
