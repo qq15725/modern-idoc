@@ -1,3 +1,12 @@
+## [0.6.16](https://github.com/qq15725/modern-idoc/compare/v0.6.15...v0.6.16) (2025-06-12)
+
+
+### Bug Fixes
+
+* normalizeTextContent ([4b0067a](https://github.com/qq15725/modern-idoc/commit/4b0067a27f6f8b113ca0dcb89efbcb474fd18bcd))
+
+
+
 ## [0.6.15](https://github.com/qq15725/modern-idoc/compare/v0.6.14...v0.6.15) (2025-06-12)
 
 
