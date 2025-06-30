@@ -1,3 +1,12 @@
+## [0.6.17](https://github.com/qq15725/modern-idoc/compare/v0.6.16...v0.6.17) (2025-06-30)
+
+
+### Features
+
+* add offsetGet、offsetSet to Definable ([0467d83](https://github.com/qq15725/modern-idoc/commit/0467d8317f5c5ce7090a2ab6d97bc8e199c0dd56))
+
+
+
 ## [0.6.16](https://github.com/qq15725/modern-idoc/compare/v0.6.15...v0.6.16) (2025-06-12)
 
 
