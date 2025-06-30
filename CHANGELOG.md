@@ -1,3 +1,12 @@
+## [0.6.20](https://github.com/qq15725/modern-idoc/compare/v0.6.19...v0.6.20) (2025-06-30)
+
+
+### Features
+
+* protectedProperty ([c2f398a](https://github.com/qq15725/modern-idoc/commit/c2f398a58e9325fd0f285dfef37c05a821407cd6))
+
+
+
 ## [0.6.19](https://github.com/qq15725/modern-idoc/compare/v0.6.18...v0.6.19) (2025-06-30)
 
 
