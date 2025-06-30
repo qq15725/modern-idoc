@@ -1,6 +1,8 @@
 import { getObjectValueByPath, RawWeakMap, setObjectValueByPath } from '../utils'
 
 export interface Definable {
+  offsetGet?: (key: string) => any
+  offsetSet?: (key: string, value: any) => void
   requestUpdate?: (
     key: PropertyKey,
     newValue: unknown,
@@ -42,18 +44,24 @@ export function defineProperty(constructor: any, key: PropertyKey, declaration: 
     || {
       get(this: Definable) {
         if (typeof alias === 'string') {
+          if (this.offsetGet) {
+            this.offsetGet(alias)
+          }
           return getObjectValueByPath(this as any, alias)
         }
         else {
           return (this as any)[alias]
         }
       },
-      set(this: Definable, v: unknown) {
+      set(this: Definable, value: unknown) {
         if (typeof alias === 'string') {
-          setObjectValueByPath(this as any, alias, v)
+          if (this.offsetSet) {
+            this.offsetSet(alias, value)
+          }
+          setObjectValueByPath(this as any, alias, value)
         }
         else {
-          (this as any)[alias] = v
+          (this as any)[alias] = value
         }
       },
     }
