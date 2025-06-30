@@ -15,6 +15,7 @@ export interface PropertyDeclaration {
   readonly [key: string]: any
   readonly default?: any | (() => any)
   readonly alias?: string | symbol
+  readonly protected?: boolean
 }
 
 const declarationMap = new RawWeakMap<object, Map<PropertyKey, PropertyDeclaration>>()
@@ -32,15 +33,16 @@ export function defineProperty(constructor: any, key: PropertyKey, declaration: 
   getDeclarations(constructor).set(key, declaration)
 
   const {
-    default: defaultValue,
+    default: _default,
     alias,
+    protected: _protected,
   } = declaration
 
   const internalKey = Symbol.for(String(key))
 
-  const getDefaultValue = (): any => typeof defaultValue === 'function'
-    ? defaultValue()
-    : defaultValue
+  const getDefaultValue = (): any => typeof _default === 'function'
+    ? _default()
+    : _default
 
   const descriptor = Object.getOwnPropertyDescriptor(constructor.prototype, key)
     || {
@@ -54,7 +56,7 @@ export function defineProperty(constructor: any, key: PropertyKey, declaration: 
           }
         }
         else {
-          if (typeof key === 'string' && this.offsetGet) {
+          if (!_protected && typeof key === 'string' && this.offsetGet) {
             return this.offsetGet(key)
           }
           else {
@@ -72,7 +74,7 @@ export function defineProperty(constructor: any, key: PropertyKey, declaration: 
           }
         }
         else {
-          if (typeof key === 'string' && this.offsetSet) {
+          if (!_protected && typeof key === 'string' && this.offsetSet) {
             this.offsetSet(key, value)
           }
           else {
@@ -110,4 +112,8 @@ export function property(options?: PropertyDeclaration): PropertyDecorator {
   return function (proto: any, name: any) {
     defineProperty(proto.constructor, name, options)
   }
+}
+
+export function protectedProperty(options?: Omit<PropertyDeclaration, 'protected'>): PropertyDecorator {
+  return property({ ...options, protected: true })
 }
