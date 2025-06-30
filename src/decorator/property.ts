@@ -33,8 +33,12 @@ export function defineProperty(constructor: any, key: PropertyKey, declaration: 
 
   const {
     default: defaultValue,
-    alias = Symbol.for(String(key)),
+    alias = key,
   } = declaration
+
+  const _alias = alias === key
+    ? Symbol.for(String(alias))
+    : alias
 
   const getDefaultValue = (): any => typeof defaultValue === 'function'
     ? defaultValue()
@@ -43,25 +47,24 @@ export function defineProperty(constructor: any, key: PropertyKey, declaration: 
   const descriptor = Object.getOwnPropertyDescriptor(constructor.prototype, key)
     || {
       get(this: Definable) {
-        if (typeof alias === 'string') {
-          if (this.offsetGet) {
-            this.offsetGet(alias)
-          }
-          return getObjectValueByPath(this as any, alias)
+        if (typeof _alias === 'string') {
+          return this.offsetGet
+            ? this.offsetGet(_alias)
+            : getObjectValueByPath(this as any, _alias)
         }
         else {
-          return (this as any)[alias]
+          return (this as any)[_alias]
         }
       },
       set(this: Definable, value: unknown) {
-        if (typeof alias === 'string') {
+        if (typeof _alias === 'string') {
           if (this.offsetSet) {
-            this.offsetSet(alias, value)
+            this.offsetSet(_alias, value)
           }
-          setObjectValueByPath(this as any, alias, value)
+          setObjectValueByPath(this as any, _alias, value)
         }
         else {
-          (this as any)[alias] = value
+          (this as any)[_alias] = value
         }
       },
     }
