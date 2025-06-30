@@ -33,12 +33,10 @@ export function defineProperty(constructor: any, key: PropertyKey, declaration: 
 
   const {
     default: defaultValue,
-    alias = key,
+    alias,
   } = declaration
 
-  const _alias = alias === key
-    ? Symbol.for(String(alias))
-    : alias
+  const internalKey = Symbol.for(String(key))
 
   const getDefaultValue = (): any => typeof defaultValue === 'function'
     ? defaultValue()
@@ -47,24 +45,39 @@ export function defineProperty(constructor: any, key: PropertyKey, declaration: 
   const descriptor = Object.getOwnPropertyDescriptor(constructor.prototype, key)
     || {
       get(this: Definable) {
-        if (typeof _alias === 'string') {
-          return this.offsetGet
-            ? this.offsetGet(_alias)
-            : getObjectValueByPath(this as any, _alias)
+        if (alias && alias !== key) {
+          if (typeof alias === 'string') {
+            return getObjectValueByPath(this as any, alias)
+          }
+          else {
+            return (this as any)[alias]
+          }
         }
         else {
-          return (this as any)[_alias]
+          if (typeof key === 'string' && this.offsetGet) {
+            return this.offsetGet(key)
+          }
+          else {
+            return (this as any)[internalKey]
+          }
         }
       },
       set(this: Definable, value: unknown) {
-        if (typeof _alias === 'string') {
-          if (this.offsetSet) {
-            this.offsetSet(_alias, value)
+        if (alias && alias !== key) {
+          if (typeof alias === 'string') {
+            setObjectValueByPath(this as any, alias, value)
           }
-          setObjectValueByPath(this as any, _alias, value)
+          else {
+            (this as any)[alias] = value
+          }
         }
         else {
-          (this as any)[_alias] = value
+          if (typeof key === 'string' && this.offsetSet) {
+            this.offsetSet(key, value)
+          }
+          else {
+            (this as any)[internalKey] = value
+          }
         }
       },
     }
