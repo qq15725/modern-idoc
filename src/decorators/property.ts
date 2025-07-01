@@ -53,7 +53,7 @@ export function getPropertyDescriptor<V, T extends ReactiveObject>(
     return (typeof fallback === 'function' ? fallback() : fallback) as any
   }
 
-  const descriptor = {
+  return {
     get(this: T) {
       let result
       if (alias && alias !== key) {
@@ -71,7 +71,6 @@ export function getPropertyDescriptor<V, T extends ReactiveObject>(
       return result ?? getFallbackValue()
     },
     set(this: T, newValue: V) {
-      const oldValue = descriptor.get?.call(this)
       if (alias && alias !== key) {
         setObjectValueByPath(this as any, alias, newValue)
       }
@@ -84,11 +83,8 @@ export function getPropertyDescriptor<V, T extends ReactiveObject>(
           this[internalKey] = newValue
         }
       }
-      this.onUpdateProperty?.(key, newValue, oldValue, declaration)
     },
   }
-
-  return descriptor
 }
 
 export function defineProperty<V, T extends ReactiveObject>(
@@ -103,7 +99,9 @@ export function defineProperty<V, T extends ReactiveObject>(
       return descriptor.get.call(this)
     },
     set(this: T, newValue: unknown) {
+      const oldValue = descriptor.get?.call(this)
       descriptor.set.call(this, newValue)
+      this.onUpdateProperty?.(key, newValue, oldValue, declaration)
     },
     configurable: true,
     enumerable: true,
@@ -135,7 +133,9 @@ export function property<V, T extends ReactiveObject>(
         return descriptor.get.call(this)
       },
       set(this: T, newValue: V) {
+        const oldValue = descriptor.get?.call(this)
         descriptor.set.call(this, newValue)
+        this.onUpdateProperty?.(key, newValue, oldValue, declaration)
       },
     } as ClassAccessorDecoratorResult<T, V>
   }
