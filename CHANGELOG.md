@@ -1,3 +1,12 @@
+## [0.7.1](https://github.com/qq15725/modern-idoc/compare/v0.7.0...v0.7.1) (2025-07-01)
+
+
+### Bug Fixes
+
+* property ([6b1b6ef](https://github.com/qq15725/modern-idoc/commit/6b1b6ef929f7d2e2e2dbdfc043746694fb8ca1b0))
+
+
+
 # [0.7.0](https://github.com/qq15725/modern-idoc/compare/v0.6.20...v0.7.0) (2025-07-01)
 
 
