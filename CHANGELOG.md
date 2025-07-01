@@ -1,3 +1,12 @@
+# [0.7.0](https://github.com/qq15725/modern-idoc/compare/v0.6.20...v0.7.0) (2025-07-01)
+
+
+### Features
+
+* support accessor decorator ([e36a22a](https://github.com/qq15725/modern-idoc/commit/e36a22acc022a3753bb31d31e2512cf4f8802c2f))
+
+
+
 ## [0.6.20](https://github.com/qq15725/modern-idoc/compare/v0.6.19...v0.6.20) (2025-06-30)
 
 
