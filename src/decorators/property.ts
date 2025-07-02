@@ -114,6 +114,8 @@ export function defineProperty<V, T extends ReactiveObject>(
     return result
   }
 
+  delete target[key]
+
   Object.defineProperty(target, key, {
     get(this: T) {
       return get.call(this)
