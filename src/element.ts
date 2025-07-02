@@ -17,6 +17,7 @@ import { normalizeBackground } from './background'
 import { normalizeEffect } from './effect'
 import { normalizeFill } from './fill'
 import { normalizeForeground } from './foreground'
+import { idGenerator } from './id'
 import { normalizeOutline } from './outline'
 import { normalizeShadow } from './shadow'
 import { normalizeShape } from './shape'
@@ -26,6 +27,7 @@ import { clearUndef, isNone } from './utils'
 import { normalizeVideo } from './video'
 
 export interface Element<T = Meta> extends Node<T> {
+  id?: string
   style?: WithNone<Style>
   text?: WithNone<Text>
   background?: WithNone<Background>
@@ -41,6 +43,7 @@ export interface Element<T = Meta> extends Node<T> {
 }
 
 export type NormalizedElement<T = Meta> = Node<T> & {
+  id: string
   style?: Partial<NormalizedStyle>
   text?: NormalizedText
   background?: NormalizedBackground
@@ -58,6 +61,7 @@ export type NormalizedElement<T = Meta> = Node<T> & {
 export function normalizeElement<T = Meta>(element: Element<T>): NormalizedElement<T> {
   return clearUndef({
     ...element,
+    id: element.id ?? idGenerator(),
     style: isNone(element.style) ? undefined : normalizeStyle(element.style),
     text: isNone(element.text) ? undefined : normalizeText(element.text),
     background: isNone(element.background) ? undefined : normalizeBackground(element.background),

@@ -54,7 +54,8 @@
     "prepare": "simple-git-hooks"
   },
   "dependencies": {
-    "colord": "^2.9.3"
+    "colord": "^2.9.3",
+    "nanoid": "^5.1.5"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^4.16.1",

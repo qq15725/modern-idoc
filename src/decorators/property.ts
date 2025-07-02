@@ -7,12 +7,12 @@ export interface PropertyDeclaration {
 }
 
 export interface ReactiveObject {
-  getter?: (key: string, context: ReactiveObjectGetterSetterContext) => any
-  setter?: (key: string, value: any, context: ReactiveObjectGetterSetterContext) => void
+  getter?: (key: string, context: ReactiveObjectPropertyAccessorContext) => any
+  setter?: (key: string, value: any, context: ReactiveObjectPropertyAccessorContext) => void
   onUpdateProperty?: (key: string, newValue: unknown, oldValue: unknown, declaration: PropertyDeclaration) => void
 }
 
-export interface ReactiveObjectGetterSetterContext {
+export interface ReactiveObjectPropertyAccessorContext {
   declaration: PropertyDeclaration
   internalKey: symbol
 }
