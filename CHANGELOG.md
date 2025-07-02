@@ -1,3 +1,12 @@
+## [0.7.3](https://github.com/qq15725/modern-idoc/compare/v0.7.2...v0.7.3) (2025-07-02)
+
+
+### Features
+
+* idGenerator ([82a9ecb](https://github.com/qq15725/modern-idoc/commit/82a9ecbed8f373943b4b41aee6919c41511ee37e))
+
+
+
 ## [0.7.2](https://github.com/qq15725/modern-idoc/compare/v0.7.1...v0.7.2) (2025-07-02)
 
 
