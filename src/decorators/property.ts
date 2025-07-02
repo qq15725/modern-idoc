@@ -92,6 +92,12 @@ export function defineProperty<V, T extends ReactiveObject>(
   key: string,
   declaration: PropertyDeclaration = {},
 ): void {
+  getDeclarations(
+    typeof target === 'function'
+      ? target
+      : target.constructor,
+  ).set(key, declaration)
+
   const descriptor = getPropertyDescriptor<V, T>(key, declaration)
 
   Object.defineProperty(target.prototype, key, {
@@ -125,7 +131,7 @@ export function property<V, T extends ReactiveObject>(
 
     return {
       init(this: T, v: V) {
-        getDeclarations(this).set(key, declaration)
+        getDeclarations(this.constructor).set(key, declaration)
         descriptor.set.call(this, v)
         return v
       },
