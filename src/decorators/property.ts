@@ -98,14 +98,29 @@ export function defineProperty<V, T extends ReactiveObject>(
       : target.constructor,
   ).set(key, declaration)
 
+  const prototype = target.prototype
+  const rawDescriptor = Object.getOwnPropertyDescriptor(prototype, key)
   const descriptor = getPropertyDescriptor<V, T>(key, declaration)
 
-  Object.defineProperty(target.prototype, key, {
+  let isFirst = true
+  function get(this: T): any {
+    let result = descriptor.get.call(this)
+    if (isFirst) {
+      isFirst = false
+      if (result === undefined && rawDescriptor) {
+        result = rawDescriptor.get?.call(this) ?? rawDescriptor.value
+        descriptor.set.call(this, result)
+      }
+    }
+    return result
+  }
+
+  Object.defineProperty(prototype, key, {
     get(this: T) {
-      return descriptor.get.call(this)
+      return get.call(this)
     },
     set(this: T, newValue: unknown) {
-      const oldValue = descriptor.get?.call(this)
+      const oldValue = get.call(this)
       descriptor.set.call(this, newValue)
       this.onUpdateProperty?.(key, newValue, oldValue, declaration)
     },
@@ -115,6 +130,18 @@ export function defineProperty<V, T extends ReactiveObject>(
 }
 
 export function property<V, T extends ReactiveObject>(
+  declaration?: PropertyDeclaration,
+): PropertyDecorator {
+  return function (target: any, key) {
+    if (typeof key !== 'string') {
+      throw new TypeError('Failed to @property decorator, prop name cannot be a symbol')
+    }
+
+    defineProperty<V, T>(target.constructor, key, declaration)
+  }
+}
+
+export function property2<V, T extends ReactiveObject>(
   declaration: PropertyDeclaration = {},
 ) {
   return function (
