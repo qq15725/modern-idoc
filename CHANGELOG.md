@@ -1,3 +1,12 @@
+## [0.7.7](https://github.com/qq15725/modern-idoc/compare/v0.7.6...v0.7.7) (2025-07-03)
+
+
+### Bug Fixes
+
+* defineProperty ([3ebefa0](https://github.com/qq15725/modern-idoc/commit/3ebefa040a329ddd21edf4716a53c62e1f6e100b))
+
+
+
 ## [0.7.6](https://github.com/qq15725/modern-idoc/compare/v0.7.5...v0.7.6) (2025-07-02)
 
 
