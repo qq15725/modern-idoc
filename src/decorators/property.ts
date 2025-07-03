@@ -83,6 +83,7 @@ export function getPropertyDescriptor<V, T extends ReactiveObject>(
       const defaultValue = getDefaultValue()
       if (defaultValue !== undefined) {
         set.call(this, defaultValue)
+        result = defaultValue
       }
     }
     return result
