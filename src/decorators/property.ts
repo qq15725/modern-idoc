@@ -2,6 +2,7 @@ import { getObjectValueByPath, setObjectValueByPath } from '../utils'
 
 export interface PropertyDeclaration {
   [key: string]: unknown
+  default?: unknown | (() => unknown)
   fallback?: unknown | (() => unknown)
   alias?: string
 }
@@ -43,47 +44,68 @@ export function getPropertyDescriptor<V, T extends ReactiveObject>(
   const internalKey = Symbol.for(key)
 
   const {
+    default: _default,
     fallback,
     alias,
   } = declaration
 
   const ctx = { declaration, internalKey }
 
+  const getDefaultValue = (): any => {
+    return (typeof _default === 'function' ? _default() : _default) as any
+  }
+
   const getFallbackValue = (): any => {
     return (typeof fallback === 'function' ? fallback() : fallback) as any
   }
 
+  let isFirst = true
+
+  function get(this: T): any {
+    let result
+    if (alias && alias !== key) {
+      result = getObjectValueByPath(this as any, alias)
+    }
+    else {
+      if (typeof this.getter !== 'undefined') {
+        result = this.getter(key, ctx)
+      }
+      else {
+        // @ts-expect-error ignore
+        result = this[internalKey]
+      }
+    }
+    // fallback
+    result = result ?? getFallbackValue()
+    // defaukt
+    if (result === undefined && isFirst) {
+      isFirst = false
+      const defaultValue = getDefaultValue()
+      if (defaultValue !== undefined) {
+        set.call(this, defaultValue)
+      }
+    }
+    return result
+  }
+
+  function set(this: T, newValue: V): void {
+    if (alias && alias !== key) {
+      setObjectValueByPath(this as any, alias, newValue)
+    }
+    else {
+      if (typeof this.setter !== 'undefined') {
+        this.setter(key, newValue, ctx)
+      }
+      else {
+        // @ts-expect-error ignore
+        this[internalKey] = newValue
+      }
+    }
+  }
+
   return {
-    get(this: T) {
-      let result
-      if (alias && alias !== key) {
-        result = getObjectValueByPath(this as any, alias)
-      }
-      else {
-        if (typeof this.getter !== 'undefined') {
-          result = this.getter(key, ctx)
-        }
-        else {
-          // @ts-expect-error ignore
-          result = this[internalKey]
-        }
-      }
-      return result ?? getFallbackValue()
-    },
-    set(this: T, newValue: V) {
-      if (alias && alias !== key) {
-        setObjectValueByPath(this as any, alias, newValue)
-      }
-      else {
-        if (typeof this.setter !== 'undefined') {
-          this.setter(key, newValue, ctx)
-        }
-        else {
-          // @ts-expect-error ignore
-          this[internalKey] = newValue
-        }
-      }
-    },
+    get,
+    set,
   }
 }
 
@@ -98,30 +120,14 @@ export function defineProperty<V, T extends ReactiveObject>(
       : target.constructor,
   ).set(key, declaration)
 
-  const rawDescriptor = Object.getOwnPropertyDescriptor(target, key)
   const descriptor = getPropertyDescriptor<V, T>(key, declaration)
-
-  let isFirst = true
-  function get(this: T): any {
-    let result = descriptor.get.call(this)
-    if (isFirst) {
-      isFirst = false
-      if (result === undefined && rawDescriptor) {
-        result = rawDescriptor.get?.call(this) ?? rawDescriptor.value
-        descriptor.set.call(this, result)
-      }
-    }
-    return result
-  }
-
-  delete target[key]
 
   Object.defineProperty(target, key, {
     get(this: T) {
-      return get.call(this)
+      return descriptor.get.call(this)
     },
     set(this: T, newValue: unknown) {
-      const oldValue = get.call(this)
+      const oldValue = descriptor.get.call(this)
       descriptor.set.call(this, newValue)
       this.onUpdateProperty?.(key, newValue, oldValue, declaration)
     },
