@@ -1,3 +1,12 @@
+# [0.8.0](https://github.com/qq15725/modern-idoc/compare/v0.7.8...v0.8.0) (2025-07-04)
+
+
+### Features
+
+* add FlatDocument ([88c2a35](https://github.com/qq15725/modern-idoc/commit/88c2a3592488feb4bb42ea66015f165ed5fbda3c))
+
+
+
 ## [0.7.8](https://github.com/qq15725/modern-idoc/compare/v0.7.7...v0.7.8) (2025-07-03)
 
 
