@@ -1,6 +1,6 @@
 import type { FillObject, NormalizedFill } from '../fill'
-import type { HeadEnd } from './head-end'
-import type { TailEnd } from './tail-end'
+import type { HeadEnd } from './headEnd'
+import type { TailEnd } from './tailEnd'
 import { normalizeFill } from '../fill'
 import { pick } from '../utils'
 

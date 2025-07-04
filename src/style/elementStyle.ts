@@ -1,12 +1,12 @@
 import type { NormalizedColor } from '../color'
 import type { NormalizedShadowStyle } from '../shadow'
 import type { WithStyleNone } from '../types'
-import type { NormalizedLayoutStyle } from './layout-style'
-import type { NormalizedTransformStyle } from './transform-style'
+import type { NormalizedLayoutStyle } from './layoutStyle'
+import type { NormalizedTransformStyle } from './transformStyle'
 import type { BorderStyle, PointerEvents, Visibility } from './types'
 import { getDefaultShadowStyle } from '../shadow'
-import { getDefaultLayoutStyle } from './layout-style'
-import { getDefaultTransformStyle } from './transform-style'
+import { getDefaultLayoutStyle } from './layoutStyle'
+import { getDefaultTransformStyle } from './transformStyle'
 
 export type BackgroundSize =
   | 'contain' | 'cover' | string

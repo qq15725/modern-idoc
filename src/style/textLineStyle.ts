@@ -1,6 +1,6 @@
-import type { NormalizedListStyleStyle } from './list-style'
+import type { NormalizedListStyleStyle } from './listStyle'
 import type { TextAlign, TextWrap, WritingMode } from './types'
-import { getDefaultListStyleStyle } from './list-style'
+import { getDefaultListStyleStyle } from './listStyle'
 
 export type NormalizedTextLineStyle =
   & NormalizedListStyleStyle

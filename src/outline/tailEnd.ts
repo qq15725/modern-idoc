@@ -1,7 +1,7 @@
 import type { WithNone } from '../types'
-import type { LineEndSize, LineEndType } from './line-end'
+import type { LineEndSize, LineEndType } from './lineEnd'
 
-export interface HeadEnd {
+export interface TailEnd {
   type: LineEndType
   width?: WithNone<LineEndSize>
   height?: WithNone<LineEndSize>

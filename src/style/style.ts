@@ -2,12 +2,12 @@ import type { Color } from '../color'
 import type { Fill, NormalizedFill } from '../fill'
 import type { NormalizedOutline, Outline } from '../outline'
 import type { WithStyleNone } from '../types'
-import type { NormalizedElementStyle } from './element-style'
-import type { NormalizedTextStyle } from './text-style'
+import type { NormalizedElementStyle } from './elementStyle'
+import type { NormalizedTextStyle } from './textStyle'
 import { normalizeColor } from '../color'
 import { clearUndef, isNone } from '../utils'
-import { getDefaultElementStyle } from './element-style'
-import { getDefaultTextStyle } from './text-style'
+import { getDefaultElementStyle } from './elementStyle'
+import { getDefaultTextStyle } from './textStyle'
 
 export type NormalizedStyle =
   & NormalizedTextStyle

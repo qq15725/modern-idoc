@@ -1,13 +1,13 @@
-import type { ColorFill, ColorFillObject, NormalizedColorFill } from './color-fill'
-import type { GradientFill, GradientFillObject, NormalizedGradientFill } from './gradient-fill'
-import type { ImageFill, ImageFillObject, NormalizedImageFill } from './image-fill'
-import type { NormalizedPresetFill, PresetFill, PresetFillObject } from './preset-fill'
+import type { ColorFill, ColorFillObject, NormalizedColorFill } from './colorFill'
+import type { GradientFill, GradientFillObject, NormalizedGradientFill } from './gradientFill'
+import type { ImageFill, ImageFillObject, NormalizedImageFill } from './imageFill'
+import type { NormalizedPresetFill, PresetFill, PresetFillObject } from './presetFill'
 import { isColor, isGradient } from '../color'
 import { isNone } from '../utils'
-import { normalizeColorFill } from './color-fill'
-import { normalizeGradientFill } from './gradient-fill'
-import { normalizeImageFill } from './image-fill'
-import { normalizePresetFill } from './preset-fill'
+import { normalizeColorFill } from './colorFill'
+import { normalizeGradientFill } from './gradientFill'
+import { normalizeImageFill } from './imageFill'
+import { normalizePresetFill } from './presetFill'
 
 export type FillObject =
   & Partial<ColorFillObject>

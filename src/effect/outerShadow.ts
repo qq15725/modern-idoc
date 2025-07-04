@@ -1,5 +1,5 @@
-import type { InnerShadowObject, NormalizedInnerShadow } from './inner-shadow'
-import { getDefaultInnerShadow, normalizeInnerShadow } from './inner-shadow'
+import type { InnerShadowObject, NormalizedInnerShadow } from './innerShadow'
+import { getDefaultInnerShadow, normalizeInnerShadow } from './innerShadow'
 
 export interface NormalizedBaseOuterShadow {
   scaleX: number

@@ -1,11 +1,11 @@
 import type { WithNone } from '../types'
-import type { InnerShadow, NormalizedInnerShadow } from './inner-shadow'
-import type { NormalizedOuterShadow, OuterShadow } from './outer-shadow'
-import type { NormalizedSoftEdge, SoftEdge } from './soft-edge'
+import type { InnerShadow, NormalizedInnerShadow } from './innerShadow'
+import type { NormalizedOuterShadow, OuterShadow } from './outerShadow'
+import type { NormalizedSoftEdge, SoftEdge } from './softEdge'
 import { clearUndef, isNone } from '../utils'
-import { normalizeInnerShadow } from './inner-shadow'
-import { normalizeOuterShadow } from './outer-shadow'
-import { normalizeSoftEdge } from './soft-edge'
+import { normalizeInnerShadow } from './innerShadow'
+import { normalizeOuterShadow } from './outerShadow'
+import { normalizeSoftEdge } from './softEdge'
 
 export interface NormalizedEffect {
   innerShadow?: NormalizedInnerShadow
