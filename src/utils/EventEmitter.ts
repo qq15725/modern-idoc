@@ -1,48 +1,35 @@
-export type EventListenerValue = (...args: any[]) => void
+export type EventListenerValue<T extends any[] = any[]> = (...args: T) => void
 export type EventListenerOptions = boolean | { once?: boolean }
-export interface EventListener {
-  value: EventListenerValue
+export interface EventListener<T extends any[] = any[]> {
+  value: EventListenerValue<T>
   options?: EventListenerOptions
 }
 
-export class EventEmitter {
-  eventListeners = new Map<string, EventListener | EventListener[]>()
+export class EventEmitter<T extends Record<string, any> = Record<string, any>> {
+  eventListeners = new Map<keyof T, EventListener | EventListener[]>()
 
-  removeAllListeners(): this {
-    this.eventListeners.clear()
-    return this
-  }
-
-  hasEventListener(event: string): boolean {
-    return this.eventListeners.has(event)
-  }
-
-  on(type: string, listener: EventListenerValue, options?: EventListenerOptions): any {
+  addEventListener<K extends keyof T>(event: K, listener: EventListenerValue<T[K]>, options?: EventListenerOptions): this {
     const object = { value: listener, options }
-    const listeners = this.eventListeners.get(type)
+    const listeners = this.eventListeners.get(event)
     if (!listeners) {
-      this.eventListeners.set(type, object)
+      this.eventListeners.set(event, object)
     }
     else if (Array.isArray(listeners)) {
       listeners.push(object)
     }
     else {
-      this.eventListeners.set(type, [listeners, object])
+      this.eventListeners.set(event, [listeners, object])
     }
     return this
   }
 
-  once(type: string, listener: EventListenerValue): this {
-    return this.on(type, listener, { once: true })
-  }
-
-  off(type: string, listener?: EventListenerValue, options?: EventListenerOptions): this {
+  removeEventListener<K extends keyof T>(event: K, listener: EventListenerValue<T[K]>, options?: EventListenerOptions): this {
     if (!listener) {
-      this.eventListeners.delete(type)
+      this.eventListeners.delete(event)
       return this
     }
 
-    const listeners = this.eventListeners.get(type)
+    const listeners = this.eventListeners.get(event)
 
     if (!listeners) {
       return this
@@ -63,10 +50,10 @@ export class EventEmitter {
         }
       }
       if (events.length) {
-        this.eventListeners.set(type, events.length === 1 ? events[0] : events)
+        this.eventListeners.set(event, events.length === 1 ? events[0] : events)
       }
       else {
-        this.eventListeners.delete(type)
+        this.eventListeners.delete(event)
       }
     }
     else {
@@ -77,28 +64,37 @@ export class EventEmitter {
           || (typeof listeners.options === 'boolean' || listeners.options?.once)
         )
       ) {
-        this.eventListeners.delete(type)
+        this.eventListeners.delete(event)
       }
     }
     return this
   }
 
-  emit(type: string, ...args: any[]): boolean {
-    const listeners = this.eventListeners.get(type)
+  removeAllListeners(): this {
+    this.eventListeners.clear()
+    return this
+  }
+
+  hasEventListener(event: string): boolean {
+    return this.eventListeners.has(event)
+  }
+
+  dispatchEvent<K extends keyof T>(event: K, ...args: T[K]): boolean {
+    const listeners = this.eventListeners.get(event)
 
     if (listeners) {
       if (Array.isArray(listeners)) {
         for (let len = listeners.length, i = 0; i < len; i++) {
           const object = listeners[i]
           if (typeof object.options === 'object' && object.options?.once) {
-            this.off(type, object.value, object.options)
+            this.off(event, object.value, object.options)
           }
           object.value.apply(this, args)
         }
       }
       else {
         if (typeof listeners.options === 'object' && listeners.options?.once) {
-          this.off(type, listeners.value, listeners.options)
+          this.off(event, listeners.value, listeners.options)
         }
         listeners.value.apply(this, args)
       }
@@ -107,5 +103,21 @@ export class EventEmitter {
     else {
       return false
     }
+  }
+
+  on<K extends keyof T>(event: K, listener: EventListenerValue<T[K]>, options?: EventListenerOptions): this {
+    return this.addEventListener(event, listener, options)
+  }
+
+  once<K extends keyof T>(event: K, listener: EventListenerValue<T[K]>): this {
+    return this.addEventListener(event, listener, { once: true })
+  }
+
+  off<K extends keyof T>(event: K, listener: EventListenerValue<T[K]>, options?: EventListenerOptions): this {
+    return this.removeEventListener(event, listener, options)
+  }
+
+  emit<K extends keyof T>(event: K, ...args: T[K]): void {
+    this.dispatchEvent(event, ...args)
   }
 }
