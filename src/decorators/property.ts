@@ -19,17 +19,15 @@ export interface ReactiveObjectPropertyAccessorContext {
 }
 
 const propertiesSymbol = Symbol('properties')
-export function getDeclarations(target: unknown): Map<string, PropertyDeclaration> {
-  const proto = Object.getPrototypeOf(target)
+export function getDeclarations(constructor: any): Map<string, PropertyDeclaration> {
   let declarations
-  if (proto && Object.hasOwn(proto, propertiesSymbol)) {
-    declarations = proto[propertiesSymbol]
+  if (Object.hasOwn(constructor, propertiesSymbol)) {
+    declarations = constructor[propertiesSymbol]
   }
   else {
-    declarations = new Map(proto ? getDeclarations(proto) : undefined)
-    if (proto) {
-      proto[propertiesSymbol] = declarations
-    }
+    const superConstructor = Object.getPrototypeOf(constructor)
+    declarations = new Map(superConstructor ? getDeclarations(superConstructor) : undefined)
+    constructor[propertiesSymbol] = declarations
   }
   return declarations
 }
@@ -111,19 +109,15 @@ export function getPropertyDescriptor<V, T extends ReactiveObject>(
 }
 
 export function defineProperty<V, T extends ReactiveObject>(
-  target: any,
+  constructor: any,
   key: string,
   declaration: PropertyDeclaration = {},
 ): void {
-  getDeclarations(
-    typeof target === 'function'
-      ? target
-      : target.constructor,
-  ).set(key, declaration)
+  getDeclarations(constructor).set(key, declaration)
 
   const descriptor = getPropertyDescriptor<V, T>(key, declaration)
 
-  Object.defineProperty(target, key, {
+  Object.defineProperty(constructor.prototype, key, {
     get(this: T) {
       return descriptor.get.call(this)
     },
@@ -145,7 +139,7 @@ export function property<V, T extends ReactiveObject>(
       throw new TypeError('Failed to @property decorator, prop name cannot be a symbol')
     }
 
-    defineProperty<V, T>(target, key, declaration)
+    defineProperty<V, T>(target.constructor, key, declaration)
   }
 }
 
