@@ -14,9 +14,9 @@ export interface NormalizedEffect {
 }
 
 export interface EffectObject {
-  innerShadow: WithNone<InnerShadow>
-  outerShadow: WithNone<OuterShadow>
-  softEdge: WithNone<SoftEdge>
+  innerShadow?: WithNone<InnerShadow>
+  outerShadow?: WithNone<OuterShadow>
+  softEdge?: WithNone<SoftEdge>
 }
 
 export type Effect =

@@ -1,8 +1,13 @@
-import { normalizeDocument, normalizeGradient } from '../../src'
+import type { NormalizedDocument, NormalizedElement } from '../../src'
+import { normalizeDocument, normalizeElement, normalizeGradient } from '../../src'
 import { pdf } from './pdf'
 import { pptx } from './pptx'
 import './text'
 import './reactive'
+
+normalizeElement({} as NormalizedElement)
+
+normalizeDocument({} as NormalizedDocument)
 
 // pdf
 console.warn('PDF', normalizeDocument(pdf))
