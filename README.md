@@ -92,4 +92,4 @@ const pdf: Document = {
 - [modern-pdf](https://github.com/qq15725/modern-pdf) PDF codec
 - [modern-openxml](https://github.com/qq15725/modern-openxml) PPTX、etc... codec
 - [modern-canvas](https://github.com/qq15725/modern-canvas) IDoc to WebGL renderer
-- [modern-idoc-svg](https://github.com/qq15725/modern-text) IDoc to SVG renderer
+- [modern-idoc-svg](https://github.com/qq15725/modern-idoc-svg) IDoc to SVG renderer
