@@ -31,6 +31,7 @@ export interface NormalizedText {
 
 export type Text =
   | string
+  | TextContent
   | (Omit<NormalizedText, 'content'> & { content: TextContent })
 
 const CRLF_RE = /\r\n|\n\r|\n|\r/

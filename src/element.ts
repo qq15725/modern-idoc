@@ -26,7 +26,7 @@ import { normalizeText } from './text'
 import { clearUndef, isNone } from './utils'
 import { normalizeVideo } from './video'
 
-export interface Element<T = Meta> extends Node<T> {
+export interface Element<T = Meta> extends Omit<Node<T>, 'children'> {
   id?: string
   style?: WithNone<Style>
   text?: WithNone<Text>
@@ -42,7 +42,7 @@ export interface Element<T = Meta> extends Node<T> {
   children?: Element[]
 }
 
-export type NormalizedElement<T = Meta> = Node<T> & {
+export interface NormalizedElement<T = Meta> extends Omit<Node<T>, 'children'> {
   id: string
   style?: Partial<NormalizedStyle>
   text?: NormalizedText

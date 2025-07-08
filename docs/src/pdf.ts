@@ -6,32 +6,16 @@ export const pdf: Document = {
       style: { width: 300, height: 600 },
       children: [
         {
-          style: {
-            rotate: 60,
-            width: 50,
-            height: 50,
-          },
+          style: { rotate: 60, width: 50, height: 50 },
           background: '/example.png',
           fill: '#FF00FF',
         },
         {
-          style: {
-            rotate: 40,
-            left: 100,
-            top: 100,
-            fontSize: 20,
-            color: '#FF00FF',
-          },
+          style: { rotate: 40, left: 100, top: 100, fontSize: 20, color: '#FF00FF' },
           text: 'test',
         },
         {
-          style: {
-            left: 200,
-            top: 100,
-            width: 100,
-            height: 200,
-            fontSize: 22,
-          },
+          style: { left: 200, top: 100, width: 100, height: 200, fontSize: 22 },
           text: [
             {
               letterSpacing: 3,
