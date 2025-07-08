@@ -18,7 +18,13 @@
   </a>
 </p>
 
-## Usage
+## 📦 Install
+
+```
+npm i modern-idoc
+```
+
+## 🦄 Usage
 
 ```ts
 import type { Document } from 'modern-idoc'
@@ -85,4 +91,5 @@ const pdf: Document = {
 - [modern-text](https://github.com/qq15725/modern-text) text renderer
 - [modern-pdf](https://github.com/qq15725/modern-pdf) PDF codec
 - [modern-openxml](https://github.com/qq15725/modern-openxml) PPTX、etc... codec
-- [modern-canvas](https://github.com/qq15725/modern-canvas) IDoc WebGL renderer
+- [modern-canvas](https://github.com/qq15725/modern-canvas) IDoc to WebGL renderer
+- [modern-idoc-svg](https://github.com/qq15725/modern-text) IDoc to SVG renderer
