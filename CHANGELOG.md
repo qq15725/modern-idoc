@@ -1,3 +1,7 @@
+## [0.8.4](https://github.com/qq15725/modern-idoc/compare/v0.8.3...v0.8.4) (2025-07-08)
+
+
+
 ## [0.8.3](https://github.com/qq15725/modern-idoc/compare/v0.8.2...v0.8.3) (2025-07-08)
 
 
