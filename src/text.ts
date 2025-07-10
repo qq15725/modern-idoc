@@ -44,6 +44,7 @@ export type NormalizedTextContent = NormalizedParagraph[]
 
 export interface TextObject {
   content?: TextContent
+  enabled?: boolean
   style?: Style
   effects?: Style[]
   measureDom?: any // runtime: HTMLElement
@@ -54,6 +55,7 @@ export interface TextObject {
 
 export interface NormalizedText {
   content: NormalizedTextContent
+  enabled?: boolean
   style?: NormalizedStyle
   effects?: NormalizedStyle[]
   measureDom?: any // runtime: HTMLElement
@@ -221,6 +223,7 @@ export function normalizeText(value: Text): NormalizedText {
   }
   else {
     return clearUndef({
+      ...value,
       content: normalizeTextContent(value.content ?? ''),
       style: value.style ? normalizeStyle(value.style) : undefined,
       effects: value.effects ? value.effects.map(v => normalizeStyle(v)) : undefined,
