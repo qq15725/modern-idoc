@@ -3,13 +3,14 @@ import type { GradientFill, GradientFillObject, NormalizedGradientFill } from '.
 import type { ImageFill, ImageFillObject, NormalizedImageFill } from './imageFill'
 import type { NormalizedPresetFill, PresetFill, PresetFillObject } from './presetFill'
 import { isColor, isGradient } from '../color'
-import { isNone } from '../utils'
+import { clearUndef, isNone } from '../utils'
 import { normalizeColorFill } from './colorFill'
 import { normalizeGradientFill } from './gradientFill'
 import { normalizeImageFill } from './imageFill'
 import { normalizePresetFill } from './presetFill'
 
 export type FillObject =
+  & { enabled?: boolean }
   & Partial<ColorFillObject>
   & Partial<GradientFillObject>
   & Partial<ImageFillObject>
@@ -20,6 +21,7 @@ export type Fill =
   | FillObject
 
 export type NormalizedFill =
+  & { enabled?: boolean }
   & Partial<NormalizedColorFill>
   & Partial<NormalizedGradientFill>
   & Partial<NormalizedImageFill>
@@ -68,17 +70,19 @@ export function isPresetFill(fill: Fill): fill is PresetFill {
 }
 
 export function normalizeFill(fill: Fill): NormalizedFill {
+  const enabled = fill && typeof fill === 'object' ? fill.enabled : undefined
+
   if (isColorFill(fill)) {
-    return normalizeColorFill(fill)
+    return clearUndef({ enabled, ...normalizeColorFill(fill) })
   }
   else if (isGradientFill(fill)) {
-    return normalizeGradientFill(fill)
+    return clearUndef({ enabled, ...normalizeGradientFill(fill) })
   }
   else if (isImageFill(fill)) {
-    return normalizeImageFill(fill)
+    return clearUndef({ enabled, ...normalizeImageFill(fill) })
   }
   else if (isPresetFill(fill)) {
-    return normalizePresetFill(fill)
+    return clearUndef({ enabled, ...normalizePresetFill(fill) })
   }
   return {}
 }

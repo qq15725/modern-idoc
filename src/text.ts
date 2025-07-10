@@ -43,7 +43,7 @@ export type TextContent =
 export type NormalizedTextContent = NormalizedParagraph[]
 
 export interface TextObject {
-  content: TextContent
+  content?: TextContent
   style?: Style
   effects?: Style[]
   measureDom?: any // runtime: HTMLElement
@@ -64,7 +64,7 @@ export interface NormalizedText {
 
 export type Text =
   | string
-  | TextContent
+  | FlatTextContent[]
   | TextObject
 
 const CRLF_RE = /\r\n|\n\r|\n|\r/
@@ -213,22 +213,15 @@ export function isFragmentObject(value: any): value is FragmentObject {
     && typeof value.content === 'string'
 }
 
-export function isTextObject(value: any): value is TextObject {
-  return value
-    && typeof value === 'object'
-    && 'content' in value
-    && typeof value.content === 'object'
-}
-
 export function normalizeText(value: Text): NormalizedText {
-  if (typeof value === 'string') {
+  if (typeof value === 'string' || Array.isArray(value)) {
     return {
       content: normalizeTextContent(value),
     }
   }
-  else if (isTextObject(value)) {
+  else {
     return clearUndef({
-      content: normalizeTextContent(value.content),
+      content: normalizeTextContent(value.content ?? ''),
       style: value.style ? normalizeStyle(value.style) : undefined,
       effects: value.effects ? value.effects.map(v => normalizeStyle(v)) : undefined,
       measureDom: value.measureDom,
@@ -236,11 +229,6 @@ export function normalizeText(value: Text): NormalizedText {
       fill: value.fill ? normalizeFill(value.fill) : undefined,
       outline: value.outline ? normalizeOutline(value.outline) : undefined,
     })
-  }
-  else {
-    return {
-      content: normalizeTextContent(value),
-    }
   }
 }
 

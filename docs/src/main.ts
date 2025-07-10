@@ -4,6 +4,7 @@ import { pdf } from './pdf'
 import { pptx } from './pptx'
 import './text'
 import './reactive'
+import './doc'
 
 normalizeElement({} as NormalizedElement)
 
