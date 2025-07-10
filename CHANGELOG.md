@@ -1,3 +1,14 @@
+## [0.8.5](https://github.com/qq15725/modern-idoc/compare/v0.8.4...v0.8.5) (2025-07-10)
+
+
+### Features
+
+* flatDocumentToDocument ([d2d6ec2](https://github.com/qq15725/modern-idoc/commit/d2d6ec2fa4cf64ea0888f66430cdc4785b3b0596))
+* text enabled ([e77492d](https://github.com/qq15725/modern-idoc/commit/e77492de6e0d4b1fb351c7fcc1ce2a6e4e009560))
+* text fill outline ([e52b83b](https://github.com/qq15725/modern-idoc/commit/e52b83b1046488c737f28fb916e4ccbf138f5a7d))
+
+
+
 ## [0.8.4](https://github.com/qq15725/modern-idoc/compare/v0.8.3...v0.8.4) (2025-07-08)
 
 
