@@ -44,7 +44,7 @@ export interface Element<T = Meta> extends Omit<Node<T>, 'children'> {
 
 export interface NormalizedElement<T = Meta> extends Omit<Node<T>, 'children'> {
   id: string
-  style?: Partial<NormalizedStyle>
+  style?: NormalizedStyle
   text?: NormalizedText
   background?: NormalizedBackground
   shape?: NormalizedShape

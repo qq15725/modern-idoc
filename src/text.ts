@@ -1,12 +1,33 @@
-import type { StyleObject } from './style'
+import type { Fill, NormalizedFill } from './fill'
+import type { NormalizedOutline, Outline } from './outline'
+import type { NormalizedStyle, Style, StyleObject } from './style'
+import { normalizeFill } from './fill'
+import { normalizeOutline } from './outline'
 import { normalizeStyle } from './style'
+import { clearUndef, isEqualObject } from './utils'
 
 export interface FragmentObject extends StyleObject {
   content: string
+  fill?: Fill
+  outline?: Outline
+}
+
+export interface NormalizedFragment extends NormalizedStyle {
+  content: string
+  fill?: NormalizedFill
+  outline?: NormalizedOutline
 }
 
 export interface ParagraphObject extends StyleObject {
   fragments: FragmentObject[]
+  fill?: Fill
+  outline?: Outline
+}
+
+export interface NormalizedParagraph extends NormalizedStyle {
+  fragments: NormalizedFragment[]
+  fill?: NormalizedFill
+  outline?: NormalizedOutline
 }
 
 export type FlatTextContent =
@@ -19,20 +40,32 @@ export type TextContent =
   | FlatTextContent
   | FlatTextContent[]
 
-export type NormalizedTextContent = ParagraphObject[]
+export type NormalizedTextContent = NormalizedParagraph[]
+
+export interface TextObject {
+  content: TextContent
+  style?: Style
+  effects?: Style[]
+  measureDom?: any // runtime: HTMLElement
+  fonts?: any // runtime: modern-font Fonts
+  fill?: Fill
+  outline?: Outline
+}
 
 export interface NormalizedText {
   content: NormalizedTextContent
-  style?: StyleObject
-  effects?: StyleObject[]
-  measureDom?: any // HTMLElement
-  fonts?: any // modern-font > Fonts
+  style?: NormalizedStyle
+  effects?: NormalizedStyle[]
+  measureDom?: any // runtime: HTMLElement
+  fonts?: any // runtime: modern-font Fonts
+  fill?: NormalizedFill
+  outline?: NormalizedOutline
 }
 
 export type Text =
   | string
   | TextContent
-  | (Omit<NormalizedText, 'content'> & { content: TextContent })
+  | TextObject
 
 const CRLF_RE = /\r\n|\n\r|\n|\r/
 const NORMALIZE_CRLF_RE = new RegExp(`${CRLF_RE.source}|<br\\/>`, 'g')
@@ -52,58 +85,70 @@ export function normalizeCRLF(content: string): string {
   return content.replace(NORMALIZE_CRLF_RE, NORMALIZED_CRLF)
 }
 
-export function isEqualStyle(style1: Record<string, any>, style2: Record<string, any>): boolean {
-  const keys = Array.from(new Set([...Object.keys(style1), ...Object.keys(style2)]))
-  return !keys.length || keys.every(key => style1[key] === style2[key])
-}
-
 export function normalizeTextContent(value: TextContent): NormalizedTextContent {
-  const paragraphs: ParagraphObject[] = []
+  const paragraphs: NormalizedParagraph[] = []
 
   function lastParagraph(): ParagraphObject | undefined {
     return paragraphs[paragraphs.length - 1]
   }
 
-  function addParagraph(style: StyleObject = {}): ParagraphObject {
-    let paragraph = paragraphs[paragraphs.length - 1]
-    if (paragraph?.fragments.length === 0) {
-      paragraph = { ...style, fragments: [] }
+  function addParagraph(styleOption?: Style, fillOption?: Fill, outlineOption?: Outline): NormalizedParagraph {
+    const style = styleOption ? normalizeStyle(styleOption) : {}
+    const fill = fillOption ? normalizeFill(fillOption) : undefined
+    const outline = outlineOption ? normalizeOutline(outlineOption) : undefined
+    const paragraph = clearUndef({
+      ...style,
+      fill,
+      outline,
+      fragments: [],
+    })
+    if (paragraphs[paragraphs.length - 1]?.fragments.length === 0) {
       paragraphs[paragraphs.length - 1] = paragraph
     }
     else {
-      paragraph = { ...style, fragments: [] }
       paragraphs.push(paragraph)
     }
     return paragraph
   }
 
-  function addFragment(content = '', style: StyleObject = {}): void {
+  function addFragment(content = '', styleOption?: Style, fillOption?: Fill, outlineOption?: Outline): void {
+    const style = styleOption ? normalizeStyle(styleOption) : {}
+    const fill = fillOption ? normalizeFill(fillOption) : undefined
+    const outline = outlineOption ? normalizeOutline(outlineOption) : undefined
     Array.from(content).forEach((c) => {
       if (isCRLF(c)) {
-        const { fragments, ...pStyle } = lastParagraph() || addParagraph()
+        const { fragments, fill: pFill, outline: pOutline, ...pStyle } = lastParagraph() || addParagraph()
         if (!fragments.length) {
-          fragments.push({
+          fragments.push(clearUndef({
             ...style,
+            fill,
+            outline,
             content: NORMALIZED_CRLF,
-          })
+          }))
         }
-        addParagraph(pStyle)
+        addParagraph(pStyle, pFill, pOutline)
       }
       else {
         const paragraph = lastParagraph() || addParagraph()
         const fragment = paragraph.fragments[paragraph.fragments.length - 1]
         if (fragment) {
-          const { content, ...fStyle } = fragment
+          const { content, fill: fFill, outline: fOutline, ...fStyle } = fragment
           // TODO opz
-          if (isEqualStyle(style, fStyle)) {
+          if (
+            isEqualObject(fill, fFill)
+            && isEqualObject(outline, fOutline)
+            && isEqualObject(style, fStyle)
+          ) {
             fragment.content = `${content}${c}`
             return
           }
         }
-        paragraph.fragments.push({
+        paragraph.fragments.push(clearUndef({
           ...style,
+          fill,
+          outline,
           content: c,
-        })
+        }))
       }
     })
   }
@@ -114,17 +159,17 @@ export function normalizeTextContent(value: TextContent): NormalizedTextContent 
       addParagraph()
       addFragment(p)
     }
-    else if ('content' in p) {
-      const { content, ...pStyle } = p
-      addParagraph(normalizeStyle(pStyle))
+    else if (isFragmentObject(p)) {
+      const { content, fill: fFill, outline: fOutline, ...fStyle } = p
+      addParagraph(fStyle, fFill, fOutline)
       addFragment(content)
     }
-    else if ('fragments' in p) {
-      const { fragments, ...pStyle } = p
-      addParagraph(normalizeStyle(pStyle))
+    else if (isParagraphObject(p)) {
+      const { fragments, fill: pFill, outline: pOutline, ...pStyle } = p
+      addParagraph(pStyle, pFill, pOutline)
       fragments.forEach((f) => {
-        const { content, ...fStyle } = f
-        addFragment(content, normalizeStyle(fStyle))
+        const { content, fill: fFill, outline: fOutline, ...fStyle } = f
+        addFragment(content, fStyle, fFill, fOutline)
       })
     }
     else if (Array.isArray(p)) {
@@ -133,9 +178,9 @@ export function normalizeTextContent(value: TextContent): NormalizedTextContent 
         if (typeof f === 'string') {
           addFragment(f)
         }
-        else {
-          const { content, ...fStyle } = f
-          addFragment(content, normalizeStyle(fStyle))
+        else if (isFragmentObject(f)) {
+          const { content, fill: fFill, outline: fOutline, ...fStyle } = f
+          addFragment(content, fStyle, fFill, fOutline)
         }
       })
     }
@@ -154,17 +199,43 @@ export function normalizeTextContent(value: TextContent): NormalizedTextContent 
   return paragraphs
 }
 
+export function isParagraphObject(value: any): value is ParagraphObject {
+  return value
+    && typeof value === 'object'
+    && 'fragments' in value
+    && Array.isArray(value.fragments)
+}
+
+export function isFragmentObject(value: any): value is FragmentObject {
+  return value
+    && typeof value === 'object'
+    && 'content' in value
+    && typeof value.content === 'string'
+}
+
+export function isTextObject(value: any): value is TextObject {
+  return value
+    && typeof value === 'object'
+    && 'content' in value
+    && typeof value.content === 'object'
+}
+
 export function normalizeText(value: Text): NormalizedText {
   if (typeof value === 'string') {
     return {
       content: normalizeTextContent(value),
     }
   }
-  else if ('content' in value) {
-    return {
-      ...value,
+  else if (isTextObject(value)) {
+    return clearUndef({
       content: normalizeTextContent(value.content),
-    }
+      style: value.style ? normalizeStyle(value.style) : undefined,
+      effects: value.effects ? value.effects.map(v => normalizeStyle(v)) : undefined,
+      measureDom: value.measureDom,
+      fonts: value.fonts,
+      fill: value.fill ? normalizeFill(value.fill) : undefined,
+      outline: value.outline ? normalizeOutline(value.outline) : undefined,
+    })
   }
   else {
     return {

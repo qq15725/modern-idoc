@@ -1,6 +1,4 @@
 import type { Color } from '../color'
-import type { Fill, NormalizedFill } from '../fill'
-import type { NormalizedOutline, Outline } from '../outline'
 import type { WithStyleNone } from '../types'
 import type { NormalizedElementStyle } from './elementStyle'
 import type { NormalizedTextStyle } from './textStyle'
@@ -9,29 +7,25 @@ import { clearUndef, isNone } from '../utils'
 import { getDefaultElementStyle } from './elementStyle'
 import { getDefaultTextStyle } from './textStyle'
 
-export type NormalizedStyle =
+export type FullStyle =
   & NormalizedTextStyle
   & NormalizedElementStyle
-  & {
-    fill?: NormalizedFill
-    outline?: NormalizedOutline
-  }
+
+export type NormalizedStyle = Partial<FullStyle>
 
 export type StyleObject =
-  & Partial<NormalizedStyle>
+  & NormalizedStyle
   & {
     color?: WithStyleNone<Color>
     backgroundColor?: WithStyleNone<Color>
     borderColor?: WithStyleNone<Color>
     outlineColor?: WithStyleNone<Color>
     shadowColor?: WithStyleNone<Color>
-    fill?: Fill
-    outline?: Outline
   }
 
 export type Style = StyleObject
 
-export function normalizeStyle(style: Style): Partial<NormalizedStyle> {
+export function normalizeStyle(style: Style): NormalizedStyle {
   return clearUndef({
     ...style,
     color: isNone(style.color) ? undefined : normalizeColor(style.color),
@@ -42,7 +36,7 @@ export function normalizeStyle(style: Style): Partial<NormalizedStyle> {
   })
 }
 
-export function getDefaultStyle(): NormalizedStyle {
+export function getDefaultStyle(): FullStyle {
   return {
     ...getDefaultElementStyle(),
     ...getDefaultTextStyle(),

@@ -1,6 +1,6 @@
 import { normalizeText, normalizeTextContent } from '../../src'
 
-console.warn(normalizeText({
+console.warn('normalizeText', normalizeText({
   style: {
     fontSize: 40,
     padding: 20,
@@ -8,15 +8,17 @@ console.warn(normalizeText({
   },
   content: [
     {
+      fill: '#FF0000',
       fragments: [
-        { backgroundColor: 'blue', content: 'Back' },
+        { fill: '#FFFF00', backgroundColor: 'blue', content: 'Back' },
         { content: 'ground1' },
       ],
     },
   ],
+  fill: '#000000',
 }))
 
-console.warn(normalizeText({
+console.warn('normalizeText', normalizeText({
   content: [
     {
       content: 'FontWeight',
@@ -65,11 +67,12 @@ console.warn(normalizeText({
 },
 ))
 
-console.warn(normalizeTextContent('textContent'))
+console.warn('normalizeTextContent', normalizeTextContent('textContent'))
 
-console.warn(normalizeTextContent('text\nContent'))
+console.warn('normalizeTextContent', normalizeTextContent('text\nContent'))
 
 console.warn(
+  'normalizeTextContent',
   normalizeTextContent({
     fontSize: 12,
     content: 'text\nContent',
@@ -77,6 +80,7 @@ console.warn(
 )
 
 console.warn(
+  'normalizeTextContent',
   normalizeTextContent([
     {
       fontSize: 12,
@@ -86,6 +90,7 @@ console.warn(
 )
 
 console.warn(
+  'normalizeTextContent',
   normalizeTextContent([
     {
       fontSize: 12,

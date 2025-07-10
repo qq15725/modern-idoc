@@ -1,3 +1,16 @@
+export function isEqualObject(a: any, b: any): boolean {
+  if (a === b)
+    return true
+
+  if (a && b && typeof a === 'object' && typeof b === 'object') {
+    const keys = Array.from(new Set([...Object.keys(a), ...Object.keys(b)]))
+    return !keys.length
+      || keys.every(key => (a as any)[key] === (b as any)[key])
+  }
+
+  return false
+}
+
 export function getNestedValue(obj: any, path: (string | number)[], fallback?: any): any {
   const last = path.length - 1
   if (last < 0)
