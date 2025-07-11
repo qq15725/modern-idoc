@@ -19,6 +19,8 @@ export interface ReactiveObjectPropertyAccessorContext {
 }
 
 const propertiesSymbol = Symbol('properties')
+const defaultValueInitedSymbol = Symbol('defaultValueInited')
+
 export function getDeclarations(constructor: any): Map<string, PropertyDeclaration> {
   let declarations
   if (Object.hasOwn(constructor, propertiesSymbol)) {
@@ -57,8 +59,6 @@ export function getPropertyDescriptor<V, T extends ReactiveObject>(
     return (typeof fallback === 'function' ? fallback() : fallback) as any
   }
 
-  let isFirst = true
-
   function get(this: T): any {
     let result
     if (alias && alias !== key) {
@@ -75,9 +75,14 @@ export function getPropertyDescriptor<V, T extends ReactiveObject>(
     }
     // fallback
     result = result ?? getFallbackValue()
-    // defaukt
-    if (result === undefined && isFirst) {
-      isFirst = false
+    // defaukt value
+    if (
+      result === undefined
+      && _default !== undefined
+      // @ts-expect-error ignore
+      && !this[defaultValueInitedSymbol]) {
+      // @ts-expect-error ignore
+      this[defaultValueInitedSymbol] = true
       const defaultValue = getDefaultValue()
       if (defaultValue !== undefined) {
         set.call(this, defaultValue)
