@@ -1,3 +1,12 @@
+## [0.8.7](https://github.com/qq15725/modern-idoc/compare/v0.8.6...v0.8.7) (2025-07-30)
+
+
+### Features
+
+* add lineCap and lineJoin to outline ([7fdfc33](https://github.com/qq15725/modern-idoc/commit/7fdfc33cdee05e38e2a71b524a1022ad58c0ad32))
+
+
+
 ## [0.8.6](https://github.com/qq15725/modern-idoc/compare/v0.8.5...v0.8.6) (2025-07-11)
 
 
