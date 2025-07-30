@@ -1,4 +1,5 @@
 import type { FillObject, NormalizedFill } from '../fill'
+import type { LineCap, LineJoin } from '../types'
 import type { HeadEnd } from './headEnd'
 import type { TailEnd } from './tailEnd'
 import { normalizeFill } from '../fill'
@@ -9,6 +10,8 @@ export type OutlineStyle = 'dashed' | 'solid' | string
 export interface NormalizedBaseOutline {
   width?: number
   style?: OutlineStyle
+  lineCap?: LineCap
+  lineJoin?: LineJoin
   headEnd?: HeadEnd
   tailEnd?: TailEnd
 }
@@ -34,7 +37,7 @@ export function normalizeOutline(outline: Outline): NormalizedOutline {
   else {
     return {
       ...normalizeFill(outline),
-      ...pick(outline, ['width', 'style', 'headEnd', 'tailEnd']),
+      ...pick(outline, ['width', 'style', 'lineCap', 'lineJoin', 'headEnd', 'tailEnd']),
     }
   }
 }
