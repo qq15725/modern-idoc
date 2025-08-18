@@ -49,30 +49,34 @@ export function flatDocumentToDocument(flatDoc: FlatDocument): Document {
   const docElementMap: Record<string, Element> = {}
   const docChildren: Element[] = []
   const doc: Document = { ...restProps, children: docChildren }
-  for (const id in children) {
-    if (docElementMap[id]) {
-      continue
+
+  function initElement(id: string): void {
+    if (!children[id] || docElementMap[id]) {
+      return
     }
     const flatElement = children[id]
     const element = toElement(flatElement)
     docElementMap[id] = element
     const parentId = flatElement.parentId
     if (parentId) {
+      initElement(parentId)
       const flatParnet = children[parentId]
-      let parnet = docElementMap[parentId]
+      const parnet = docElementMap[parentId]
       if (!parnet) {
-        if (children[parentId]) {
-          parnet = toElement(children[parentId])
-          docElementMap[parentId] = parnet
-        }
+        return
       }
       if (flatParnet?.childrenIds && parnet?.children) {
-        parnet.children.splice(flatParnet.childrenIds.indexOf(id), 0, element)
+        parnet.children[flatParnet.childrenIds.indexOf(id)] = element
       }
     }
     else {
       docChildren.push(element)
     }
   }
+
+  for (const id in children) {
+    initElement(id)
+  }
+
   return doc
 }
