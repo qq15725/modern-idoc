@@ -1,3 +1,12 @@
+## [0.8.8](https://github.com/qq15725/modern-idoc/compare/v0.8.7...v0.8.8) (2025-08-18)
+
+
+### Bug Fixes
+
+* flatDocumentToDocument ([0bda227](https://github.com/qq15725/modern-idoc/commit/0bda2272bdfcabc8a4dbdb985efa52b3868f083f))
+
+
+
 ## [0.8.7](https://github.com/qq15725/modern-idoc/compare/v0.8.6...v0.8.7) (2025-07-30)
 
 
