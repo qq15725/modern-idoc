@@ -194,7 +194,7 @@ export function normalizeTextContent(value: TextContent): NormalizedTextContent 
   const lastP = lastParagraph()
   if (lastP && !lastP.fragments.length) {
     lastP.fragments.push({
-      content: NORMALIZED_CRLF,
+      content: '',
     })
   }
 

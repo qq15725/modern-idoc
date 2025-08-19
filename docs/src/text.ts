@@ -67,6 +67,8 @@ console.warn('normalizeText', normalizeText({
 },
 ))
 
+console.warn('normalizeTextContent', normalizeTextContent(''))
+
 console.warn('normalizeTextContent', normalizeTextContent('textContent'))
 
 console.warn('normalizeTextContent', normalizeTextContent('text\nContent'))
