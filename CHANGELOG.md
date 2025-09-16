@@ -1,3 +1,12 @@
+## [0.8.10](https://github.com/qq15725/modern-idoc/compare/v0.8.9...v0.8.10) (2025-09-16)
+
+
+### Features
+
+* add Observable ([009c958](https://github.com/qq15725/modern-idoc/commit/009c958490a0c641cdec20990970e15a02a18cd4))
+
+
+
 ## [0.8.9](https://github.com/qq15725/modern-idoc/compare/v0.8.8...v0.8.9) (2025-08-19)
 
 
