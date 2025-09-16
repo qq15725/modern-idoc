@@ -1,36 +1,39 @@
-export class Observable<EVENTS extends { [key in keyof EVENTS]: (...args: any[]) => void; }> {
+export class Observable<T extends { [K in keyof T]: (...args: any[]) => void }> {
   _observers = new Map<string, Set<any>>()
 
-  on<NAME extends keyof EVENTS & string>(name: NAME, f: EVENTS[NAME]): EVENTS[NAME] {
-    let set = this._observers.get(name)
+  on<K extends keyof T & string>(event: K, listener: T[K]): this {
+    let set = this._observers.get(event)
     if (set === undefined) {
-      this._observers.set(name, set = new Set())
+      this._observers.set(event, set = new Set())
     }
-    set.add(f)
-    return f
+    set.add(listener)
+    return this
   }
 
-  once<NAME extends keyof EVENTS & string>(name: NAME, f: EVENTS[NAME]): void {
+  once<K extends keyof T & string>(event: K, listener: T[K]): this {
     const _f = (...args: any[]): void => {
-      this.off(name, _f as any)
-      f(...args)
+      this.off(event, _f as any)
+      listener(...args)
     }
-    this.on(name, _f as any)
+    this.on(event, _f as any)
+    return this
   }
 
-  off<NAME extends keyof EVENTS & string>(name: NAME, f: EVENTS[NAME]): void {
-    const observers = this._observers.get(name)
+  off<K extends keyof T & string>(event: K, listener: T[K]): this {
+    const observers = this._observers.get(event)
     if (observers !== undefined) {
-      observers.delete(f)
+      observers.delete(listener)
       if (observers.size === 0) {
-        this._observers.delete(name)
+        this._observers.delete(event)
       }
     }
+    return this
   }
 
-  emit<NAME extends keyof EVENTS & string>(name: NAME, ...args: Parameters<EVENTS[NAME]>): void {
-    return Array.from((this._observers.get(name) || new Map()).values())
+  emit<K extends keyof T & string>(event: K, ...args: Parameters<T[K]>): this {
+    Array.from((this._observers.get(event) || new Map()).values())
       .forEach(f => f(...args))
+    return this
   }
 
   destroy(): void {
