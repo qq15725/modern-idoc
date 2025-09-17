@@ -102,16 +102,18 @@ export class Reactivable extends Observable implements PropertyAccessor {
     this._propertyAccessor = accessor
 
     this.getPropertyDeclarations().forEach((_declaration, key) => {
-      const newValue = this.offsetGet(key)
+      let newValue = this.offsetGet(key)
       const oldValue = this._properties.get(key)
       if (newValue === undefined) {
         if (oldValue !== undefined) {
-          this.offsetSet(key, oldValue)
+          newValue = oldValue
+          this.offsetSet(key, newValue)
         }
       }
       else if (newValue !== oldValue) {
         this.offsetSet(key, newValue)
       }
+      this.requestUpdate(key, newValue, oldValue)
     })
 
     return this
