@@ -1,3 +1,12 @@
+## [0.9.2](https://github.com/qq15725/modern-idoc/compare/v0.9.1...v0.9.2) (2025-09-17)
+
+
+### Features
+
+* update Reactivable ([bfa5f44](https://github.com/qq15725/modern-idoc/commit/bfa5f44d7586dd32a75c25545af9abc48632817a))
+
+
+
 ## [0.9.1](https://github.com/qq15725/modern-idoc/compare/v0.9.0...v0.9.1) (2025-09-17)
 
 
