@@ -102,9 +102,7 @@ export function getPropertyDescriptor<V, T extends PropertyAccessor>(
       // @ts-expect-error ignore
       this[internalKey] = newValue
     }
-    if (!Object.is(newValue, oldValue)) {
-      this.onUpdateProperty?.(key, newValue, oldValue)
-    }
+    this.onUpdateProperty?.(key, newValue, oldValue)
   }
 
   return {
