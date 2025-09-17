@@ -11,6 +11,7 @@ export interface PropertyDeclaration {
 export interface PropertyAccessor {
   getProperty?: (key: string, defaultValue?: any) => any
   setProperty?: (key: string, newValue: any) => void
+  onUpdateProperty?: (key: string, newValue: any, oldValue: any) => void
 }
 
 const propertiesSymbol = Symbol('properties')
@@ -90,6 +91,7 @@ export function getPropertyDescriptor<V, T extends PropertyAccessor>(
   }
 
   function set(this: T, newValue: V): void {
+    const oldValue = get.call(this)
     if (alias && alias !== key) {
       setObjectValueByPath(this as any, alias, newValue)
     }
@@ -99,6 +101,9 @@ export function getPropertyDescriptor<V, T extends PropertyAccessor>(
     else {
       // @ts-expect-error ignore
       this[internalKey] = newValue
+    }
+    if (!Object.is(newValue, oldValue)) {
+      this.onUpdateProperty?.(key, newValue, oldValue)
     }
   }
 

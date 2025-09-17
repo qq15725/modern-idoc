@@ -53,17 +53,8 @@ export class Reactivable extends Observable implements PropertyAccessor {
   }
 
   setProperty(key: string, newValue: any): void {
-    const oldValue = this.offsetGet(key)
-    if (Object.is(newValue, oldValue)) {
-      return
-    }
-    if (this._propertyAccessor?.setProperty) {
-      this._propertyAccessor.setProperty(key, newValue)
-    }
-    else {
-      this._properties.set(key, newValue)
-    }
-    this.onUpdateProperty(key, newValue, oldValue)
+    this._propertyAccessor?.setProperty?.(key, newValue)
+    this._properties.set(key, newValue)
   }
 
   getProperties(keys?: string[]): Record<string, any> {
