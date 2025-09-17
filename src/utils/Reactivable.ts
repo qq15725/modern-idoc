@@ -145,7 +145,9 @@ export class Reactivable extends Observable implements PropertyAccessor {
   }
 
   onUpdateProperty(key: string, newValue: any, oldValue: any): void {
-    this.requestUpdate(key, newValue, oldValue)
+    if (!Object.is(newValue, oldValue)) {
+      this.requestUpdate(key, newValue, oldValue)
+    }
   }
 
   requestUpdate(key?: string, newValue?: any, oldValue?: any): void {
