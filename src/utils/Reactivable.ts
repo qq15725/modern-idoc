@@ -1,12 +1,20 @@
 import type { PropertyAccessor, PropertyDeclaration } from '../decorators'
+import type { ObservableEvents } from './Observable'
 import { getDeclarations } from '../decorators'
 import { Observable } from './Observable'
 
-export interface ReactivableEvents {
+export interface ReactivableEvents extends ObservableEvents {
   updateProperty: (key: string, newValue: any, oldValue: any) => void
 }
 
-export class Reactivable extends Observable<ReactivableEvents> implements PropertyAccessor {
+export interface Reactivable {
+  on: <K extends keyof ReactivableEvents & string>(event: K, listener: ReactivableEvents[K]) => this
+  once: <K extends keyof ReactivableEvents & string>(event: K, listener: ReactivableEvents[K]) => this
+  off: <K extends keyof ReactivableEvents & string>(event: K, listener: ReactivableEvents[K]) => this
+  emit: <K extends keyof ReactivableEvents & string>(event: K, ...args: Parameters<ReactivableEvents[K]>) => this
+}
+
+export class Reactivable extends Observable implements PropertyAccessor {
   protected _propertyAccessor?: PropertyAccessor
   protected _properties = new Map<string, unknown>()
 

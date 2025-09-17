@@ -1,4 +1,10 @@
-export class Observable<T extends { [K in keyof T]: (...args: any[]) => void }> {
+export type EventListener = (...args: any[]) => void
+
+export interface ObservableEvents {
+  [event: string]: EventListener
+}
+
+export class Observable<T extends ObservableEvents = ObservableEvents> {
   _observers = new Map<string, Set<any>>()
 
   on<K extends keyof T & string>(event: K, listener: T[K]): this {
