@@ -1,3 +1,13 @@
+## [0.9.3](https://github.com/qq15725/modern-idoc/compare/v0.9.2...v0.9.3) (2025-09-17)
+
+
+### Bug Fixes
+
+* onUpdateProperty ([e6f5b85](https://github.com/qq15725/modern-idoc/commit/e6f5b85d159b852df3ba5b2a1b75b340cb45762c))
+* onUpdateProperty ([1af2d78](https://github.com/qq15725/modern-idoc/commit/1af2d7831d75d41bad645071dae01d7d865b451b))
+
+
+
 ## [0.9.2](https://github.com/qq15725/modern-idoc/compare/v0.9.1...v0.9.2) (2025-09-17)
 
 
