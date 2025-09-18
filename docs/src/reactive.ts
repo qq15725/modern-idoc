@@ -8,6 +8,7 @@ class TestObject1 extends Reactivable {
 
 class TestObject2 extends TestObject1 {
   @property({ fallback: 2 }) declare test2: number
+  @property() declare test3: number
 
   override onUpdateProperty(key: string, newValue: unknown, oldValue: unknown): void {
     console.warn('[reactive] onUpdateProperty', key, newValue, oldValue)

@@ -1,6 +1,6 @@
 import type { PropertyAccessor, PropertyDeclaration } from '../decorators'
 import type { ObservableEvents } from './Observable'
-import { getDeclarations, propertyOffsetGet, propertyOffsetSet } from '../decorators'
+import { getDeclarations, propertyOffsetDefaultValue, propertyOffsetGet, propertyOffsetSet } from '../decorators'
 import { Observable } from './Observable'
 
 export interface ReactivableEvents extends ObservableEvents {
@@ -33,7 +33,7 @@ export class Reactivable extends Observable implements PropertyAccessor {
       : this._updatedProperties.size > 0
   }
 
-  getProperty(key: string, defaultValue?: any): any {
+  getProperty(key: string): any {
     const declaration = this.getPropertyDeclaration(key)
 
     if (declaration) {
@@ -41,12 +41,14 @@ export class Reactivable extends Observable implements PropertyAccessor {
         return propertyOffsetGet(this, key, declaration)
       }
       else {
+        let result
         if (this._propertyAccessor?.getProperty) {
-          return this._propertyAccessor.getProperty(key, defaultValue)
+          result = this._propertyAccessor.getProperty(key)
         }
         else {
-          return this._properties.get(key) ?? defaultValue
+          result = this._properties.get(key)
         }
+        return result ?? propertyOffsetDefaultValue(this, key, declaration)
       }
     }
 
