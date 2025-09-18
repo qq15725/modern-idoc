@@ -6,6 +6,7 @@ export interface PropertyDeclaration {
   fallback?: unknown | (() => unknown)
   alias?: string
   internal?: boolean
+  internalKey: symbol
 }
 
 export interface PropertyAccessor {
@@ -14,7 +15,6 @@ export interface PropertyAccessor {
   onUpdateProperty?: (key: string, newValue: any, oldValue: any) => void
 }
 
-const internalSymbol = Symbol('internal')
 const propertiesSymbol = Symbol('properties')
 const initedSymbol = Symbol('inited')
 
@@ -31,85 +31,90 @@ export function getDeclarations(constructor: any): Map<string, PropertyDeclarati
   return declarations
 }
 
-export function getPropertyInternalKey(obj: any, key: string): string {
-  if (!Object.hasOwn(obj, internalSymbol)) {
-    obj[internalSymbol] = new Map()
+export function propertyOffsetSet(
+  target: any & PropertyAccessor,
+  key: string,
+  newValue: any,
+  declaration: PropertyDeclaration,
+): void {
+  const {
+    alias,
+    internalKey,
+  } = declaration
+
+  const oldValue = target[key]
+  if (alias) {
+    setObjectValueByPath(target, alias, newValue)
   }
-  let internalKey = obj[internalSymbol].get(key)
-  if (!internalKey) {
-    internalKey = Symbol(key)
-    obj[internalSymbol].set(key, internalKey)
+  else {
+    target[internalKey] = newValue
   }
-  return internalKey
+  target.onUpdateProperty?.(key, newValue, oldValue)
 }
 
-export function getPropertyDescriptor<V, T extends PropertyAccessor>(
+export function propertyOffsetGet(
+  target: any & PropertyAccessor,
   key: string,
-  declaration: PropertyDeclaration = {},
-): {
-  get: () => any
-  set: (v: any) => void
-} {
+  declaration: PropertyDeclaration,
+): any {
   const {
     default: _default,
     fallback,
     alias,
-    internal,
+    internalKey,
   } = declaration
 
-  const getDefaultValue = (): any => {
-    return (typeof _default === 'function' ? _default() : _default) as any
+  let result
+  if (alias) {
+    result = getObjectValueByPath(target, alias)
+  }
+  else {
+    result = target[internalKey]
   }
 
-  const getFallbackValue = (): any => {
-    return (typeof fallback === 'function' ? fallback() : fallback) as any
-  }
+  // fallback
+  result = result ?? ((typeof fallback === 'function' ? fallback() : fallback) as any)()
 
-  function get(this: T): any {
-    let result
-    if (alias && alias !== key) {
-      result = getObjectValueByPath(this as any, alias)
+  // init default value
+  if (
+    result === undefined
+    && _default !== undefined
+    && !target[initedSymbol]
+  ) {
+    target[initedSymbol] = true
+    const defaultValue = ((typeof _default === 'function' ? _default() : _default) as any)()
+    if (defaultValue !== undefined) {
+      target[key] = defaultValue
+      result = defaultValue
     }
-    else if (!internal && typeof this.getProperty !== 'undefined') {
-      result = this.getProperty(key)
+  }
+
+  return result
+}
+
+export function getPropertyDescriptor<V, T extends PropertyAccessor>(
+  key: string,
+  declaration: PropertyDeclaration,
+): {
+  get: () => any
+  set: (v: any) => void
+} {
+  function get(this: T): any {
+    if (typeof this.getProperty !== 'undefined') {
+      return this.getProperty(key)
     }
     else {
-      // @ts-expect-error ignore
-      result = this[getPropertyInternalKey(this, key)]
+      return propertyOffsetGet(this, key, declaration)
     }
-    // fallback
-    result = result ?? getFallbackValue()
-    // defaukt value
-    if (
-      result === undefined
-      && _default !== undefined
-      // @ts-expect-error ignore
-      && !this[initedSymbol]
-    ) {
-      // @ts-expect-error ignore
-      this[initedSymbol] = true
-      const defaultValue = getDefaultValue()
-      if (defaultValue !== undefined) {
-        set.call(this, defaultValue)
-        result = defaultValue
-      }
-    }
-    return result
   }
 
   function set(this: T, newValue: V): void {
-    const oldValue = get.call(this)
-    if (alias && alias !== key) {
-      setObjectValueByPath(this as any, alias, newValue)
-    }
-    else if (!internal && typeof this.setProperty !== 'undefined') {
+    if (typeof this.setProperty !== 'undefined') {
       this.setProperty(key, newValue)
     }
     else {
-      // @ts-expect-error ignore
-      this[getPropertyInternalKey(this, key)] = newValue
+      propertyOffsetSet(this, key, newValue, declaration)
     }
-    this.onUpdateProperty?.(key, newValue, oldValue)
   }
 
   return {
@@ -121,11 +126,16 @@ export function getPropertyDescriptor<V, T extends PropertyAccessor>(
 export function defineProperty<V, T extends PropertyAccessor>(
   constructor: any,
   key: string,
-  declaration: PropertyDeclaration = {},
+  declaration: Partial<PropertyDeclaration> = {},
 ): void {
-  getDeclarations(constructor).set(key, declaration)
+  const _declaration: PropertyDeclaration = {
+    ...declaration,
+    internalKey: Symbol(key),
+  }
 
-  const descriptor = getPropertyDescriptor<V, T>(key, declaration)
+  getDeclarations(constructor).set(key, _declaration)
+
+  const descriptor = getPropertyDescriptor<V, T>(key, _declaration)
 
   Object.defineProperty(constructor.prototype, key, {
     get(this: T) {
@@ -152,7 +162,7 @@ export function property<V, T extends PropertyAccessor>(
 }
 
 export function property2<V, T extends PropertyAccessor>(
-  declaration: PropertyDeclaration = {},
+  declaration: Partial<PropertyDeclaration> = {},
 ) {
   return function (
     _: ClassAccessorDecoratorTarget<T, V>,
@@ -164,11 +174,16 @@ export function property2<V, T extends PropertyAccessor>(
       throw new TypeError('Failed to @property decorator, prop name cannot be a symbol')
     }
 
-    const descriptor = getPropertyDescriptor(key, declaration)
+    const _declaration: PropertyDeclaration = {
+      ...declaration,
+      internalKey: Symbol(key),
+    }
+
+    const descriptor = getPropertyDescriptor(key, _declaration)
 
     return {
       init(this: T, v: V) {
-        getDeclarations(this.constructor).set(key, declaration)
+        getDeclarations(this.constructor).set(key, _declaration)
         descriptor.set.call(this, v)
         return v
       },

@@ -1,6 +1,6 @@
 import type { PropertyAccessor, PropertyDeclaration } from '../decorators'
 import type { ObservableEvents } from './Observable'
-import { getDeclarations } from '../decorators'
+import { getDeclarations, propertyOffsetGet, propertyOffsetSet } from '../decorators'
 import { Observable } from './Observable'
 
 export interface ReactivableEvents extends ObservableEvents {
@@ -33,34 +33,46 @@ export class Reactivable extends Observable implements PropertyAccessor {
       : this._updatedProperties.size > 0
   }
 
-  offsetGet(key: string): any {
-    // @ts-expect-error ignore
-    return this[key]
-  }
-
-  offsetSet(key: string, newValue: any): void {
-    // @ts-expect-error ignore
-    this[key] = newValue
-  }
-
   getProperty(key: string, defaultValue?: any): any {
-    if (this._propertyAccessor?.getProperty) {
-      return this._propertyAccessor.getProperty(key, defaultValue)
+    const declaration = this.getPropertyDeclaration(key)
+
+    if (declaration) {
+      if (declaration.internal || declaration.alias) {
+        return propertyOffsetGet(this, key, declaration)
+      }
+      else {
+        if (this._propertyAccessor?.getProperty) {
+          return this._propertyAccessor.getProperty(key, defaultValue)
+        }
+        else {
+          return this._properties.get(key) ?? defaultValue
+        }
+      }
     }
-    else {
-      return this._properties.get(key) ?? defaultValue
-    }
+
+    return undefined
   }
 
   setProperty(key: string, newValue: any): void {
-    this._propertyAccessor?.setProperty?.(key, newValue)
-    this._properties.set(key, newValue)
+    const declaration = this.getPropertyDeclaration(key)
+
+    if (declaration) {
+      if (declaration.internal || declaration.alias) {
+        propertyOffsetSet(this, key, newValue, declaration)
+      }
+      else {
+        const oldValue = this.getProperty(key)
+        this._propertyAccessor?.setProperty?.(key, newValue)
+        this._properties.set(key, newValue)
+        this.onUpdateProperty?.(key, newValue, oldValue)
+      }
+    }
   }
 
   getProperties(keys?: string[]): Record<string, any> {
     const properties: Record<string, any> = {}
-    for (const [name, property] of this.getPropertyDeclarations()) {
-      if (!property.internal && !property.alias && (!keys || keys.includes(name))) {
+    for (const [name, declaration] of this.getPropertyDeclarations()) {
+      if (!declaration.internal && !declaration.alias && (!keys || keys.includes(name))) {
         properties[name] = this.getProperty(name)
       }
     }
@@ -69,22 +81,20 @@ export class Reactivable extends Observable implements PropertyAccessor {
 
   setProperties(properties?: Record<string, any>): this {
     if (properties && typeof properties === 'object') {
-      for (const [name] of this.getPropertyDeclarations()) {
-        if (name in properties) {
-          this.offsetSet(name, properties[name])
-        }
+      for (const name in properties) {
+        this.setProperty(name, properties[name])
       }
     }
     return this
   }
 
   resetProperties(): this {
-    for (const [name, property] of this.getPropertyDeclarations()) {
-      this.offsetSet(
+    for (const [name, declaration] of this.getPropertyDeclarations()) {
+      this.setProperty(
         name,
-        typeof property.default === 'function'
-          ? property.default()
-          : property.default,
+        typeof declaration.default === 'function'
+          ? declaration.default()
+          : declaration.default,
       )
     }
     return this
@@ -99,26 +109,23 @@ export class Reactivable extends Observable implements PropertyAccessor {
   }
 
   setPropertyAccessor(accessor: PropertyAccessor): this {
+    const declarations = this.getPropertyDeclarations()
+
+    this._propertyAccessor = undefined
+
+    const oldValues: Record<string, any> = {}
+    declarations.forEach((_declaration, key) => {
+      oldValues[key] = this.getProperty(key)
+    })
+
     this._propertyAccessor = accessor
 
-    this.getPropertyDeclarations().forEach((declaration, key) => {
-      const proxyed = declaration.internal
-        || (declaration.alias && declaration.alias !== key)
-
-      const newValue = accessor.getProperty?.(key)
-      let oldValue
-      if (proxyed) {
-        oldValue = this.offsetGet(key)
-      }
-      else {
-        oldValue = this._properties.get(key)
-      }
+    declarations.forEach((declaration, key) => {
+      const newValue = this.getProperty(key)
+      const oldValue = oldValues[key]
       if (newValue !== undefined && !Object.is(newValue, oldValue)) {
-        if (proxyed) {
-          this.offsetSet(key, newValue)
-        }
-        else {
-          this._properties.set(key, newValue)
+        this.setProperty(key, newValue)
+        if (!declaration.internal && !declaration.alias) {
           this.requestUpdate(key, newValue, oldValue)
         }
       }
