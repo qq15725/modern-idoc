@@ -19,7 +19,7 @@ export function normalizeColorFill(fill: ColorFill): NormalizedColorFill {
     obj = { color: fill }
   }
   else {
-    obj = fill
+    obj = { ...fill }
   }
   return {
     color: normalizeColor(obj.color),

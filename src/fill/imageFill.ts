@@ -1,3 +1,5 @@
+import { pick } from '../utils'
+
 /**
  * 0    -0.5   0
  * -0.5        -0.5
@@ -55,7 +57,15 @@ export function normalizeImageFill(fill: ImageFill): NormalizedImageFill {
     obj = { image: fill }
   }
   else {
-    obj = fill
+    obj = { ...fill }
   }
-  return obj
+  return pick(obj, [
+    'image',
+    'cropRect',
+    'stretchRect',
+    'tile',
+    'dpi',
+    'opacity',
+    'rotateWithShape',
+  ])
 }

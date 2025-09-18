@@ -37,7 +37,14 @@ export function normalizeOutline(outline: Outline): NormalizedOutline {
   else {
     return {
       ...normalizeFill(outline),
-      ...pick(outline, ['width', 'style', 'lineCap', 'lineJoin', 'headEnd', 'tailEnd']),
+      ...pick(outline, [
+        'width',
+        'style',
+        'lineCap',
+        'lineJoin',
+        'headEnd',
+        'tailEnd',
+      ]),
     }
   }
 }

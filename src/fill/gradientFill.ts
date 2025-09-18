@@ -1,5 +1,6 @@
 import type { LinearGradient, RadialGradient } from '../color'
 import { normalizeGradient } from '../color'
+import { pick } from '../utils'
 
 export type GradientFillObject =
   // `linear-gradient(${string})` | `radial-gradient(${string})`
@@ -22,9 +23,8 @@ export function normalizeGradientFill(fill: GradientFill): NormalizedGradientFil
     obj = { image: fill }
   }
   else {
-    obj = fill
+    obj = { ...fill }
   }
-
   if (obj.image) {
     const { type, ...props } = normalizeGradient(obj.image)[0] ?? {}
     switch (type) {
@@ -38,6 +38,9 @@ export function normalizeGradientFill(fill: GradientFill): NormalizedGradientFil
         }
     }
   }
-
-  return obj
+  return pick(obj, [
+    'linearGradient',
+    'radialGradient',
+    'rotateWithShape',
+  ])
 }
