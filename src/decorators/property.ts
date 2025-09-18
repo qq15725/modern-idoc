@@ -14,6 +14,7 @@ export interface PropertyAccessor {
   onUpdateProperty?: (key: string, newValue: any, oldValue: any) => void
 }
 
+const internalSymbol = Symbol('internal')
 const propertiesSymbol = Symbol('properties')
 const initedSymbol = Symbol('inited')
 
@@ -30,8 +31,16 @@ export function getDeclarations(constructor: any): Map<string, PropertyDeclarati
   return declarations
 }
 
-export function getPropertyInternalKey(key: string): string {
-  return `__internal:${key}`
+export function getPropertyInternalKey(obj: any, key: string): string {
+  if (!Object.hasOwn(obj, internalSymbol)) {
+    obj[internalSymbol] = new Map()
+  }
+  let internalKey = obj[internalSymbol].get(key)
+  if (!internalKey) {
+    internalKey = Symbol(key)
+    obj[internalSymbol].set(key, internalKey)
+  }
+  return internalKey
 }
 
 export function getPropertyDescriptor<V, T extends PropertyAccessor>(
@@ -41,8 +50,6 @@ export function getPropertyDescriptor<V, T extends PropertyAccessor>(
   get: () => any
   set: (v: any) => void
 } {
-  const internalKey = getPropertyInternalKey(key)
-
   const {
     default: _default,
     fallback,
@@ -68,7 +75,7 @@ export function getPropertyDescriptor<V, T extends PropertyAccessor>(
     }
     else {
       // @ts-expect-error ignore
-      result = this[internalKey]
+      result = this[getPropertyInternalKey(this, key)]
     }
     // fallback
     result = result ?? getFallbackValue()
@@ -100,7 +107,7 @@ export function getPropertyDescriptor<V, T extends PropertyAccessor>(
     }
     else {
       // @ts-expect-error ignore
-      this[internalKey] = newValue
+      this[getPropertyInternalKey(this, key)] = newValue
     }
     this.onUpdateProperty?.(key, newValue, oldValue)
   }
