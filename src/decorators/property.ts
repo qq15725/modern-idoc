@@ -73,7 +73,7 @@ export function propertyOffsetGet(
   }
 
   // fallback
-  result = result ?? ((typeof fallback === 'function' ? fallback() : fallback) as any)()
+  result = result ?? (typeof fallback === 'function' ? fallback() : fallback)
 
   // init default value
   if (
@@ -82,7 +82,7 @@ export function propertyOffsetGet(
     && !target[initedSymbol]
   ) {
     target[initedSymbol] = true
-    const defaultValue = ((typeof _default === 'function' ? _default() : _default) as any)()
+    const defaultValue = typeof _default === 'function' ? _default() : _default
     if (defaultValue !== undefined) {
       target[key] = defaultValue
       result = defaultValue
