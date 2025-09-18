@@ -1,3 +1,12 @@
+## [0.9.11](https://github.com/qq15725/modern-idoc/compare/v0.9.10...v0.9.11) (2025-09-18)
+
+
+### Bug Fixes
+
+* propertyOffsetDefaultValue ([835bb15](https://github.com/qq15725/modern-idoc/commit/835bb1569f4a04dc40e7f3f089a90b36ae32cefd))
+
+
+
 ## [0.9.10](https://github.com/qq15725/modern-idoc/compare/v0.9.9...v0.9.10) (2025-09-18)
 
 
