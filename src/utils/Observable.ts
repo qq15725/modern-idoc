@@ -1,13 +1,11 @@
-export type EventListener = (...args: any[]) => void
-
 export interface ObservableEvents {
-  [event: string]: EventListener
+  [event: string]: any[]
 }
 
 export class Observable<T extends ObservableEvents = ObservableEvents> {
   _observers = new Map<string, Set<any>>()
 
-  on<K extends keyof T & string>(event: K, listener: T[K]): this {
+  on<K extends keyof T & string>(event: K, listener: (...args: T[K]) => void): this {
     let set = this._observers.get(event)
     if (set === undefined) {
       this._observers.set(event, set = new Set())
@@ -16,8 +14,8 @@ export class Observable<T extends ObservableEvents = ObservableEvents> {
     return this
   }
 
-  once<K extends keyof T & string>(event: K, listener: T[K]): this {
-    const _f = (...args: any[]): void => {
+  once<K extends keyof T & string>(event: K, listener: (...args: T[K]) => void): this {
+    const _f = (...args: T[K]): void => {
       this.off(event, _f as any)
       listener(...args)
     }
@@ -25,7 +23,7 @@ export class Observable<T extends ObservableEvents = ObservableEvents> {
     return this
   }
 
-  off<K extends keyof T & string>(event: K, listener: T[K]): this {
+  off<K extends keyof T & string>(event: K, listener: (...args: T[K]) => void): this {
     const observers = this._observers.get(event)
     if (observers !== undefined) {
       observers.delete(listener)
@@ -36,7 +34,7 @@ export class Observable<T extends ObservableEvents = ObservableEvents> {
     return this
   }
 
-  emit<K extends keyof T & string>(event: K, ...args: Parameters<T[K]>): this {
+  emit<K extends keyof T & string>(event: K, ...args: T[K]): this {
     Array.from((this._observers.get(event) || new Map()).values())
       .forEach(f => f(...args))
     return this

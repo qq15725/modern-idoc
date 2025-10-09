@@ -4,14 +4,14 @@ import { getDeclarations, propertyOffsetDefaultValue, propertyOffsetGet, propert
 import { Observable } from './Observable'
 
 export interface ReactivableEvents extends ObservableEvents {
-  updateProperty: (key: string, newValue: any, oldValue: any) => void
+  updateProperty: [key: string, newValue: any, oldValue: any]
 }
 
 export interface Reactivable {
-  on: <K extends keyof ReactivableEvents & string>(event: K, listener: ReactivableEvents[K]) => this
-  once: <K extends keyof ReactivableEvents & string>(event: K, listener: ReactivableEvents[K]) => this
-  off: <K extends keyof ReactivableEvents & string>(event: K, listener: ReactivableEvents[K]) => this
-  emit: <K extends keyof ReactivableEvents & string>(event: K, ...args: Parameters<ReactivableEvents[K]>) => this
+  on: <K extends keyof ReactivableEvents & string>(event: K, listener: (...args: ReactivableEvents[K]) => void) => this
+  once: <K extends keyof ReactivableEvents & string>(event: K, listener: (...args: ReactivableEvents[K]) => void) => this
+  off: <K extends keyof ReactivableEvents & string>(event: K, listener: (...args: ReactivableEvents[K]) => void) => this
+  emit: <K extends keyof ReactivableEvents & string>(event: K, ...args: ReactivableEvents[K]) => this
 }
 
 export class Reactivable extends Observable implements PropertyAccessor {
