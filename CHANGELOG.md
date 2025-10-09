@@ -1,3 +1,12 @@
+## [0.10.1](https://github.com/qq15725/modern-idoc/compare/v0.10.0...v0.10.1) (2025-10-09)
+
+
+### Features
+
+* up deps ([eb54a72](https://github.com/qq15725/modern-idoc/commit/eb54a729389ab531cee7e262babf33bede59f3d3))
+
+
+
 # [0.10.0](https://github.com/qq15725/modern-idoc/compare/v0.9.11...v0.10.0) (2025-10-09)
 
 
