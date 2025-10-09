@@ -1,3 +1,12 @@
+# [0.10.0](https://github.com/qq15725/modern-idoc/compare/v0.9.11...v0.10.0) (2025-10-09)
+
+
+### Features
+
+* observable events type ([cdab597](https://github.com/qq15725/modern-idoc/commit/cdab5976a479c1e30f184b30e51afae4c8edb1cd))
+
+
+
 ## [0.9.11](https://github.com/qq15725/modern-idoc/compare/v0.9.10...v0.9.11) (2025-09-18)
 
 
