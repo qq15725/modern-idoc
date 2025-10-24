@@ -1,3 +1,12 @@
+## [0.10.4](https://github.com/qq15725/modern-idoc/compare/v0.10.3...v0.10.4) (2025-10-24)
+
+
+### Bug Fixes
+
+* fallback ([9942a39](https://github.com/qq15725/modern-idoc/commit/9942a39d7449a7afc5664d474c20f1a9abbe6721))
+
+
+
 ## [0.10.3](https://github.com/qq15725/modern-idoc/compare/v0.10.2...v0.10.3) (2025-10-24)
 
 
