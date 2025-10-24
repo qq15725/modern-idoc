@@ -6,7 +6,7 @@ export interface PropertyDeclaration {
   fallback?: unknown | (() => unknown)
   alias?: string
   internal?: boolean
-  internalKey: symbol
+  internalKey: symbol | string
 }
 
 export interface PropertyAccessor {
@@ -43,13 +43,19 @@ export function propertyOffsetSet(
   } = declaration
 
   const oldValue = target[key]
+
   if (alias) {
     setObjectValueByPath(target, alias, newValue)
   }
   else {
     target[internalKey] = newValue
   }
-  target.onUpdateProperty?.(key, newValue, oldValue)
+
+  target.onUpdateProperty?.(
+    key,
+    newValue ?? propertyOffsetGetDefaultValue(target, key, declaration),
+    oldValue,
+  )
 }
 
 export function propertyOffsetGet(
@@ -70,20 +76,26 @@ export function propertyOffsetGet(
     result = target[internalKey]
   }
 
-  result = result ?? propertyOffsetDefaultValue(target, key, declaration)
+  result = result ?? propertyOffsetGetDefaultValue(target, key, declaration)
 
   return result
 }
 
-export function propertyOffsetDefaultValue(
+export function propertyOffsetGetDefaultValue(
   target: any & PropertyAccessor,
   key: string,
   declaration: PropertyDeclaration,
 ): any {
-  const {
-    default: _default,
-    fallback,
-  } = declaration
+  return propertyDefaultValue(target, key, declaration)
+    ?? propertyFallbackValue(declaration)
+}
+
+export function propertyDefaultValue(
+  target: any & PropertyAccessor,
+  key: string,
+  declaration: PropertyDeclaration,
+): any {
+  const { default: _default } = declaration
 
   let result: any | undefined
 
@@ -100,10 +112,12 @@ export function propertyOffsetDefaultValue(
     }
   }
 
-  // fallback
-  result = result ?? (typeof fallback === 'function' ? fallback() : fallback)
-
   return result
+}
+
+export function propertyFallbackValue(declaration: PropertyDeclaration): any {
+  const { fallback } = declaration
+  return typeof fallback === 'function' ? fallback() : fallback
 }
 
 export function getPropertyDescriptor<V, T extends PropertyAccessor>(

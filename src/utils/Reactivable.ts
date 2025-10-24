@@ -1,6 +1,6 @@
 import type { PropertyAccessor, PropertyDeclaration } from '../decorators'
 import type { ObservableEvents } from './Observable'
-import { getDeclarations, propertyOffsetDefaultValue, propertyOffsetGet, propertyOffsetSet } from '../decorators'
+import { getDeclarations, propertyOffsetGet, propertyOffsetGetDefaultValue, propertyOffsetSet } from '../decorators'
 import { Observable } from './Observable'
 
 export interface ReactivableEvents extends ObservableEvents {
@@ -48,7 +48,7 @@ export class Reactivable extends Observable implements PropertyAccessor {
         else {
           result = this._properties.get(key)
         }
-        return result ?? propertyOffsetDefaultValue(this, key, declaration)
+        return result ?? propertyOffsetGetDefaultValue(this, key, declaration)
       }
     }
 
