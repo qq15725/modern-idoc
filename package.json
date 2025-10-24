@@ -1,7 +1,7 @@
 {
   "name": "modern-idoc",
   "type": "module",
-  "version": "0.10.1",
+  "version": "0.10.2",
   "packageManager": "pnpm@10.18.1",
   "description": "Intermediate document for modern codec libs",
   "author": "wxm",
