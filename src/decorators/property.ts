@@ -106,7 +106,7 @@ export function propertyOffsetFallback(
     }
   }
 
-  if (fallback && result === undefined) {
+  if (result === undefined && fallback !== undefined) {
     result = typeof fallback === 'function' ? fallback() : fallback
   }
 
