@@ -53,7 +53,7 @@ export function propertyOffsetSet(
 
   target.onUpdateProperty?.(
     key,
-    newValue ?? propertyOffsetGetDefaultValue(target, key, declaration),
+    newValue ?? propertyOffsetFallback(target, key, declaration),
     oldValue,
   )
 }
@@ -76,26 +76,20 @@ export function propertyOffsetGet(
     result = target[internalKey]
   }
 
-  result = result ?? propertyOffsetGetDefaultValue(target, key, declaration)
+  result = result ?? propertyOffsetFallback(target, key, declaration)
 
   return result
 }
 
-export function propertyOffsetGetDefaultValue(
+export function propertyOffsetFallback(
   target: any & PropertyAccessor,
   key: string,
   declaration: PropertyDeclaration,
 ): any {
-  return propertyDefaultValue(target, key, declaration)
-    ?? propertyFallbackValue(declaration)
-}
-
-export function propertyDefaultValue(
-  target: any & PropertyAccessor,
-  key: string,
-  declaration: PropertyDeclaration,
-): any {
-  const { default: _default } = declaration
+  const {
+    default: _default,
+    fallback,
+  } = declaration
 
   let result: any | undefined
 
@@ -112,12 +106,11 @@ export function propertyDefaultValue(
     }
   }
 
-  return result
-}
+  if (fallback && result === undefined) {
+    result = typeof fallback === 'function' ? fallback() : fallback
+  }
 
-export function propertyFallbackValue(declaration: PropertyDeclaration): any {
-  const { fallback } = declaration
-  return typeof fallback === 'function' ? fallback() : fallback
+  return result
 }
 
 export function getPropertyDescriptor<V, T extends PropertyAccessor>(
