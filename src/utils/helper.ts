@@ -1,5 +1,5 @@
-export function isNone<T>(value: T): value is Extract<T, null | undefined | 'none'> {
-  return value === null || value === undefined || value === 'none'
+export function isNone<T>(value: T): value is Extract<T, null | undefined | '' | 'none'> {
+  return value === null || value === undefined || value === '' || value === 'none'
 }
 
 export function round(number: number, digits = 0, base = 10 ** digits): number {
