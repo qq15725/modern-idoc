@@ -1,3 +1,12 @@
+## [0.10.5](https://github.com/qq15725/modern-idoc/compare/v0.10.4...v0.10.5) (2025-10-29)
+
+
+### Bug Fixes
+
+* isNone ([20caaff](https://github.com/qq15725/modern-idoc/commit/20caaff13ad69f4d2a4d275c9427a11047554095))
+
+
+
 ## [0.10.4](https://github.com/qq15725/modern-idoc/compare/v0.10.3...v0.10.4) (2025-10-24)
 
 
