@@ -5,6 +5,7 @@ import { Observable } from './Observable'
 
 export interface ReactivableEvents extends ObservableEvents {
   updateProperty: [key: string, newValue: any, oldValue: any]
+  destroy: []
 }
 
 export interface Reactivable {
@@ -222,5 +223,10 @@ export class Reactivable extends Observable implements PropertyAccessor {
 
   clone(): this {
     return new (this.constructor as any)(this.toJSON())
+  }
+
+  override destroy(): void {
+    this.emit('destroy')
+    super.destroy()
   }
 }

@@ -96,9 +96,12 @@ export function propertyOffsetFallback(
   // init default value
   if (
     _default !== undefined
-    && !target[initedSymbol]
+    && !target[initedSymbol]?.[key]
   ) {
-    target[initedSymbol] = true
+    if (!target[initedSymbol]) {
+      target[initedSymbol] = {}
+    }
+    target[initedSymbol][key] = true
     const defaultValue = typeof _default === 'function' ? _default() : _default
     if (defaultValue !== undefined) {
       target[key] = defaultValue

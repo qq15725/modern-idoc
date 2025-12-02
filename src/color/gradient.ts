@@ -8,9 +8,7 @@ import type {
 } from './gradient-parser'
 import { round } from '../utils'
 import { normalizeColor } from './color'
-import {
-  parseGradient,
-} from './gradient-parser'
+import { parseGradient } from './gradient-parser'
 
 export interface ColorStop {
   offset: number
