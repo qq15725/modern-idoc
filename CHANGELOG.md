@@ -1,3 +1,12 @@
+## [0.10.7](https://github.com/qq15725/modern-idoc/compare/v0.10.6...v0.10.7) (2025-12-16)
+
+
+### Features
+
+* Display ([a7d1610](https://github.com/qq15725/modern-idoc/commit/a7d16106866a42cfcbd89cc4344e84953a54f100))
+
+
+
 ## [0.10.6](https://github.com/qq15725/modern-idoc/compare/v0.10.5...v0.10.6) (2025-12-02)
 
 
