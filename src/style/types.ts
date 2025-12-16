@@ -2,7 +2,7 @@ import type { WithStyleNone } from '../types'
 
 export type StyleUnit = `${number}%` | number
 
-export type Display = 'flex' | 'contents'
+export type Display = 'inherit' | 'freeform' | 'flex'
 export type Direction = 'inherit' | 'ltr' | 'rtl'
 export type Overflow = 'hidden' | 'visible'
 export type Visibility = 'hidden' | 'visible'
