@@ -1,3 +1,12 @@
+## [0.10.8](https://github.com/qq15725/modern-idoc/compare/v0.10.7...v0.10.8) (2025-12-25)
+
+
+### Features
+
+* change textStrokeColor default value ([4e5859d](https://github.com/qq15725/modern-idoc/commit/4e5859d26d65bea29cf362e30bf0e0067673ce60))
+
+
+
 ## [0.10.7](https://github.com/qq15725/modern-idoc/compare/v0.10.6...v0.10.7) (2025-12-16)
 
 
