@@ -33,6 +33,7 @@ export function normalizeStyle(style: Style): NormalizedStyle {
     borderColor: isNone(style.borderColor) ? undefined : normalizeColor(style.borderColor),
     outlineColor: isNone(style.outlineColor) ? undefined : normalizeColor(style.outlineColor),
     shadowColor: isNone(style.shadowColor) ? undefined : normalizeColor(style.shadowColor),
+    textStrokeColor: isNone(style.textStrokeColor) ? undefined : normalizeColor(style.textStrokeColor),
   })
 }
 

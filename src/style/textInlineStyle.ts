@@ -33,7 +33,7 @@ export type NormalizedTextInlineStyle =
 export function getDefaultTextInlineStyle(): Required<NormalizedTextInlineStyle> {
   return {
     ...getDefaultHighlightStyle(),
-    color: 'rgb(0, 0, 0)',
+    color: '#000000',
     verticalAlign: 'baseline',
     letterSpacing: 0,
     wordSpacing: 0,

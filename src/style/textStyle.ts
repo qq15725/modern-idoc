@@ -1,4 +1,5 @@
 import type { NormalizedColor } from '../color'
+import type { WithStyleNone } from '../types'
 import type { NormalizedTextInlineStyle } from './textInlineStyle'
 import type { NormalizedTextLineStyle } from './textLineStyle'
 import { getDefaultTextInlineStyle } from './textInlineStyle'
@@ -6,7 +7,7 @@ import { getDefaultTextLineStyle } from './textLineStyle'
 
 export interface NormalizedTextDrawStyle {
   textStrokeWidth: number
-  textStrokeColor: NormalizedColor
+  textStrokeColor: WithStyleNone<NormalizedColor>
 }
 
 export type NormalizedTextStyle =
@@ -14,12 +15,12 @@ export type NormalizedTextStyle =
   & NormalizedTextInlineStyle
   & NormalizedTextDrawStyle
 
-export function getDefaultTextStyle(): Required<NormalizedTextStyle> {
+export function getDefaultTextStyle(): NormalizedTextStyle {
   return {
     ...getDefaultTextLineStyle(),
     ...getDefaultTextInlineStyle(),
     // textStroke
     textStrokeWidth: 0,
-    textStrokeColor: 'rgb(0, 0, 0)',
+    textStrokeColor: 'none',
   }
 }

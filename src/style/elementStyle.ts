@@ -57,7 +57,7 @@ export function getDefaultElementStyle(): NormalizedElementStyle {
     // outline
     outlineWidth: 0,
     outlineOffset: 0,
-    outlineColor: 'rgb(0, 0, 0)',
+    outlineColor: 'none',
     outlineStyle: 'none',
     // other
     visibility: 'visible',
