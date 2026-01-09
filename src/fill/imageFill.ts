@@ -51,6 +51,16 @@ export interface NormalizedImageFill extends ImageFillObject {
   //
 }
 
+export const imageFillFiedls: (keyof NormalizedImageFill)[] = [
+  'image',
+  'cropRect',
+  'stretchRect',
+  'tile',
+  'dpi',
+  'opacity',
+  'rotateWithShape',
+]
+
 export function normalizeImageFill(fill: ImageFill): NormalizedImageFill {
   let obj: ImageFillObject
   if (typeof fill === 'string') {
@@ -59,13 +69,5 @@ export function normalizeImageFill(fill: ImageFill): NormalizedImageFill {
   else {
     obj = { ...fill }
   }
-  return pick(obj, [
-    'image',
-    'cropRect',
-    'stretchRect',
-    'tile',
-    'dpi',
-    'opacity',
-    'rotateWithShape',
-  ])
+  return pick(obj, imageFillFiedls)
 }

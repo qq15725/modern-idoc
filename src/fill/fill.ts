@@ -3,11 +3,11 @@ import type { GradientFill, GradientFillObject, NormalizedGradientFill } from '.
 import type { ImageFill, ImageFillObject, NormalizedImageFill } from './imageFill'
 import type { NormalizedPresetFill, PresetFill, PresetFillObject } from './presetFill'
 import { isColor, isGradient } from '../color'
-import { clearUndef, isNone } from '../utils'
-import { normalizeColorFill } from './colorFill'
-import { normalizeGradientFill } from './gradientFill'
-import { normalizeImageFill } from './imageFill'
-import { normalizePresetFill } from './presetFill'
+import { clearUndef, isNone, pick } from '../utils'
+import { colorFillFields, normalizeColorFill } from './colorFill'
+import { gradientFillFields, normalizeGradientFill } from './gradientFill'
+import { imageFillFiedls, normalizeImageFill } from './imageFill'
+import { normalizePresetFill, presetFillFiedls } from './presetFill'
 
 export type FillObject =
   & { enabled?: boolean }
@@ -72,17 +72,28 @@ export function isPresetFill(fill: Fill): fill is PresetFill {
 export function normalizeFill(fill: Fill): NormalizedFill {
   const enabled = fill && typeof fill === 'object' ? fill.enabled : undefined
 
+  const obj = { enabled } as NormalizedFill
+
   if (isColorFill(fill)) {
-    return clearUndef({ enabled, ...normalizeColorFill(fill) })
+    Object.assign(obj, normalizeColorFill(fill))
   }
-  else if (isGradientFill(fill)) {
-    return clearUndef({ enabled, ...normalizeGradientFill(fill) })
+
+  if (isGradientFill(fill)) {
+    Object.assign(obj, normalizeGradientFill(fill))
   }
-  else if (isImageFill(fill)) {
-    return clearUndef({ enabled, ...normalizeImageFill(fill) })
+
+  if (isImageFill(fill)) {
+    Object.assign(obj, normalizeImageFill(fill))
   }
-  else if (isPresetFill(fill)) {
-    return clearUndef({ enabled, ...normalizePresetFill(fill) })
+
+  if (isPresetFill(fill)) {
+    Object.assign(obj, normalizePresetFill(fill))
   }
-  return {}
+
+  return pick(clearUndef(obj), Array.from(new Set([
+    ...colorFillFields,
+    ...imageFillFiedls,
+    ...gradientFillFields,
+    ...presetFillFiedls,
+  ])))
 }

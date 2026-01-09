@@ -18,6 +18,12 @@ export interface NormalizedPresetFill extends PresetFillObject {
   backgroundColor?: NormalizedColor
 }
 
+export const presetFillFiedls: (keyof NormalizedPresetFill)[] = [
+  'preset',
+  'foregroundColor',
+  'backgroundColor',
+]
+
 export function normalizePresetFill(fill: PresetFill): NormalizedPresetFill {
   let obj: NormalizedPresetFill
   if (typeof fill === 'string') {
@@ -38,9 +44,5 @@ export function normalizePresetFill(fill: PresetFill): NormalizedPresetFill {
   else {
     obj.backgroundColor = normalizeColor(obj.backgroundColor)
   }
-  return pick(obj, [
-    'preset',
-    'foregroundColor',
-    'backgroundColor',
-  ])
+  return pick(obj, presetFillFiedls)
 }

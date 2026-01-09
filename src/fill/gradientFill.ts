@@ -17,6 +17,12 @@ export interface NormalizedGradientFill {
   rotateWithShape?: boolean
 }
 
+export const gradientFillFields: (keyof NormalizedGradientFill)[] = [
+  'linearGradient',
+  'radialGradient',
+  'rotateWithShape',
+]
+
 export function normalizeGradientFill(fill: GradientFill): NormalizedGradientFill {
   let obj: GradientFillObject
   if (typeof fill === 'string') {
@@ -38,9 +44,5 @@ export function normalizeGradientFill(fill: GradientFill): NormalizedGradientFil
         }
     }
   }
-  return pick(obj, [
-    'linearGradient',
-    'radialGradient',
-    'rotateWithShape',
-  ])
+  return pick(obj, gradientFillFields)
 }
