@@ -1,3 +1,12 @@
+## [0.10.9](https://github.com/qq15725/modern-idoc/compare/v0.10.8...v0.10.9) (2026-01-09)
+
+
+### Bug Fixes
+
+* fill ([9290ccb](https://github.com/qq15725/modern-idoc/commit/9290ccb169af9e33588c77ca7308edccf6fd30e3))
+
+
+
 ## [0.10.8](https://github.com/qq15725/modern-idoc/compare/v0.10.7...v0.10.8) (2025-12-25)
 
 
