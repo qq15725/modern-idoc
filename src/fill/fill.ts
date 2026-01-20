@@ -55,7 +55,7 @@ export function isImageFillObject(fill: FillObject): fill is ImageFillObject {
 
 export function isImageFill(fill: Fill): fill is ImageFill {
   return typeof fill === 'string'
-    ? !isGradient(fill)
+    ? !isColor(fill) && !isGradient(fill)
     : isImageFillObject(fill)
 }
 
