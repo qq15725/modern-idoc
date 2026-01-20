@@ -1,3 +1,12 @@
+## [0.10.10](https://github.com/qq15725/modern-idoc/compare/v0.10.9...v0.10.10) (2026-01-20)
+
+
+### Bug Fixes
+
+* isImageFill ([3a49112](https://github.com/qq15725/modern-idoc/commit/3a49112db61d0518b6d86e9a425cd0394f94dc17))
+
+
+
 ## [0.10.9](https://github.com/qq15725/modern-idoc/compare/v0.10.8...v0.10.9) (2026-01-09)
 
 
