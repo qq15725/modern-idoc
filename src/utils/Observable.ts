@@ -3,14 +3,14 @@ export interface ObservableEvents {
 }
 
 export class Observable<T extends ObservableEvents = ObservableEvents> {
-  _observers = new Map<string, Set<any>>()
+  protected _eventListeners = new Map<string, Set<any>>()
 
   on<K extends keyof T & string>(event: K, listener: (...args: T[K]) => void): this {
-    let set = this._observers.get(event)
-    if (set === undefined) {
-      this._observers.set(event, set = new Set())
+    let listeners = this._eventListeners.get(event)
+    if (listeners === undefined) {
+      this._eventListeners.set(event, listeners = new Set())
     }
-    set.add(listener)
+    listeners.add(listener)
     return this
   }
 
@@ -24,23 +24,36 @@ export class Observable<T extends ObservableEvents = ObservableEvents> {
   }
 
   off<K extends keyof T & string>(event: K, listener: (...args: T[K]) => void): this {
-    const observers = this._observers.get(event)
-    if (observers !== undefined) {
-      observers.delete(listener)
-      if (observers.size === 0) {
-        this._observers.delete(event)
+    const listeners = this._eventListeners.get(event)
+    if (listeners !== undefined) {
+      listeners.delete(listener)
+      if (listeners.size === 0) {
+        this._eventListeners.delete(event)
       }
     }
     return this
   }
 
   emit<K extends keyof T & string>(event: K, ...args: T[K]): this {
-    Array.from((this._observers.get(event) || new Map()).values())
-      .forEach(f => f(...args))
+    const listeners = this._eventListeners.get(event)
+    if (listeners) {
+      for (const listener of listeners) {
+        listener(...args)
+      }
+    }
     return this
   }
 
+  removeAllListeners(): this {
+    this._eventListeners.clear()
+    return this
+  }
+
+  hasEventListener(event: string): boolean {
+    return this._eventListeners.has(event)
+  }
+
   destroy(): void {
-    this._observers = new Map()
+    this.removeAllListeners()
   }
 }
