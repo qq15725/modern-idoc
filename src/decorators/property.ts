@@ -19,11 +19,8 @@ const propertiesSymbol = Symbol('properties')
 const initedSymbol = Symbol('inited')
 
 export function getDeclarations(constructor: any): Map<string, PropertyDeclaration> {
-  let declarations
-  if (Object.hasOwn(constructor, propertiesSymbol)) {
-    declarations = constructor[propertiesSymbol]
-  }
-  else {
+  let declarations = constructor[propertiesSymbol]
+  if (!declarations) {
     const superConstructor = Object.getPrototypeOf(constructor)
     declarations = new Map(superConstructor ? getDeclarations(superConstructor) : undefined)
     constructor[propertiesSymbol] = declarations
@@ -124,7 +121,7 @@ export function getPropertyDescriptor<V, T extends PropertyAccessor>(
   set: (v: any) => void
 } {
   function get(this: T): any {
-    if (typeof this.getProperty !== 'undefined') {
+    if (this.getProperty) {
       return this.getProperty(key)
     }
     else {
@@ -133,7 +130,7 @@ export function getPropertyDescriptor<V, T extends PropertyAccessor>(
   }
 
   function set(this: T, newValue: V): void {
-    if (typeof this.setProperty !== 'undefined') {
+    if (this.setProperty) {
       this.setProperty(key, newValue)
     }
     else {
@@ -159,14 +156,14 @@ export function defineProperty<V, T extends PropertyAccessor>(
 
   getDeclarations(constructor).set(key, _declaration)
 
-  const descriptor = getPropertyDescriptor<V, T>(key, _declaration)
+  const { get, set } = getPropertyDescriptor<V, T>(key, _declaration)
 
   Object.defineProperty(constructor.prototype, key, {
     get(this: T) {
-      return descriptor.get.call(this)
+      return get.call(this)
     },
     set(this: T, newValue: unknown) {
-      descriptor.set.call(this, newValue)
+      set.call(this, newValue)
     },
     configurable: true,
     enumerable: true,
