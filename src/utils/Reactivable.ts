@@ -42,11 +42,11 @@ export class Reactivable extends Observable implements PropertyAccessor {
         return propertyOffsetGet(this, key, declaration)
       }
       else {
-        const getProperty = this._propertyAccessor?.getProperty
+        const accessor = this._propertyAccessor
 
         let result
-        if (getProperty) {
-          result = getProperty(key)
+        if (accessor && accessor.getProperty) {
+          result = accessor.getProperty(key)
         }
         else {
           result = this._properties.get(key)
