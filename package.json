@@ -59,17 +59,17 @@
     "nanoid": "^5.1.6"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^6.7.3",
-    "@types/node": "^25.0.3",
-    "bumpp": "^10.3.2",
+    "@antfu/eslint-config": "^7.2.0",
+    "@types/node": "^25.0.10",
+    "bumpp": "^10.4.0",
     "conventional-changelog-cli": "^5.0.0",
     "eslint": "^9.39.2",
     "lint-staged": "^16.2.7",
     "simple-git-hooks": "^2.13.1",
     "typescript": "^5.9.3",
     "unbuild": "^3.6.1",
-    "vite": "^7.3.0",
-    "vitest": "^4.0.16"
+    "vite": "^7.3.1",
+    "vitest": "^4.0.18"
   },
   "simple-git-hooks": {
     "pre-commit": "pnpm lint-staged"
