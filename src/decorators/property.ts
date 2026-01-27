@@ -19,8 +19,11 @@ const propertiesSymbol = Symbol('properties')
 const initedSymbol = Symbol('inited')
 
 export function getDeclarations(constructor: any): Map<string, PropertyDeclaration> {
-  let declarations = constructor[propertiesSymbol]
-  if (!declarations) {
+  let declarations
+  if (Object.hasOwn(constructor, propertiesSymbol)) {
+    declarations = constructor[propertiesSymbol]
+  }
+  else {
     const superConstructor = Object.getPrototypeOf(constructor)
     declarations = new Map(superConstructor ? getDeclarations(superConstructor) : undefined)
     constructor[propertiesSymbol] = declarations
