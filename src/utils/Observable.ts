@@ -11,7 +11,10 @@ export class Observable<T extends ObservableEvents = ObservableEvents> {
       listeners = []
       this._eventListeners[event] = listeners
     }
-    listeners.splice(listeners.indexOf(listener), 1)
+    const idx = listeners.indexOf(listener)
+    if (idx > -1) {
+      listeners.splice(idx, 1)
+    }
     listeners.push(listener)
     return this
   }
@@ -28,9 +31,9 @@ export class Observable<T extends ObservableEvents = ObservableEvents> {
   off<K extends keyof T & string>(event: K, listener: (...args: T[K]) => void): this {
     const listeners = this._eventListeners[event]
     if (listeners !== undefined) {
-      listeners.splice(listeners.indexOf(listener), 1)
-      if (listeners.length === 0) {
-        delete this._eventListeners[event]
+      const idx = listeners.indexOf(listener)
+      if (idx > -1) {
+        listeners.splice(idx, 1)
       }
     }
     return this
@@ -38,8 +41,9 @@ export class Observable<T extends ObservableEvents = ObservableEvents> {
 
   emit<K extends keyof T & string>(event: K, ...args: T[K]): this {
     const listeners = this._eventListeners[event]
-    if (listeners) {
-      for (let len = listeners.length, i = 0; i < len; i++) {
+    const len = listeners.length
+    if (len > 0) {
+      for (let i = 0; i < len; i++) {
         listeners[i].apply(this, args)
       }
     }
