@@ -1,3 +1,7 @@
+## [0.10.16](https://github.com/qq15725/modern-idoc/compare/v0.10.15...v0.10.16) (2026-01-28)
+
+
+
 ## [0.10.15](https://github.com/qq15725/modern-idoc/compare/v0.10.14...v0.10.15) (2026-01-28)
 
 
