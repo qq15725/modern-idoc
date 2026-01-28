@@ -1,3 +1,12 @@
+## [0.10.17](https://github.com/qq15725/modern-idoc/compare/v0.10.16...v0.10.17) (2026-01-28)
+
+
+### Bug Fixes
+
+* bug ([2b91057](https://github.com/qq15725/modern-idoc/commit/2b91057e494bda2d0a8f7d452a221650870405c0))
+
+
+
 ## [0.10.16](https://github.com/qq15725/modern-idoc/compare/v0.10.15...v0.10.16) (2026-01-28)
 
 
