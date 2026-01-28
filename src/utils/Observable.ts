@@ -3,54 +3,56 @@ export interface ObservableEvents {
 }
 
 export class Observable<T extends ObservableEvents = ObservableEvents> {
-  protected _eventListeners = new Map<string, Set<any>>()
+  protected _eventListeners: Record<string, any[]> = {}
 
   on<K extends keyof T & string>(event: K, listener: (...args: T[K]) => void): this {
-    let listeners = this._eventListeners.get(event)
+    let listeners = this._eventListeners[event]
     if (listeners === undefined) {
-      this._eventListeners.set(event, listeners = new Set())
+      listeners = []
+      this._eventListeners[event] = listeners
     }
-    listeners.add(listener)
+    listeners.splice(listeners.indexOf(listener), 1)
+    listeners.push(listener)
     return this
   }
 
   once<K extends keyof T & string>(event: K, listener: (...args: T[K]) => void): this {
     const _f = (...args: T[K]): void => {
       this.off(event, _f as any)
-      listener(...args)
+      listener.apply(this, args)
     }
     this.on(event, _f as any)
     return this
   }
 
   off<K extends keyof T & string>(event: K, listener: (...args: T[K]) => void): this {
-    const listeners = this._eventListeners.get(event)
+    const listeners = this._eventListeners[event]
     if (listeners !== undefined) {
-      listeners.delete(listener)
-      if (listeners.size === 0) {
-        this._eventListeners.delete(event)
+      listeners.splice(listeners.indexOf(listener), 1)
+      if (listeners.length === 0) {
+        delete this._eventListeners[event]
       }
     }
     return this
   }
 
   emit<K extends keyof T & string>(event: K, ...args: T[K]): this {
-    const listeners = this._eventListeners.get(event)
+    const listeners = this._eventListeners[event]
     if (listeners) {
-      for (const listener of listeners) {
-        listener(...args)
+      for (let len = listeners.length, i = 0; i < len; i++) {
+        listeners[i].apply(this, args)
       }
     }
     return this
   }
 
   removeAllListeners(): this {
-    this._eventListeners.clear()
+    this._eventListeners = {}
     return this
   }
 
   hasEventListener(event: string): boolean {
-    return this._eventListeners.has(event)
+    return Boolean(this._eventListeners[event])
   }
 
   destroy(): void {
