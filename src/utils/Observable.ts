@@ -41,10 +41,12 @@ export class Observable<T extends ObservableEvents = ObservableEvents> {
 
   emit<K extends keyof T & string>(event: K, ...args: T[K]): this {
     const listeners = this._eventListeners[event]
-    const len = listeners.length
-    if (len > 0) {
-      for (let i = 0; i < len; i++) {
-        listeners[i].apply(this, args)
+    if (listeners !== undefined) {
+      const len = listeners.length
+      if (len > 0) {
+        for (let i = 0; i < len; i++) {
+          listeners[i].apply(this, args)
+        }
       }
     }
     return this
