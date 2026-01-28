@@ -15,18 +15,18 @@ export interface PropertyAccessor {
   onUpdateProperty?: (key: string, newValue: any, oldValue: any) => void
 }
 
-const propertiesSymbol = Symbol('properties')
-const initedSymbol = Symbol('inited')
+const declarationsSymbol = Symbol.for('declarations')
+const initedSymbol = Symbol.for('inited')
 
-export function getDeclarations(constructor: any): Map<string, PropertyDeclaration> {
+export function getDeclarations(constructor: any): Record<string, PropertyDeclaration> {
   let declarations
-  if (Object.hasOwn(constructor, propertiesSymbol)) {
-    declarations = constructor[propertiesSymbol]
+  if (Object.hasOwn(constructor, declarationsSymbol)) {
+    declarations = constructor[declarationsSymbol]
   }
   else {
     const superConstructor = Object.getPrototypeOf(constructor)
-    declarations = new Map(superConstructor ? getDeclarations(superConstructor) : undefined)
-    constructor[propertiesSymbol] = declarations
+    declarations = { ...(superConstructor ? getDeclarations(superConstructor) : {}) }
+    constructor[declarationsSymbol] = declarations
   }
   return declarations
 }
@@ -154,10 +154,11 @@ export function defineProperty<V, T extends PropertyAccessor>(
 ): void {
   const _declaration: PropertyDeclaration = {
     ...declaration,
-    internalKey: Symbol(key),
+    internalKey: Symbol.for(key),
   }
 
-  getDeclarations(constructor).set(key, _declaration)
+  const declarations = getDeclarations(constructor)
+  declarations[key] = _declaration
 
   const { get, set } = getPropertyDescriptor<V, T>(key, _declaration)
 
@@ -200,14 +201,15 @@ export function property2<V, T extends PropertyAccessor>(
 
     const _declaration: PropertyDeclaration = {
       ...declaration,
-      internalKey: Symbol(key),
+      internalKey: Symbol.for(key),
     }
 
     const descriptor = getPropertyDescriptor(key, _declaration)
 
     return {
       init(this: T, v: V) {
-        getDeclarations(this.constructor).set(key, _declaration)
+        const declarations = getDeclarations(this.constructor)
+        declarations[key] = _declaration
         descriptor.set.call(this, v)
         return v
       },

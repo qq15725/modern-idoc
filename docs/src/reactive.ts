@@ -19,6 +19,7 @@ const test = new TestObject2()
 test.test1 = 2
 test.meta.title = 2
 
+console.warn('[reactive]', test)
 console.warn('[reactive] meta', test.meta)
-console.warn('[reactive] getDeclarations', Object.fromEntries(getDeclarations(TestObject1).entries()))
-console.warn('[reactive] getDeclarations', Object.fromEntries(getDeclarations(TestObject2).entries()))
+console.warn('[reactive] getDeclarations', getDeclarations(TestObject1))
+console.warn('[reactive] getDeclarations', getDeclarations(TestObject2))

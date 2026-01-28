@@ -17,8 +17,8 @@ export interface Reactivable {
 
 export class Reactivable extends Observable implements PropertyAccessor {
   protected _propertyAccessor?: PropertyAccessor
-  protected _properties = new Map<string, unknown>()
-  protected _updatedProperties = new Map<string, unknown>()
+  protected _properties: Record<string, any> = {}
+  protected _updatedProperties: Record<string, any> = {}
   protected _changedProperties = new Set<string>()
   protected _updatingPromise = Promise.resolve()
   protected _updating = false
@@ -30,8 +30,8 @@ export class Reactivable extends Observable implements PropertyAccessor {
 
   isDirty(key?: string): boolean {
     return key
-      ? this._updatedProperties.has(key)
-      : this._updatedProperties.size > 0
+      ? Boolean(this._updatedProperties[key])
+      : Object.keys(this._updatedProperties).length > 0
   }
 
   getProperty(key: string): any {
@@ -49,7 +49,7 @@ export class Reactivable extends Observable implements PropertyAccessor {
           result = accessor.getProperty(key)
         }
         else {
-          result = this._properties.get(key)
+          result = this._properties[key]
         }
 
         return result ?? propertyOffsetFallback(this, key, declaration)
@@ -69,7 +69,7 @@ export class Reactivable extends Observable implements PropertyAccessor {
       else {
         const oldValue = this.getProperty(key)
         this._propertyAccessor?.setProperty?.(key, newValue)
-        this._properties.set(key, newValue)
+        this._properties[key] = newValue
         this.onUpdateProperty?.(
           key,
           newValue ?? propertyOffsetFallback(this, key, declaration),
@@ -81,9 +81,13 @@ export class Reactivable extends Observable implements PropertyAccessor {
 
   getProperties(keys?: string[]): Record<string, any> {
     const properties: Record<string, any> = {}
-    for (const [name, declaration] of this.getPropertyDeclarations()) {
-      if (!declaration.internal && !declaration.alias && (!keys || keys.includes(name))) {
-        properties[name] = this.getProperty(name)
+    const declarations = this.getPropertyDeclarations()
+    const declarationKeys = Object.keys(declarations)
+    for (let i = 0, len = declarationKeys.length; i < len; i++) {
+      const key = declarationKeys[i]
+      const declaration = declarations[key]
+      if (!declaration.internal && !declaration.alias && (!keys || keys.includes(key))) {
+        properties[key] = this.getProperty(key)
       }
     }
     return properties
@@ -99,9 +103,13 @@ export class Reactivable extends Observable implements PropertyAccessor {
   }
 
   resetProperties(): this {
-    for (const [name, declaration] of this.getPropertyDeclarations()) {
+    const declarations = this.getPropertyDeclarations()
+    const declarationKeys = Object.keys(declarations)
+    for (let i = 0, len = declarationKeys.length; i < len; i++) {
+      const key = declarationKeys[i]
+      const declaration = declarations[key]
       this.setProperty(
-        name,
+        key,
         typeof declaration.default === 'function'
           ? declaration.default()
           : declaration.default,
@@ -110,12 +118,12 @@ export class Reactivable extends Observable implements PropertyAccessor {
     return this
   }
 
-  getPropertyDeclarations(): Map<string, PropertyDeclaration> {
+  getPropertyDeclarations(): Record<string, PropertyDeclaration> {
     return getDeclarations(this.constructor)
   }
 
   getPropertyDeclaration(key: string): PropertyDeclaration | undefined {
-    return this.getPropertyDeclarations().get(key)
+    return this.getPropertyDeclarations()[key]
   }
 
   setPropertyAccessor(accessor: PropertyAccessor): this {
@@ -124,13 +132,18 @@ export class Reactivable extends Observable implements PropertyAccessor {
     this._propertyAccessor = undefined
 
     const oldValues: Record<string, any> = {}
-    declarations.forEach((_declaration, key) => {
+
+    const declarationKeys = Object.keys(declarations)
+    for (let i = 0, len = declarationKeys.length; i < len; i++) {
+      const key = declarationKeys[i]
       oldValues[key] = this.getProperty(key)
-    })
+    }
 
     this._propertyAccessor = accessor
 
-    declarations.forEach((declaration, key) => {
+    for (let i = 0, len = declarationKeys.length; i < len; i++) {
+      const key = declarationKeys[i]
+      const declaration = declarations[key]
       const newValue = this.getProperty(key)
       const oldValue = oldValues[key]
       if (newValue !== undefined && !Object.is(newValue, oldValue)) {
@@ -139,7 +152,7 @@ export class Reactivable extends Observable implements PropertyAccessor {
           this.requestUpdate(key, newValue, oldValue)
         }
       }
-    })
+    }
 
     return this
   }
@@ -168,7 +181,7 @@ export class Reactivable extends Observable implements PropertyAccessor {
 
   onUpdate(): void {
     this._update(this._updatedProperties)
-    this._updatedProperties = new Map()
+    this._updatedProperties = {}
   }
 
   onUpdateProperty(key: string, newValue: any, oldValue: any): void {
@@ -179,7 +192,7 @@ export class Reactivable extends Observable implements PropertyAccessor {
 
   requestUpdate(key?: string, newValue?: any, oldValue?: any): void {
     if (key !== undefined) {
-      this._updatedProperties.set(key, oldValue)
+      this._updatedProperties[key] = oldValue
       this._changedProperties.add(key)
       this._updateProperty(key, newValue, oldValue)
       this.emit('updateProperty', key, newValue, oldValue)
@@ -191,7 +204,7 @@ export class Reactivable extends Observable implements PropertyAccessor {
   }
 
   // eslint-disable-next-line unused-imports/no-unused-vars
-  protected _update(changed: Map<string, any>): void {
+  protected _update(changed: Record<string, any>): void {
     /** override */
   }
 
@@ -202,9 +215,13 @@ export class Reactivable extends Observable implements PropertyAccessor {
 
   toJSON(): Record<string, any> {
     const json: Record<string, any> = {}
-    this._properties.forEach((value, key) => {
+    const properties = this._properties
+    const keys = Object.keys(properties)
+    for (let i = 0, len = keys.length; i < len; i++) {
+      const key = keys[i]
+      const value = properties[key]
       if (value === undefined) {
-        return
+        continue
       }
       if (value && typeof value === 'object') {
         if ('toJSON' in value && typeof value.toJSON === 'function') {
@@ -220,7 +237,7 @@ export class Reactivable extends Observable implements PropertyAccessor {
       else {
         json[key] = value
       }
-    })
+    }
     return json
   }
 
