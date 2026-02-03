@@ -1,3 +1,12 @@
+## [0.10.20](https://github.com/qq15725/modern-idoc/compare/v0.10.19...v0.10.20) (2026-02-03)
+
+
+### Features
+
+* offsetGetProperties ([38c6293](https://github.com/qq15725/modern-idoc/commit/38c6293e25f19949b12d738a9cda30a1514dc4c1))
+
+
+
 ## [0.10.19](https://github.com/qq15725/modern-idoc/compare/v0.10.18...v0.10.19) (2026-02-03)
 
 
