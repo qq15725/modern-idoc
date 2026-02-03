@@ -190,10 +190,10 @@ export class Reactivable extends Observable implements PropertyAccessor {
         const oldValue = this.offsetGetProperty(key)
         const newValue = accessor.getProperty(key)
         if (
-          (oldValue !== undefined || newValue !== undefined)
+          (newValue !== undefined)
           && !Object.is(oldValue, newValue)
         ) {
-          accessor.setProperty(key, newValue)
+          this.offsetSetProperty(key, newValue)
           items.push({ key, newValue, oldValue })
         }
       }
