@@ -34,6 +34,14 @@ export class Reactivable extends Observable implements PropertyAccessor {
       : Object.keys(this._updatedProperties).length > 0
   }
 
+  offsetGetProperty(key: string): any {
+    return this._properties[key]
+  }
+
+  offsetSetProperty(key: string, value: any): void {
+    this._properties[key] = value
+  }
+
   getProperty(key: string): any {
     const declaration = this.getPropertyDeclaration(key)
 
@@ -49,7 +57,7 @@ export class Reactivable extends Observable implements PropertyAccessor {
           result = accessor.getProperty(key)
         }
         else {
-          result = this._properties[key]
+          result = this.offsetGetProperty(key)
         }
 
         return result ?? propertyOffsetFallback(this, key, declaration)
@@ -69,7 +77,7 @@ export class Reactivable extends Observable implements PropertyAccessor {
       else {
         const oldValue = this.getProperty(key)
         this._propertyAccessor?.setProperty?.(key, newValue)
-        this._properties[key] = newValue
+        this.offsetSetProperty(key, newValue)
         this.onUpdateProperty?.(
           key,
           newValue ?? propertyOffsetFallback(this, key, declaration),
@@ -126,32 +134,35 @@ export class Reactivable extends Observable implements PropertyAccessor {
     return this.getPropertyDeclarations()[key]
   }
 
-  setPropertyAccessor(accessor: PropertyAccessor): this {
+  setPropertyAccessor(accessor?: PropertyAccessor): this {
     const declarations = this.getPropertyDeclarations()
+    const items: any[] = []
 
-    this._propertyAccessor = undefined
-
-    const oldValues: Record<string, any> = {}
-
-    const declarationKeys = Object.keys(declarations)
-    for (let i = 0, len = declarationKeys.length; i < len; i++) {
-      const key = declarationKeys[i]
-      oldValues[key] = this.getProperty(key)
+    if (accessor && accessor.getProperty && accessor.setProperty) {
+      const declarationKeys = Object.keys(declarations)
+      for (let i = 0, len = declarationKeys.length; i < len; i++) {
+        const key = declarationKeys[i]
+        const declaration = declarations[key]
+        if (declaration.internal || declaration.alias) {
+          continue
+        }
+        const oldValue = this.offsetGetProperty(key)
+        const newValue = accessor.getProperty(key)
+        if (
+          (oldValue !== undefined || newValue !== undefined)
+          && !Object.is(oldValue, newValue)
+        ) {
+          accessor.setProperty(key, newValue)
+          items.push({ key, newValue, oldValue })
+        }
+      }
     }
 
     this._propertyAccessor = accessor
 
-    for (let i = 0, len = declarationKeys.length; i < len; i++) {
-      const key = declarationKeys[i]
-      const declaration = declarations[key]
-      const newValue = this.getProperty(key)
-      const oldValue = oldValues[key]
-      if (newValue !== undefined && !Object.is(newValue, oldValue)) {
-        this.setProperty(key, newValue)
-        if (!declaration.internal && !declaration.alias) {
-          this.requestUpdate(key, newValue, oldValue)
-        }
-      }
+    for (let i = 0, len = items.length; i < len; i++) {
+      const { key, newValue, oldValue } = items[i]
+      this.requestUpdate(key, newValue, oldValue)
     }
 
     return this
