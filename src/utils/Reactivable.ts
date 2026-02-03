@@ -42,6 +42,44 @@ export class Reactivable extends Observable implements PropertyAccessor {
     this._properties[key] = value
   }
 
+  offsetGetProperties(keys?: string[]): Record<string, any> {
+    const properties = this._properties
+    const allKeys = Object.keys(properties)
+    const result: Record<string, any> = {}
+    for (let key, value, i = 0; i < allKeys.length; i++) {
+      key = allKeys[i]
+      value = properties[key]
+      if (value !== undefined && (!keys || keys.includes(key))) {
+        if (value && typeof value === 'object') {
+          if ('toJSON' in value) {
+            result[key] = value.toJSON()
+          }
+          else if (Array.isArray(value)) {
+            result[key] = [...value]
+          }
+          else {
+            result[key] = { ...value }
+          }
+        }
+        else {
+          result[key] = value
+        }
+      }
+    }
+    return result
+  }
+
+  offsetSetProperties(properties?: Record<string, any>): this {
+    if (properties && typeof properties === 'object') {
+      const allKeys = Object.keys(properties)
+      for (let key, i = 0; i < allKeys.length; i++) {
+        key = allKeys[i]
+        this.offsetSetProperty(key, properties[key])
+      }
+    }
+    return this
+  }
+
   getProperty(key: string): any {
     const declaration = this.getPropertyDeclaration(key)
 
@@ -94,7 +132,10 @@ export class Reactivable extends Observable implements PropertyAccessor {
     for (let i = 0, len = declarationKeys.length; i < len; i++) {
       const key = declarationKeys[i]
       const declaration = declarations[key]
-      if (!declaration.internal && !declaration.alias && (!keys || keys.includes(key))) {
+      if (declaration.internal || declaration.alias) {
+        continue
+      }
+      if (!keys || keys.includes(key)) {
         properties[key] = this.getProperty(key)
       }
     }
@@ -225,31 +266,7 @@ export class Reactivable extends Observable implements PropertyAccessor {
   }
 
   toJSON(): Record<string, any> {
-    const json: Record<string, any> = {}
-    const properties = this._properties
-    const keys = Object.keys(properties)
-    for (let i = 0, len = keys.length; i < len; i++) {
-      const key = keys[i]
-      const value = properties[key]
-      if (value === undefined) {
-        continue
-      }
-      if (value && typeof value === 'object') {
-        if ('toJSON' in value && typeof value.toJSON === 'function') {
-          json[key] = value.toJSON()
-        }
-        else if (Array.isArray(value)) {
-          json[key] = [...value]
-        }
-        else {
-          json[key] = { ...value }
-        }
-      }
-      else {
-        json[key] = value
-      }
-    }
-    return json
+    return this.offsetGetProperties()
   }
 
   clone(): this {
