@@ -1,3 +1,12 @@
+## [0.10.21](https://github.com/qq15725/modern-idoc/compare/v0.10.20...v0.10.21) (2026-02-03)
+
+
+### Bug Fixes
+
+* setPropertyAccessor ([da18c6a](https://github.com/qq15725/modern-idoc/commit/da18c6a9c6a955c73e66d093f25e1d295f08ba80))
+
+
+
 ## [0.10.20](https://github.com/qq15725/modern-idoc/compare/v0.10.19...v0.10.20) (2026-02-03)
 
 
