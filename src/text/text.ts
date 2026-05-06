@@ -1,4 +1,4 @@
-import type { Effect } from '../effect'
+import type { Effect, NormalizedEffect } from '../effect'
 import type { Fill, NormalizedFill } from '../fill'
 import type { NormalizedOutline, Outline } from '../outline'
 import type { NormalizedStyle, Style, StyleObject } from '../style'
@@ -50,24 +50,20 @@ export type TextContent =
 
 export type NormalizedTextContent = NormalizedParagraph[]
 
-export interface TextObject extends Partial<Toggleable> {
+export interface TextObject extends Pick<Effect, 'fill' | 'outline'>, Partial<Toggleable> {
   content?: TextContent
   style?: Style
-  effects?: Effect[]
   measureDom?: any // runtime: HTMLElement
   fonts?: any // runtime: modern-font Fonts
-  fill?: Fill
-  outline?: Outline
+  effects?: Effect[]
 }
 
-export interface NormalizedText extends Toggleable {
+export interface NormalizedText extends Pick<NormalizedEffect, 'fill' | 'outline'>, Toggleable {
   content: NormalizedTextContent
   style?: NormalizedStyle
   effects?: Effect[]
   measureDom?: any // runtime: HTMLElement
   fonts?: any // runtime: modern-font Fonts
-  fill?: NormalizedFill
-  outline?: NormalizedOutline
 }
 
 const CRLF_RE = /\r\n|\n\r|\n|\r/
@@ -225,15 +221,13 @@ export function normalizeText(value: Text): NormalizedText {
   }
   else {
     return clearUndef({
-      ...value,
       enabled: value.enabled ?? true,
       content: normalizeTextContent(value.content ?? ''),
       style: value.style ? normalizeStyle(value.style) : undefined,
-      effects: value.effects ? value.effects.map(v => normalizeEffect(v)) : undefined,
       measureDom: value.measureDom,
       fonts: value.fonts,
-      fill: value.fill ? normalizeFill(value.fill) : undefined,
-      outline: value.outline ? normalizeOutline(value.outline) : undefined,
+      ...normalizeEffect(value),
+      effects: value.effects ? value.effects.map(v => normalizeEffect(v)) : undefined,
     })
   }
 }
