@@ -1,37 +1,28 @@
+import type { NormalizedBackgroundStyle } from '../background'
 import type { NormalizedColor } from '../color'
+import type { NormalizedOutlineStyle } from '../outline'
 import type { NormalizedShadowStyle } from '../shadow'
 import type { WithStyleNone } from '../types'
 import type { NormalizedLayoutStyle } from './layoutStyle'
 import type { NormalizedTransformStyle } from './transformStyle'
 import type { BorderStyle, PointerEvents, Visibility } from './types'
+import { getDefaultBackgroundStyle } from '../background'
+import { getDefaultOutlineStyle } from '../outline'
 import { getDefaultShadowStyle } from '../shadow'
 import { getDefaultLayoutStyle } from './layoutStyle'
 import { getDefaultTransformStyle } from './transformStyle'
-
-export type BackgroundSize =
-  | 'contain' | 'cover' | string
-  // custom
-  | 'stretch' | 'rigid'
 
 export type NormalizedElementStyle =
   & Partial<NormalizedLayoutStyle>
   & NormalizedTransformStyle
   & NormalizedShadowStyle
+  & NormalizedOutlineStyle
+  & NormalizedBackgroundStyle
   & {
-  // background
-    backgroundImage: WithStyleNone<string>
-    backgroundSize: BackgroundSize
-    backgroundColor: WithStyleNone<NormalizedColor>
-    backgroundColormap: WithStyleNone<Record<string, string>>
     // border
     borderRadius: number
     borderColor: WithStyleNone<NormalizedColor>
     borderStyle: BorderStyle
-    // outline
-    outlineWidth: number
-    outlineOffset: number
-    outlineColor: WithStyleNone<NormalizedColor>
-    outlineStyle: string
     // other
     visibility: Visibility
     filter: string
@@ -45,20 +36,12 @@ export function getDefaultElementStyle(): NormalizedElementStyle {
     ...getDefaultLayoutStyle(),
     ...getDefaultTransformStyle(),
     ...getDefaultShadowStyle(),
-    // background
-    backgroundImage: 'none',
-    backgroundSize: 'auto, auto',
-    backgroundColor: 'none',
-    backgroundColormap: 'none',
+    ...getDefaultBackgroundStyle(),
+    ...getDefaultOutlineStyle(),
     // border
     borderRadius: 0,
     borderColor: 'none',
     borderStyle: 'solid',
-    // outline
-    outlineWidth: 0,
-    outlineOffset: 0,
-    outlineColor: 'none',
-    outlineStyle: 'none',
     // other
     visibility: 'visible',
     filter: 'none',

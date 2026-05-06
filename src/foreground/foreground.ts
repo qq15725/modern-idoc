@@ -1,6 +1,6 @@
-import type { FillObject, NormalizedFill } from './fill'
-import { normalizeFill } from './fill'
-import { pick } from './utils'
+import type { FillObject, NormalizedFill } from '../fill'
+import { normalizeFill } from '../fill'
+import { pick } from '../utils'
 
 export interface NormalizedBaseForeground {
   fillWithShape?: boolean

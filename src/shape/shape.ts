@@ -1,4 +1,4 @@
-import type { NormalizedColor } from './color'
+import type { NormalizedColor } from '../color'
 
 export type SVGPathData = string
 export type FillRule = 'nonzero' | 'evenodd'

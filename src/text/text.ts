@@ -1,10 +1,18 @@
-import type { Fill, NormalizedFill } from './fill'
-import type { NormalizedOutline, Outline } from './outline'
-import type { NormalizedStyle, Style, StyleObject } from './style'
-import { normalizeFill } from './fill'
-import { normalizeOutline } from './outline'
-import { normalizeStyle } from './style'
-import { clearUndef, isEqualObject } from './utils'
+import type { Effect } from '../effect'
+import type { Fill, NormalizedFill } from '../fill'
+import type { NormalizedOutline, Outline } from '../outline'
+import type { NormalizedStyle, Style, StyleObject } from '../style'
+import type { Toggleable } from '../types'
+import { normalizeEffect } from '../effect'
+import { normalizeFill } from '../fill'
+import { normalizeOutline } from '../outline'
+import { normalizeStyle } from '../style'
+import { clearUndef, isEqualObject } from '../utils'
+
+export type Text =
+  | string
+  | FlatTextContent[]
+  | TextObject
 
 export interface FragmentObject extends StyleObject {
   content: string
@@ -42,32 +50,25 @@ export type TextContent =
 
 export type NormalizedTextContent = NormalizedParagraph[]
 
-export interface TextObject {
+export interface TextObject extends Partial<Toggleable> {
   content?: TextContent
-  enabled?: boolean
   style?: Style
-  effects?: Style[]
+  effects?: Effect[]
   measureDom?: any // runtime: HTMLElement
   fonts?: any // runtime: modern-font Fonts
   fill?: Fill
   outline?: Outline
 }
 
-export interface NormalizedText {
+export interface NormalizedText extends Toggleable {
   content: NormalizedTextContent
-  enabled?: boolean
   style?: NormalizedStyle
-  effects?: NormalizedStyle[]
+  effects?: Effect[]
   measureDom?: any // runtime: HTMLElement
   fonts?: any // runtime: modern-font Fonts
   fill?: NormalizedFill
   outline?: NormalizedOutline
 }
-
-export type Text =
-  | string
-  | FlatTextContent[]
-  | TextObject
 
 const CRLF_RE = /\r\n|\n\r|\n|\r/
 const NORMALIZE_CRLF_RE = new RegExp(`${CRLF_RE.source}|<br\\/>`, 'g')
@@ -218,15 +219,17 @@ export function isFragmentObject(value: any): value is FragmentObject {
 export function normalizeText(value: Text): NormalizedText {
   if (typeof value === 'string' || Array.isArray(value)) {
     return {
+      enabled: true,
       content: normalizeTextContent(value),
     }
   }
   else {
     return clearUndef({
       ...value,
+      enabled: value.enabled ?? true,
       content: normalizeTextContent(value.content ?? ''),
       style: value.style ? normalizeStyle(value.style) : undefined,
-      effects: value.effects ? value.effects.map(v => normalizeStyle(v)) : undefined,
+      effects: value.effects ? value.effects.map(v => normalizeEffect(v)) : undefined,
       measureDom: value.measureDom,
       fonts: value.fonts,
       fill: value.fill ? normalizeFill(value.fill) : undefined,

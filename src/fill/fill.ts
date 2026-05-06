@@ -1,16 +1,17 @@
-import type { ColorFill, ColorFillObject, NormalizedColorFill } from './colorFill'
-import type { GradientFill, GradientFillObject, NormalizedGradientFill } from './gradientFill'
-import type { ImageFill, ImageFillObject, NormalizedImageFill } from './imageFill'
-import type { NormalizedPresetFill, PresetFill, PresetFillObject } from './presetFill'
+import type { Toggleable } from '../types'
+import type { ColorFill, ColorFillObject, NormalizedColorFill } from './color'
+import type { GradientFill, GradientFillObject, NormalizedGradientFill } from './gradient'
+import type { ImageFill, ImageFillObject, NormalizedImageFill } from './image'
+import type { NormalizedPresetFill, PresetFill, PresetFillObject } from './preset'
 import { isColor, isGradient } from '../color'
 import { clearUndef, isNone, pick } from '../utils'
-import { colorFillFields, normalizeColorFill } from './colorFill'
-import { gradientFillFields, normalizeGradientFill } from './gradientFill'
-import { imageFillFiedls, normalizeImageFill } from './imageFill'
-import { normalizePresetFill, presetFillFiedls } from './presetFill'
+import { colorFillFields, normalizeColorFill } from './color'
+import { gradientFillFields, normalizeGradientFill } from './gradient'
+import { imageFillFiedls, normalizeImageFill } from './image'
+import { normalizePresetFill, presetFillFiedls } from './preset'
 
 export type FillObject =
-  & { enabled?: boolean }
+  & Partial<Toggleable>
   & Partial<ColorFillObject>
   & Partial<GradientFillObject>
   & Partial<ImageFillObject>
@@ -21,7 +22,7 @@ export type Fill =
   | FillObject
 
 export type NormalizedFill =
-  & { enabled?: boolean }
+  & Toggleable
   & Partial<NormalizedColorFill>
   & Partial<NormalizedGradientFill>
   & Partial<NormalizedImageFill>
@@ -70,7 +71,9 @@ export function isPresetFill(fill: Fill): fill is PresetFill {
 }
 
 export function normalizeFill(fill: Fill): NormalizedFill {
-  const enabled = fill && typeof fill === 'object' ? fill.enabled : undefined
+  const enabled = fill && typeof fill === 'object'
+    ? (fill.enabled ?? true)
+    : true
 
   const obj = { enabled } as NormalizedFill
 
@@ -91,6 +94,7 @@ export function normalizeFill(fill: Fill): NormalizedFill {
   }
 
   return pick(clearUndef(obj), Array.from(new Set([
+    'enabled',
     ...colorFillFields,
     ...imageFillFiedls,
     ...gradientFillFields,
