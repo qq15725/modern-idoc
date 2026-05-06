@@ -1,3 +1,9 @@
+## [0.11.1](https://github.com/qq15725/modern-idoc/compare/v0.11.0...v0.11.1) (2026-05-06)
+
+
+### Bug Fixes
+
+* export effect ([1151069](https://github.com/qq15725/modern-idoc/commit/1151069ce280a91a8ec2c05c8bc5ee4b8faa5df5))
 # [0.11.0](https://github.com/qq15725/modern-idoc/compare/v0.11.0-beta.2...v0.11.0) (2026-05-06)
 # [0.11.0-beta.2](https://github.com/qq15725/modern-idoc/compare/v0.11.0-beta.1...v0.11.0-beta.2) (2026-05-06)
 
