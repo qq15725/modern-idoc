@@ -1,3 +1,14 @@
+# [0.11.0-beta.1](https://github.com/qq15725/modern-idoc/compare/v0.10.21...v0.11.0-beta.1) (2026-05-06)
+
+
+### Bug Fixes
+
+* normalizeEffect ([64be984](https://github.com/qq15725/modern-idoc/commit/64be984950c3d1b9a5f5532dc97273dca8f1a423))
+
+
+### Features
+
+* effect ([6880e33](https://github.com/qq15725/modern-idoc/commit/6880e334cc66dbd4643870447a90342bd6f333af))
 ## [0.10.21](https://github.com/qq15725/modern-idoc/compare/v0.10.20...v0.10.21) (2026-02-03)
 
 
