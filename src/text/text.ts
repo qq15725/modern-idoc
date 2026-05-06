@@ -61,7 +61,7 @@ export interface TextObject extends Pick<Effect, 'fill' | 'outline'>, Partial<To
 export interface NormalizedText extends Pick<NormalizedEffect, 'fill' | 'outline'>, Toggleable {
   content: NormalizedTextContent
   style?: NormalizedStyle
-  effects?: Effect[]
+  effects?: NormalizedEffect[]
   measureDom?: any // runtime: HTMLElement
   fonts?: any // runtime: modern-font Fonts
 }
