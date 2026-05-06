@@ -1,3 +1,4 @@
+# [0.11.0](https://github.com/qq15725/modern-idoc/compare/v0.11.0-beta.2...v0.11.0) (2026-05-06)
 # [0.11.0-beta.2](https://github.com/qq15725/modern-idoc/compare/v0.11.0-beta.1...v0.11.0-beta.2) (2026-05-06)
 
 
