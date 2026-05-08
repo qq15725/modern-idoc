@@ -1,3 +1,9 @@
+## [0.11.3](https://github.com/qq15725/modern-idoc/compare/v0.11.2...v0.11.3) (2026-05-08)
+
+
+### Bug Fixes
+
+* transformStyle ([5dd30ee](https://github.com/qq15725/modern-idoc/commit/5dd30ee0babee2a59487b205b2cae7ca65ec1f04))
 ## [0.11.2](https://github.com/qq15725/modern-idoc/compare/v0.11.1...v0.11.2) (2026-05-06)
 
 
