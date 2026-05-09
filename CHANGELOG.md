@@ -1,3 +1,9 @@
+## [0.11.4](https://github.com/qq15725/modern-idoc/compare/v0.11.3...v0.11.4) (2026-05-09)
+
+
+### Features
+
+* connection ([58b17e6](https://github.com/qq15725/modern-idoc/commit/58b17e6835f05010910d69e4d8c13d890c43443e))
 ## [0.11.3](https://github.com/qq15725/modern-idoc/compare/v0.11.2...v0.11.3) (2026-05-08)
 
 
