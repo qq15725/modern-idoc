@@ -40,11 +40,19 @@ export interface ShapePath extends Partial<ShapePathStyle> {
   data: SVGPathData
 }
 
+export interface ShapeConnectionPoint {
+  idx: number
+  x: number
+  y: number
+  ang?: number
+}
+
 export interface NormalizedShape extends Toggleable {
   preset?: string
   viewBox?: number[]
   svg?: string
   paths?: ShapePath[]
+  connectionPoints?: ShapeConnectionPoint[]
 }
 
 export function normalizeShape(shape: Shape): NormalizedShape {
