@@ -13,7 +13,7 @@ console.warn('flatDocumentToDocument', flatDocumentToDocument({
       background: {
         enabled: true,
       },
-      shape: {},
+      shape: { enabled: true },
       fill: {},
       outline: {},
       text: {},
@@ -37,7 +37,7 @@ console.warn('flatDocumentToDocument', flatDocumentToDocument({
         rotate: 0,
       },
       background: {},
-      shape: {},
+      shape: { enabled: true },
       fill: {},
       outline: {},
       text: {},
@@ -66,7 +66,7 @@ console.warn('flatDocumentToDocument', flatDocumentToDocument({
         rotate: 0,
       },
       background: {},
-      shape: {},
+      shape: { enabled: true },
       fill: {},
       outline: {},
       text: {

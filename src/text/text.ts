@@ -51,11 +51,8 @@ export type TextContent =
 export type NormalizedTextContent = NormalizedParagraph[]
 
 export interface TextDeformation {
-  /** 变形类型：已注册的预设名，kebab-case（如 'bend' / 'arch-curve' / 'ellipse-by-word'） */
   type: string
-  /** 变形强度，按各预设语义解释；省略时用预设的 defaultIntensities */
   intensities?: number[]
-  /** 参与变形的最大字号，默认 100 */
   maxFontSize?: number
 }
 
