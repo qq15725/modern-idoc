@@ -1,3 +1,14 @@
+## [0.11.5](https://github.com/qq15725/modern-idoc/compare/v0.11.4...v0.11.5) (2026-05-20)
+
+
+### Bug Fixes
+
+* doc.ts shape type error and drop zh comments ([0634ca9](https://github.com/qq15725/modern-idoc/commit/0634ca9d898a54b8d1023c5375c75e46586f630d))
+
+
+### Features
+
+* connection mode and text deformation ([5f06c84](https://github.com/qq15725/modern-idoc/commit/5f06c847c9cdcc6ed6ef6fa60e2514c10aea6d9c))
 ## [0.11.4](https://github.com/qq15725/modern-idoc/compare/v0.11.3...v0.11.4) (2026-05-09)
 
 
