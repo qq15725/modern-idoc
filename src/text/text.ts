@@ -50,9 +50,25 @@ export type TextContent =
 
 export type NormalizedTextContent = NormalizedParagraph[]
 
+export interface TextDeformation {
+  /** 变形类型：已注册的预设名，kebab-case（如 'bend' / 'arch-curve' / 'ellipse-by-word'） */
+  type: string
+  /** 变形强度，按各预设语义解释；省略时用预设的 defaultIntensities */
+  intensities?: number[]
+  /** 参与变形的最大字号，默认 100 */
+  maxFontSize?: number
+}
+
+export interface NormalizedTextDeformation {
+  type: string
+  intensities?: number[]
+  maxFontSize: number
+}
+
 export interface TextObject extends Pick<Effect, 'fill' | 'outline'>, Partial<Toggleable> {
   content?: TextContent
   style?: Style
+  deformation?: TextDeformation
   measureDom?: any // runtime: HTMLElement
   fonts?: any // runtime: modern-font Fonts
   effects?: Effect[]
@@ -61,6 +77,7 @@ export interface TextObject extends Pick<Effect, 'fill' | 'outline'>, Partial<To
 export interface NormalizedText extends Pick<NormalizedEffect, 'fill' | 'outline'>, Toggleable {
   content: NormalizedTextContent
   style?: NormalizedStyle
+  deformation?: NormalizedTextDeformation
   effects?: NormalizedEffect[]
   measureDom?: any // runtime: HTMLElement
   fonts?: any // runtime: modern-font Fonts
@@ -212,6 +229,14 @@ export function isFragmentObject(value: any): value is FragmentObject {
     && typeof value.content === 'string'
 }
 
+export function normalizeTextDeformation(deformation: TextDeformation): NormalizedTextDeformation {
+  return clearUndef({
+    type: deformation.type,
+    intensities: deformation.intensities,
+    maxFontSize: deformation.maxFontSize ?? 100,
+  })
+}
+
 export function normalizeText(value: Text): NormalizedText {
   if (typeof value === 'string' || Array.isArray(value)) {
     return {
@@ -224,6 +249,7 @@ export function normalizeText(value: Text): NormalizedText {
       enabled: value.enabled ?? true,
       content: normalizeTextContent(value.content ?? ''),
       style: value.style ? normalizeStyle(value.style) : undefined,
+      deformation: value.deformation ? normalizeTextDeformation(value.deformation) : undefined,
       measureDom: value.measureDom,
       fonts: value.fonts,
       ...normalizeEffect(value),
