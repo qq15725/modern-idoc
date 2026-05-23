@@ -1,3 +1,9 @@
+## [0.11.6](https://github.com/qq15725/modern-idoc/compare/v0.11.5...v0.11.6) (2026-05-23)
+
+
+### Bug Fixes
+
+* defensive numeric normalization for style fields ([8666427](https://github.com/qq15725/modern-idoc/commit/8666427aeba59e325718fcba1b86cefdf328af43))
 ## [0.11.5](https://github.com/qq15725/modern-idoc/compare/v0.11.4...v0.11.5) (2026-05-20)
 
 
