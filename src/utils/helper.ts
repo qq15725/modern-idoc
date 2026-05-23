@@ -6,6 +6,23 @@ export function round(number: number, digits = 0, base = 10 ** digits): number {
   return Math.round(base * number) / base + 0
 }
 
+/**
+ * Defensively coerce an unknown value to a finite number.
+ * - number: returned as-is when finite, otherwise `fallback`
+ * - string: parsed via parseFloat (e.g. '20' / '20px' -> 20), `fallback` when not finite
+ * - anything else: `fallback`
+ */
+export function normalizeNumber(value: unknown, fallback?: number): number | undefined {
+  if (typeof value === 'number') {
+    return Number.isFinite(value) ? value : fallback
+  }
+  if (typeof value === 'string') {
+    const parsed = Number.parseFloat(value)
+    return Number.isFinite(parsed) ? parsed : fallback
+  }
+  return fallback
+}
+
 export function clearUndef<T>(obj: T, deep = false): T {
   if (typeof obj !== 'object' || !obj) {
     return obj

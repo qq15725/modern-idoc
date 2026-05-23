@@ -3,9 +3,40 @@ import type { WithStyleNone } from '../types'
 import type { NormalizedElementStyle } from './elementStyle'
 import type { NormalizedTextStyle } from './textStyle'
 import { normalizeColor } from '../color'
-import { clearUndef, isNone } from '../utils'
+import { clearUndef, isNone, normalizeNumber } from '../utils'
 import { getDefaultElementStyle } from './elementStyle'
 import { getDefaultTextStyle } from './textStyle'
+
+// Style keys typed as a strict `number` (excludes StyleUnit/FontWeight which may
+// legitimately be strings). Inputs are coerced defensively; invalid values are
+// dropped so the default applies downstream.
+const NUMERIC_STYLE_KEYS = [
+  // textLineStyle
+  'textIndent',
+  'lineHeight',
+  // textInlineStyle
+  'letterSpacing',
+  'wordSpacing',
+  'fontSize',
+  // textStyle
+  'textStrokeWidth',
+  // elementStyle
+  'borderRadius',
+  'opacity',
+  // transformStyle
+  'rotate',
+  'scaleX',
+  'scaleY',
+  'skewX',
+  'skewY',
+  'translateX',
+  'translateY',
+  // layoutStyle
+  'borderWidth',
+  'flex',
+  'flexGrow',
+  'flexShrink',
+] as const
 
 export type FullStyle =
   & NormalizedTextStyle
@@ -26,7 +57,7 @@ export type StyleObject =
 export type Style = StyleObject
 
 export function normalizeStyle(style: Style): NormalizedStyle {
-  return clearUndef({
+  const normalized: Record<string, any> = clearUndef({
     ...style,
     color: isNone(style.color) ? undefined : normalizeColor(style.color),
     backgroundColor: isNone(style.backgroundColor) ? undefined : normalizeColor(style.backgroundColor),
@@ -35,6 +66,18 @@ export function normalizeStyle(style: Style): NormalizedStyle {
     shadowColor: isNone(style.shadowColor) ? undefined : normalizeColor(style.shadowColor),
     textStrokeColor: isNone(style.textStrokeColor) ? undefined : normalizeColor(style.textStrokeColor),
   })
+  for (const key of NUMERIC_STYLE_KEYS) {
+    if (key in normalized) {
+      const value = normalizeNumber(normalized[key])
+      if (value === undefined) {
+        delete normalized[key]
+      }
+      else {
+        normalized[key] = value
+      }
+    }
+  }
+  return normalized as NormalizedStyle
 }
 
 export function getDefaultStyle(): FullStyle {
