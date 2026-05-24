@@ -1,3 +1,10 @@
+## [0.11.8](https://github.com/qq15725/modern-idoc/compare/v0.11.7...v0.11.8) (2026-05-24)
+
+
+### Features
+
+* chart structure ([1d26a3c](https://github.com/qq15725/modern-idoc/commit/1d26a3cd5490147a5b06071b25e49b38c0b8ced1))
+* extend ListStyleType to align with CSS list-style-type ([564313d](https://github.com/qq15725/modern-idoc/commit/564313d0ae09cadbdf399e0509eb38c744845747))
 ## [0.11.7](https://github.com/qq15725/modern-idoc/compare/v0.11.6...v0.11.7) (2026-05-24)
 
 
