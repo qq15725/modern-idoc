@@ -7,6 +7,7 @@ import type { Meta } from './meta'
 import type { Node } from './node'
 import type { NormalizedShape, Shape } from './shape'
 import type { NormalizedStyle, Style } from './style'
+import type { NormalizedTable, Table } from './table'
 import type { NormalizedText, Text } from './text'
 import type { WithNone } from './types'
 import type { NormalizedVideo, Video } from './video'
@@ -18,6 +19,7 @@ import { normalizeForeground } from './foreground'
 import { idGenerator } from './id'
 import { normalizeShape } from './shape'
 import { normalizeStyle } from './style'
+import { normalizeTable } from './table'
 import { normalizeText } from './text'
 import { clearUndef, isNone } from './utils'
 import { normalizeVideo } from './video'
@@ -32,6 +34,7 @@ export interface Element<T = Meta> extends Effect, Omit<Node<T>, 'children'> {
   video?: WithNone<Video>
   audio?: WithNone<Audio>
   connection?: WithNone<Connection>
+  table?: WithNone<Table>
   children?: Element[]
 }
 
@@ -45,6 +48,7 @@ export interface NormalizedElement<T = Meta> extends NormalizedEffect, Omit<Node
   video?: NormalizedVideo
   audio?: NormalizedAudio
   connection?: NormalizedConnection
+  table?: NormalizedTable
   children?: NormalizedElement[]
 }
 
@@ -59,6 +63,7 @@ export function normalizeElement<T = Meta>(element: Element<T>): NormalizedEleme
     video: isNone(element.video) ? undefined : normalizeVideo(element.video),
     audio: isNone(element.audio) ? undefined : normalizeAudio(element.audio),
     connection: isNone(element.connection) ? undefined : normalizeConnection(element.connection),
+    table: isNone(element.table) ? undefined : normalizeTable(element.table),
     ...normalizeEffect(element),
     children: element.children?.map(child => normalizeElement(child)),
   })
