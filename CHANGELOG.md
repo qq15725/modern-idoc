@@ -1,3 +1,9 @@
+## [0.11.7](https://github.com/qq15725/modern-idoc/compare/v0.11.6...v0.11.7) (2026-05-24)
+
+
+### Features
+
+* table structure ([03754f2](https://github.com/qq15725/modern-idoc/commit/03754f204cf2dcd2c35a28ac8aeacae13135f44b))
 ## [0.11.6](https://github.com/qq15725/modern-idoc/compare/v0.11.5...v0.11.6) (2026-05-23)
 
 
