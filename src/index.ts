@@ -1,5 +1,6 @@
 export * from './audio'
 export * from './background'
+export * from './chart'
 export * from './color'
 export * from './connection'
 export * from './decorators'

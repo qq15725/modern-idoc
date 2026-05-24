@@ -1,5 +1,6 @@
 import type { Audio, NormalizedAudio } from './audio'
 import type { Background, NormalizedBackground } from './background'
+import type { Chart, NormalizedChart } from './chart'
 import type { Connection, NormalizedConnection } from './connection'
 import type { Effect, NormalizedEffect } from './effect'
 import type { Foreground, NormalizedForeground } from './foreground'
@@ -13,6 +14,7 @@ import type { WithNone } from './types'
 import type { NormalizedVideo, Video } from './video'
 import { normalizeAudio } from './audio'
 import { normalizeBackground } from './background'
+import { normalizeChart } from './chart'
 import { normalizeConnection } from './connection'
 import { normalizeEffect } from './effect'
 import { normalizeForeground } from './foreground'
@@ -35,6 +37,7 @@ export interface Element<T = Meta> extends Effect, Omit<Node<T>, 'children'> {
   audio?: WithNone<Audio>
   connection?: WithNone<Connection>
   table?: WithNone<Table>
+  chart?: WithNone<Chart>
   children?: Element[]
 }
 
@@ -49,6 +52,7 @@ export interface NormalizedElement<T = Meta> extends NormalizedEffect, Omit<Node
   audio?: NormalizedAudio
   connection?: NormalizedConnection
   table?: NormalizedTable
+  chart?: NormalizedChart
   children?: NormalizedElement[]
 }
 
@@ -64,6 +68,7 @@ export function normalizeElement<T = Meta>(element: Element<T>): NormalizedEleme
     audio: isNone(element.audio) ? undefined : normalizeAudio(element.audio),
     connection: isNone(element.connection) ? undefined : normalizeConnection(element.connection),
     table: isNone(element.table) ? undefined : normalizeTable(element.table),
+    chart: isNone(element.chart) ? undefined : normalizeChart(element.chart),
     ...normalizeEffect(element),
     children: element.children?.map(child => normalizeElement(child)),
   })
