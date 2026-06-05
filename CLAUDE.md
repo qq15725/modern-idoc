@@ -8,6 +8,18 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 The library is published as an npm package with multiple export formats (ESM, CJS, UMD) and is designed to be consumed by downstream codec libraries like modern-pdf, modern-openxml, modern-canvas, and modern-idoc-svg.
 
+## Downstream Consumers (IMPORTANT)
+
+The following consumer repos live locally as siblings under `../` and **must be adapted whenever this project's types/structure change** (e.g. adding new fields to `Element`/`Style`/`Fill`):
+
+- `../modern-canvas` — canvas/WebGL renderer
+- `../modern-openxml` — OOXML (PPTX/DOCX) codec
+- `../modern-pdf` — PDF codec
+- `../modern-idoc-svg` — SVG renderer
+- `../modern-text` — text layout/rendering (sync whenever text-related types change)
+
+Note: these repos consume the **published** `modern-idoc` (via node_modules / pnpm, not a workspace symlink). So new types added here are not visible to them until `modern-idoc` is rebuilt and their dependency is updated. When making a structural change, implement the corresponding parse/stringify/render support in each consumer.
+
 ## Build & Development Commands
 
 ```bash
