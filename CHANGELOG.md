@@ -1,3 +1,9 @@
+## [0.11.9](https://github.com/qq15725/modern-idoc/compare/v0.11.8...v0.11.9) (2026-06-05)
+
+
+### Features
+
+* unify image/text effects on Effect and add CSS-aligned Effect.filter ([2714fed](https://github.com/qq15725/modern-idoc/commit/2714fed218d9756c54df3ba4e40b516089570dd3))
 ## [0.11.8](https://github.com/qq15725/modern-idoc/compare/v0.11.7...v0.11.8) (2026-05-24)
 
 
