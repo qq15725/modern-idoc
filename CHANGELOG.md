@@ -1,3 +1,9 @@
+# [0.12.0](https://github.com/qq15725/modern-idoc/compare/v0.11.9...v0.12.0) (2026-06-21)
+
+
+### Features
+
+* add comment thread spec on element.comments ([956968e](https://github.com/qq15725/modern-idoc/commit/956968ea1ae57563950e42dfb0bdb3417fcb4bda))
 ## [0.11.9](https://github.com/qq15725/modern-idoc/compare/v0.11.8...v0.11.9) (2026-06-05)
 
 
