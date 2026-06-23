@@ -39,7 +39,14 @@ export class Reactivable extends Observable implements PropertyAccessor {
   }
 
   offsetSetProperty(key: string, value: any): void {
-    this._properties[key] = value
+    // undefined 语义为「未设置/回退到 fallback」（offsetGetProperties / getProperty 据此过滤与回退），
+    // 故不存为真实值，而是删除键——保持 _properties 不残留 undefined，序列化 / 外部访问器一致。
+    if (value === undefined) {
+      delete this._properties[key]
+    }
+    else {
+      this._properties[key] = value
+    }
   }
 
   offsetGetProperties(keys?: string[]): Record<string, any> {
@@ -113,6 +120,14 @@ export class Reactivable extends Observable implements PropertyAccessor {
         propertyOffsetSet(this, key, newValue, declaration)
       }
       else {
+        // 幂等：原始值未变则不向访问器 / 存储 / 事件传播。
+        // 关键在于灭掉 resetProperties() 的副作用——它对所有声明属性 setProperty(key, default)，
+        // 而 fallback-only 属性 default 为 undefined；若其原始值本就是 undefined（未设置），这里直接跳过，
+        // 不会把 undefined 当「值」广播给外部访问器（如 CRDT 会据此写出畸形结构而崩）。
+        const oldRaw = this.offsetGetProperty(key)
+        if (Object.is(oldRaw, newValue)) {
+          return
+        }
         const oldValue = this.getProperty(key)
         this._propertyAccessor?.setProperty?.(key, newValue)
         this.offsetSetProperty(key, newValue)
