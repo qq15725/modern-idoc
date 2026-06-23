@@ -1,3 +1,9 @@
+## [0.12.1](https://github.com/qq15725/modern-idoc/compare/v0.12.0...v0.12.1) (2026-06-23)
+
+
+### Bug Fixes
+
+* **reactivable:** make setProperty idempotent and treat undefined as unset ([1a02a7e](https://github.com/qq15725/modern-idoc/commit/1a02a7e9c46847232bfc8b23be3a77983724b4fa))
 # [0.12.0](https://github.com/qq15725/modern-idoc/compare/v0.11.9...v0.12.0) (2026-06-21)
 
 
