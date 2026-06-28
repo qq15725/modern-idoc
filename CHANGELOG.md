@@ -1,3 +1,14 @@
+## [0.12.3](https://github.com/qq15725/modern-idoc/compare/v0.12.2...v0.12.3) (2026-06-28)
+
+
+* refactor(fill)!: rename pipelines to imagePipelines ([7728102](https://github.com/qq15725/modern-idoc/commit/7728102a628664bb23772b56901847311140a370))
+
+
+### BREAKING CHANGES
+
+* ImageFill.pipelines is now imagePipelines.
+
+Co-Authored-By: Claude Opus 4.8 (1M context) <noreply@anthropic.com>
 ## [0.12.2](https://github.com/qq15725/modern-idoc/compare/v0.12.1...v0.12.2) (2026-06-28)
 
 
