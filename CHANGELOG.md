@@ -1,3 +1,15 @@
+## [0.12.2](https://github.com/qq15725/modern-idoc/compare/v0.12.1...v0.12.2) (2026-06-28)
+
+
+* feat(fill)!: add image processing pipelines ([9f8363b](https://github.com/qq15725/modern-idoc/commit/9f8363bf748b7111716c0d4512bdfba226b63423))
+
+
+### BREAKING CHANGES
+
+* drop `foreground.effects`; image styling now goes
+through `pipelines`. The concrete effect pipeline lives downstream.
+
+Co-Authored-By: Claude Opus 4.8 (1M context) <noreply@anthropic.com>
 ## [0.12.1](https://github.com/qq15725/modern-idoc/compare/v0.12.0...v0.12.1) (2026-06-23)
 
 
