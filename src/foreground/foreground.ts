@@ -25,7 +25,7 @@ export function normalizeForeground(foreground: Foreground): NormalizedForegroun
     }
   }
 
-  // 图片处理管线（pipelines）由 normalizeFill 在 fill 层规范化，foreground 继承即可。
+  // 图片处理管线（imagePipelines）由 normalizeFill 在 fill 层规范化，foreground 继承即可。
   return clearUndef({
     ...normalizeFill(foreground),
     ...pick(foreground, ['fillWithShape']),

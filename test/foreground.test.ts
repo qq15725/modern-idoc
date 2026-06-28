@@ -18,18 +18,18 @@ describe('normalizeForeground', () => {
     const fg = normalizeForeground({
       image: 'a.png',
       fillWithShape: true,
-      pipelines: [
+      imagePipelines: [
         { name: 'rembg' },
         { name: 'duotone', params: { dark: '#000', light: '#fff' } },
       ],
     })
-    expect(fg?.pipelines).toEqual([
+    expect(fg?.imagePipelines).toEqual([
       { name: 'rembg' },
       { name: 'duotone', params: { dark: '#000', light: '#fff' } },
     ])
   })
 
-  it('omits pipelines when not provided', () => {
-    expect(normalizeForeground({ image: 'a.png' })?.pipelines).toBeUndefined()
+  it('omits imagePipelines when not provided', () => {
+    expect(normalizeForeground({ image: 'a.png' })?.imagePipelines).toBeUndefined()
   })
 })

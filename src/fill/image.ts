@@ -47,7 +47,7 @@ export interface ImageFillObject {
    * 图片处理管线：图片源在上屏/导出前依次流经的具名处理步骤（image → image）。
    * 只记录管线名与参数；处理函数为运行时注册的黑盒，不入数据。
    */
-  pipelines?: ImagePipeline[]
+  imagePipelines?: ImagePipeline[]
 }
 
 export type ImageFill =
@@ -55,7 +55,7 @@ export type ImageFill =
   | ImageFillObject
 
 export interface NormalizedImageFill extends ImageFillObject {
-  pipelines?: NormalizedImagePipeline[]
+  imagePipelines?: NormalizedImagePipeline[]
 }
 
 export const imageFillFiedls: (keyof NormalizedImageFill)[] = [
@@ -66,7 +66,7 @@ export const imageFillFiedls: (keyof NormalizedImageFill)[] = [
   'dpi',
   'opacity',
   'rotateWithShape',
-  'pipelines',
+  'imagePipelines',
 ]
 
 export function normalizeImageFill(fill: ImageFill): NormalizedImageFill {
@@ -78,8 +78,8 @@ export function normalizeImageFill(fill: ImageFill): NormalizedImageFill {
     obj = { ...fill }
   }
   const normalized = pick(obj, imageFillFiedls) as NormalizedImageFill
-  normalized.pipelines = obj.pipelines?.length
-    ? obj.pipelines.map(normalizeImagePipeline)
+  normalized.imagePipelines = obj.imagePipelines?.length
+    ? obj.imagePipelines.map(normalizeImagePipeline)
     : undefined
   return clearUndef(normalized)
 }

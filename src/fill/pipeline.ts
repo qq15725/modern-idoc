@@ -4,7 +4,7 @@ import { clearUndef } from '../utils'
  * 图片处理管线步骤：引用一个已注册的具名管线 + 参数。
  *
  * 数据只记录「用了哪个管线 + 参数」，处理函数（image → image）是运行时注册的黑盒，
- * 不入持久化数据。渲染端按需把 `图片 + pipelines` 烘焙到运行时纹理；导出端按需物化成成品图。
+ * 不入持久化数据。渲染端按需把 `图片 + imagePipelines` 烘焙到运行时纹理；导出端按需物化成成品图。
  */
 export interface ImagePipeline {
   name: string
