@@ -1,4 +1,6 @@
-import { pick } from '../utils'
+import type { ImagePipeline, NormalizedImagePipeline } from './pipeline'
+import { clearUndef, pick } from '../utils'
+import { normalizeImagePipeline } from './pipeline'
 
 /**
  * 0    -0.5   0
@@ -41,6 +43,11 @@ export interface ImageFillObject {
   dpi?: number
   opacity?: number
   rotateWithShape?: boolean
+  /**
+   * 图片处理管线：图片源在上屏/导出前依次流经的具名处理步骤（image → image）。
+   * 只记录管线名与参数；处理函数为运行时注册的黑盒，不入数据。
+   */
+  pipelines?: ImagePipeline[]
 }
 
 export type ImageFill =
@@ -48,7 +55,7 @@ export type ImageFill =
   | ImageFillObject
 
 export interface NormalizedImageFill extends ImageFillObject {
-  //
+  pipelines?: NormalizedImagePipeline[]
 }
 
 export const imageFillFiedls: (keyof NormalizedImageFill)[] = [
@@ -59,6 +66,7 @@ export const imageFillFiedls: (keyof NormalizedImageFill)[] = [
   'dpi',
   'opacity',
   'rotateWithShape',
+  'pipelines',
 ]
 
 export function normalizeImageFill(fill: ImageFill): NormalizedImageFill {
@@ -69,5 +77,9 @@ export function normalizeImageFill(fill: ImageFill): NormalizedImageFill {
   else {
     obj = { ...fill }
   }
-  return pick(obj, imageFillFiedls)
+  const normalized = pick(obj, imageFillFiedls) as NormalizedImageFill
+  normalized.pipelines = obj.pipelines?.length
+    ? obj.pipelines.map(normalizeImagePipeline)
+    : undefined
+  return clearUndef(normalized)
 }
