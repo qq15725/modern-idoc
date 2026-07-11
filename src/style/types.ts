@@ -4,7 +4,7 @@ export type StyleUnit = `${number}%` | number
 
 export type Display = 'inherit' | 'freeform' | 'flex'
 export type Direction = 'inherit' | 'ltr' | 'rtl'
-export type Overflow = 'hidden' | 'visible'
+export type Overflow = 'hidden' | 'visible' | 'clip' | 'scroll' | 'auto'
 export type Visibility = 'hidden' | 'visible'
 export type FontWeight = 'normal' | 'bold' | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900
 export type FontStyle = 'normal' | 'italic' | 'oblique' | `oblique ${string}`
