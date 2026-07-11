@@ -87,9 +87,7 @@ export class Reactivable extends Observable implements PropertyAccessor {
     return this
   }
 
-  getProperty(key: string): any {
-    const declaration = this.getPropertyDeclaration(key)
-
+  getProperty(key: string, declaration = this.getPropertyDeclaration(key)): any {
     if (declaration) {
       if (declaration.internal || declaration.alias) {
         return propertyOffsetGet(this, key, declaration)
@@ -102,7 +100,7 @@ export class Reactivable extends Observable implements PropertyAccessor {
           result = accessor.getProperty(key)
         }
         else {
-          result = this.offsetGetProperty(key)
+          result = this._properties[key]
         }
 
         return result ?? propertyOffsetFallback(this, key, declaration)
@@ -112,9 +110,7 @@ export class Reactivable extends Observable implements PropertyAccessor {
     return undefined
   }
 
-  setProperty(key: string, newValue: any): void {
-    const declaration = this.getPropertyDeclaration(key)
-
+  setProperty(key: string, newValue: any, declaration = this.getPropertyDeclaration(key)): void {
     if (declaration) {
       if (declaration.internal || declaration.alias) {
         propertyOffsetSet(this, key, newValue, declaration)

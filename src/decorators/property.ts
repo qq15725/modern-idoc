@@ -10,8 +10,9 @@ export interface PropertyDeclaration {
 }
 
 export interface PropertyAccessor {
-  getProperty?: (key: string) => any
-  setProperty?: (key: string, newValue: any) => void
+  /** `declaration` is a fast-path hint from decorated accessors; implementations may ignore it. */
+  getProperty?: (key: string, declaration?: PropertyDeclaration) => any
+  setProperty?: (key: string, newValue: any, declaration?: PropertyDeclaration) => void
   onUpdateProperty?: (key: string, newValue: any, oldValue: any) => void
 }
 
@@ -63,22 +64,13 @@ export function propertyOffsetGet(
   key: string,
   declaration: PropertyDeclaration,
 ): any {
-  const {
-    alias,
-    internalKey,
-  } = declaration
+  // hot path: called for every decorated internal/alias property read — avoid
+  // destructuring allocations and keep the common `internalKey` case first
+  const result = declaration.alias
+    ? getObjectValueByPath(target, declaration.alias)
+    : target[declaration.internalKey]
 
-  let result
-  if (alias) {
-    result = getObjectValueByPath(target, alias)
-  }
-  else {
-    result = target[internalKey]
-  }
-
-  result = result ?? propertyOffsetFallback(target, key, declaration)
-
-  return result
+  return result ?? propertyOffsetFallback(target, key, declaration)
 }
 
 export function propertyOffsetFallback(
@@ -86,10 +78,9 @@ export function propertyOffsetFallback(
   key: string,
   declaration: PropertyDeclaration,
 ): any {
-  const {
-    default: _default,
-    fallback,
-  } = declaration
+  // hot path: runs on every read of an unset property (fallback-only properties
+  // stay unset forever, e.g. `visible`) — destructure-free, cheap checks first
+  const _default = declaration.default
 
   let result: any | undefined
 
@@ -109,8 +100,11 @@ export function propertyOffsetFallback(
     }
   }
 
-  if (result === undefined && fallback !== undefined) {
-    result = typeof fallback === 'function' ? fallback() : fallback
+  if (result === undefined) {
+    const fallback = declaration.fallback
+    if (fallback !== undefined) {
+      result = typeof fallback === 'function' ? fallback() : fallback
+    }
   }
 
   return result
@@ -123,9 +117,12 @@ export function getPropertyDescriptor<V, T extends PropertyAccessor>(
   get: () => any
   set: (v: any) => void
 } {
+  // The declaration is passed through so implementations (e.g. Reactivable)
+  // can skip the per-access declaration lookup — decorated reads are the
+  // hottest path in render loops.
   function get(this: T): any {
     if (this.getProperty) {
-      return this.getProperty(key)
+      return this.getProperty(key, declaration)
     }
     else {
       return propertyOffsetGet(this, key, declaration)
@@ -134,7 +131,7 @@ export function getPropertyDescriptor<V, T extends PropertyAccessor>(
 
   function set(this: T, newValue: V): void {
     if (this.setProperty) {
-      this.setProperty(key, newValue)
+      this.setProperty(key, newValue, declaration)
     }
     else {
       propertyOffsetSet(this, key, newValue, declaration)
