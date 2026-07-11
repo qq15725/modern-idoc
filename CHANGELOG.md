@@ -1,3 +1,14 @@
+## [0.12.4](https://github.com/qq15725/modern-idoc/compare/v0.12.3...v0.12.4) (2026-07-11)
+
+
+### Features
+
+* **style:** extend Overflow with clip / scroll / auto ([79b9597](https://github.com/qq15725/modern-idoc/commit/79b9597e97f900c22151aec512777455123c7188))
+
+
+### Performance Improvements
+
+* **property:** thread declaration through accessors, drop hot-path destructuring ([aaff549](https://github.com/qq15725/modern-idoc/commit/aaff5492395f7652e13e03e021fd654c7bf15082))
 ## [0.12.3](https://github.com/qq15725/modern-idoc/compare/v0.12.2...v0.12.3) (2026-06-28)
 
 
