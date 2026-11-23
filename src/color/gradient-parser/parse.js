@@ -141,8 +141,11 @@ GradientParser.parse = (function () {
   }
 
   function matchAngle() {
-    return match('angular', tokens.angleValue, 1)
-      || match('angular', tokens.radianValue, 1)
+    const degrees = match('angular', tokens.angleValue, 1)
+    if (degrees) return degrees
+    const radians = match('angular', tokens.radianValue, 1)
+    if (radians) radians.value = String(Number(radians.value) * 180 / Math.PI)
+    return radians
   }
 
   function matchListRadialOrientations() {

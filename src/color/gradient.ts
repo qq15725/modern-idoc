@@ -79,14 +79,18 @@ function parseColorStopNodeList(colorStops: ColorStopNode[]): ColorStop[] {
 }
 
 function parseLinearGradientNode(node: LinearGradientNode | RepeatingLinearGradientNode): LinearGradientWithType {
-  let angle = 0
+  let angle = 180
   switch (node.orientation?.type) {
     case 'angular':
       angle = Number(node.orientation.value)
       break
-    case 'directional':
-      // TODO
+    case 'directional': {
+      const sides = node.orientation.value.toLowerCase().split(' ')
+      const x = Number(sides.includes('right')) - Number(sides.includes('left'))
+      const y = Number(sides.includes('top')) - Number(sides.includes('bottom'))
+      angle = (Math.atan2(x, y) * 180 / Math.PI + 360) % 360
       break
+    }
   }
 
   return {

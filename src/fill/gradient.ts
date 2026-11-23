@@ -40,7 +40,8 @@ export function normalizeGradientFill(fill: GradientFill): NormalizedGradientFil
         }
       case 'linear-gradient':
         return {
-          linearGradient: props as any,
+          // CSS starts at the top. Document gradients start at the right.
+          linearGradient: { ...props as LinearGradient, angle: (((props as LinearGradient).angle - 90) % 360 + 360) % 360 },
         }
     }
   }
